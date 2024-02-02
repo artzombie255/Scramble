@@ -127,7 +127,34 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Altar.cpp" />
+    <ClCompile Include="Base.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="FuelTower.cpp" />
+    <ClCompile Include="Level.cpp" />
+    <ClCompile Include="Meteors.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Rockets.cpp" />
     <ClCompile Include="Scramble.cpp" />
+    <ClCompile Include="ScrambleGame.cpp" />
+    <ClCompile Include="Ufo.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Altar.h" />
+    <ClInclude Include="Base.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Entity.h" />
+    <ClInclude Include="FuelTower.h" />
+    <ClInclude Include="Level.h" />
+    <ClInclude Include="Meteors.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Rockets.h" />
+    <ClInclude Include="ScrambleGame.h" />
+    <ClInclude Include="Ufo.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="README.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
