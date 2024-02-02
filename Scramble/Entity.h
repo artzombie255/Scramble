@@ -1,8 +1,12 @@
 #pragma once
-class Entity
+#include <SFML/Graphics.hpp>
+
+class Entity: public sf::RectangleShape
 {
 public:
-	virtual void move();
+	Entity();
+	~Entity();
+	virtual void moveCheck();
 	int getY();
 	int getX();
 protected:

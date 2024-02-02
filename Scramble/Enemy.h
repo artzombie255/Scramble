@@ -1,12 +1,13 @@
 #pragma once
-#include "Player.h"
+#include <iostream>
 
 
 class Enemy
 {
 public:
+	Enemy();
+	~Enemy();
 	int getPoints();
-	void hit(Player);
 protected:
 	int points;
 	bool destroyable = true;

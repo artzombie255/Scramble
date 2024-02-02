@@ -3,5 +3,7 @@
 
 int main()
 {
+    ScrambleGame game;
+    game.playGame();
     
 }

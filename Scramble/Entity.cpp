@@ -1,7 +1,16 @@
 #include "Entity.h"
 
 
-void Entity::move()
+Entity::Entity()
+{
+}
+
+Entity::~Entity()
+{
+}
+
+
+void Entity::moveCheck()
 {
 
 }
