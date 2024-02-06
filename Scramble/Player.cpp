@@ -1,6 +1,7 @@
 #include "Player.h"
 #include <iostream>
 #include "Enemy.h"
+#include <vector>
 
 
 Player::Player()
@@ -41,13 +42,15 @@ void Player::shootMissiles()
 }
 
 
-void Player::shootBlaster()
+void Player::shootBlaster(sf::RectangleShape &bullet)
 {
-	if (usableShots > 0)
+	if (usableShots > 0 && sf::Keyboard::isKeyPressed(sf::Keyboard::J))
 	{
+		bullet.setPosition(getPosition().x + 100, getPosition().y + 20);
 		usableShots--;
 		//not done yet
 	}
+	usableShots++;
 }
 
 
@@ -69,29 +72,29 @@ void Player::hit(Enemy)
 
 void Player::moveCheck()
 {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
 		xMove = -5;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
 		xMove = 5;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     {
 		yMove = -5;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     {
 		yMove = 5;
     }
 
 
-	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::A) && !sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
 		xMove = 0;
 	}
-	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::W) && !sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
 		yMove = 0;
 	}
@@ -99,7 +102,10 @@ void Player::moveCheck()
 }
 
 
-void Player::move()
+void Player::move(sf::RectangleShape& bullet)
 {
-	RectangleShape::move(xMove, yMove);
+	getPosition().x + 100, getPosition().y + 20;
+	if (getPosition().x > 10 || getPosition().y > 10)
+		RectangleShape::move(xMove, yMove);
+	bullet.RectangleShape::move(10, 0);
 }

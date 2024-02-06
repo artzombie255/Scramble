@@ -29,6 +29,11 @@ void ScrambleGame::playGame()
 {
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Scramble");
 	Player player;
+    sf::RectangleShape bullet;
+
+    bullet.setSize(sf::Vector2f(5, 5));
+    bullet.setOrigin(0, 0);
+
     window.setFramerateLimit(60);
 
 
@@ -43,16 +48,17 @@ void ScrambleGame::playGame()
                 window.close();
 
             player.moveCheck();
+            player.shootBlaster(bullet);
 
         }
 
-        player.move();
+        player.move(bullet);
         // Clear the whole window before rendering a new frame
         window.clear();
 
         // Draw some graphical entities
         window.draw(player);
-
+        window.draw(bullet);
         // End the current frame and display its contents on screen
         window.display();
     }
