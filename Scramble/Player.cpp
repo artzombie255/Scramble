@@ -18,39 +18,66 @@ Player::~Player()
 }
 
 
-//returns missiles available
+/*returns missiles available
 int Player::getUsableMissiles()
 {
-	return usableMissiles;
+	return usableMissiles&;
 }
 
 
 //returns shots available
 int Player::getUsableShots()
 {
-	return usableShots;
+	//return usableShots;
 }
+*/
 
 
 void Player::shootMissiles()
 {
-	if (usableMissiles > 0)
+	int i = 3;
+	do 
 	{
-		usableMissiles--;
-		//not done yet
-	}
+		if (usableMissiles[i] == true)
+		{
+			usableMissiles[i] = false;
+			
+		}
+
+		i--;
+	} while (i >= 0);
 }
 
 
-void Player::shootBlaster(sf::RectangleShape &bullet)
+void Player::shootBlaster(sf::RectangleShape bullet[])
 {
-	if (usableShots > 0 && sf::Keyboard::isKeyPressed(sf::Keyboard::J))
+	if (usableShots[0] == true && sf::Keyboard::isKeyPressed(sf::Keyboard::J))
 	{
-		bullet.setPosition(getPosition().x + 100, getPosition().y + 20);
-		usableShots--;
+		bullet[0].setPosition(getPosition().x + 90, getPosition().y + 20);
+		usableShots[0] = false;
 		//not done yet
 	}
-	usableShots++;
+
+	if (usableShots[1] == true && sf::Keyboard::isKeyPressed(sf::Keyboard::J))
+	{
+		bullet[1].setPosition(getPosition().x + 90, getPosition().y + 20);
+		usableShots[1] = false;
+		//not done yet
+	}
+
+	if (usableShots[2] == true && sf::Keyboard::isKeyPressed(sf::Keyboard::J))
+	{
+		bullet[2].setPosition(getPosition().x + 90, getPosition().y + 20);
+		usableShots[2] = false;
+		//not done yet
+	}
+
+	if (usableShots[3] == true && sf::Keyboard::isKeyPressed(sf::Keyboard::J))
+	{
+		bullet[3].setPosition(getPosition().x + 90, getPosition().y + 20);
+		usableShots[3] = false;
+		//not done yet
+	}
 }
 
 
@@ -102,10 +129,11 @@ void Player::moveCheck()
 }
 
 
-void Player::move(sf::RectangleShape& bullet)
+void Player::move(sf::RectangleShape bullet[])
 {
 	getPosition().x + 100, getPosition().y + 20;
 	if (getPosition().x > 10 || getPosition().y > 10)
 		RectangleShape::move(xMove, yMove);
-	bullet.RectangleShape::move(10, 0);
+	for (int i = 0; i < 4; i++)
+		bullet[i].RectangleShape::move(10, 0);
 }

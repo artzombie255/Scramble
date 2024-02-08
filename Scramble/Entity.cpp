@@ -9,12 +9,12 @@ Entity::~Entity()
 {
 }
 
-
+/*
 void Entity::moveCheck()
 {
 
 }
-
+*/
 
 int Entity::getY()
 {

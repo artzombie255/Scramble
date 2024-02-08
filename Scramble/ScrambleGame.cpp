@@ -29,10 +29,13 @@ void ScrambleGame::playGame()
 {
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Scramble");
 	Player player;
-    sf::RectangleShape bullet;
-
-    bullet.setSize(sf::Vector2f(5, 5));
-    bullet.setOrigin(0, 0);
+    sf::RectangleShape bullet[4];
+    
+    for (int i = 0; i < 4; i++)
+    {
+        bullet[i].setSize(sf::Vector2f(5, 5));
+        bullet[i].setOrigin(0, 0);
+    }
 
     window.setFramerateLimit(60);
 
@@ -58,7 +61,8 @@ void ScrambleGame::playGame()
 
         // Draw some graphical entities
         window.draw(player);
-        window.draw(bullet);
+        for (int i = 0; i < 4; i++)
+           window.draw(bullet[i]);
         // End the current frame and display its contents on screen
         window.display();
     }
