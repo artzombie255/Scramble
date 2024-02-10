@@ -33,50 +33,62 @@ int Player::getUsableShots()
 */
 
 
-void Player::shootMissiles()
+void Player::shootMissiles(sf::RectangleShape missile[])
 {
-	int i = 3;
-	do 
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::K) && mTimer > 3)
 	{
-		if (usableMissiles[i] == true)
+		if (usableMissiles[0] == true)
 		{
-			usableMissiles[i] = false;
-			
+			missile[0].setPosition(getPosition().x + 90, getPosition().y + 20);
+			usableMissiles[0] = false;
+			std::cout << "1";
+			mxMove[0] = 5;
+			mTimer = 0;
 		}
-
-		i--;
-	} while (i >= 0);
+		else if (usableMissiles[1] == true)
+		{
+			missile[1].setPosition(getPosition().x + 90, getPosition().y + 20);
+			usableMissiles[1] = false;
+			std::cout << "2";
+			mxMove[1] = 5;
+			mTimer = 0;
+		}
+	}
 }
 
 
 void Player::shootBlaster(sf::RectangleShape bullet[])
 {
-	if (usableShots[0] == true && sf::Keyboard::isKeyPressed(sf::Keyboard::J))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::J) && sTimer > 5)
 	{
-		bullet[0].setPosition(getPosition().x + 90, getPosition().y + 20);
-		usableShots[0] = false;
-		//not done yet
-	}
-
-	if (usableShots[1] == true && sf::Keyboard::isKeyPressed(sf::Keyboard::J))
-	{
-		bullet[1].setPosition(getPosition().x + 90, getPosition().y + 20);
-		usableShots[1] = false;
-		//not done yet
-	}
-
-	if (usableShots[2] == true && sf::Keyboard::isKeyPressed(sf::Keyboard::J))
-	{
-		bullet[2].setPosition(getPosition().x + 90, getPosition().y + 20);
-		usableShots[2] = false;
-		//not done yet
-	}
-
-	if (usableShots[3] == true && sf::Keyboard::isKeyPressed(sf::Keyboard::J))
-	{
-		bullet[3].setPosition(getPosition().x + 90, getPosition().y + 20);
-		usableShots[3] = false;
-		//not done yet
+		if (usableShots[0] == true)
+		{
+			bullet[0].setPosition(getPosition().x + 90, getPosition().y + 20);
+			usableShots[0] = false;
+			std::cout << "1";
+			sTimer = 0;
+		}
+		else if (usableShots[1] == true)
+		{
+			bullet[1].setPosition(getPosition().x + 90, getPosition().y + 20);
+			usableShots[1] = false;
+			std::cout << "2";
+			sTimer = 0;
+		}
+		else if (usableShots[2] == true)
+		{
+			bullet[2].setPosition(getPosition().x + 90, getPosition().y + 20);
+			usableShots[2] = false;
+			std::cout << "3";
+			sTimer = 0;
+		}
+		else if (usableShots[3] == true)
+		{
+			bullet[3].setPosition(getPosition().x + 90, getPosition().y + 20);
+			usableShots[3] = false;
+			std::cout << "4";
+			sTimer = 0;
+		}
 	}
 }
 
@@ -101,19 +113,19 @@ void Player::moveCheck()
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
-		xMove = -5;
+		xMove = -3;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
-		xMove = 5;
+		xMove = 3;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     {
-		yMove = -5;
+		yMove = -3;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     {
-		yMove = 5;
+		yMove = 3;
     }
 
 
@@ -129,11 +141,38 @@ void Player::moveCheck()
 }
 
 
-void Player::move(sf::RectangleShape bullet[])
+void Player::move(sf::RectangleShape bullet[], sf::RectangleShape missile[])
 {
-	getPosition().x + 100, getPosition().y + 20;
-	if (getPosition().x > 10 || getPosition().y > 10)
-		RectangleShape::move(xMove, yMove);
+	//getPosition().x + 100, getPosition().y + 20;
+	RectangleShape::move(xMove, yMove);
+	if (getPosition().x <= 10 || getPosition().y <= 10 || getPosition().x >= 290 || getPosition().y >= 550)
+	{
+		if (getPosition().x <= 10)
+			RectangleShape::setPosition(10, getPosition().y);
+		if (getPosition().y <= 10)
+			RectangleShape::setPosition(getPosition().x, 10);
+		if (getPosition().x >= 290)
+			RectangleShape::setPosition(290, getPosition().y);
+		if (getPosition().y >= 550)
+			RectangleShape::setPosition(getPosition().x, 550);
+	}
 	for (int i = 0; i < 4; i++)
+	{
 		bullet[i].RectangleShape::move(10, 0);
+		if (bullet[i].getPosition().x > 800)
+			usableShots[i] = true;
+	}
+	for (int i = 0; i < 2; i++)
+	{
+		missile[i].RectangleShape::move(mxMove[i], myMove[i]);
+		if (mxMove[i] > 0)
+			mxMove[i]--;
+		if (myMove[i] < 5)
+			myMove[i]++;
+		if (missile[i].getPosition().y > 600)
+			usableMissiles[i] = true;
+	}
+	sTimer++;
+	mTimer++;
+	
 }

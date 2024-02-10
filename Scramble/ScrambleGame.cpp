@@ -29,12 +29,17 @@ void ScrambleGame::playGame()
 {
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Scramble");
 	Player player;
-    sf::RectangleShape bullet[4];
+    sf::RectangleShape bullet[4], missile[4];
     
     for (int i = 0; i < 4; i++)
     {
         bullet[i].setSize(sf::Vector2f(5, 5));
         bullet[i].setOrigin(0, 0);
+    }
+    for (int i = 0; i < 2; i++)
+    {
+        missile[i].setSize(sf::Vector2f(10, 10));
+        missile[i].setOrigin(0, 0);
     }
 
     window.setFramerateLimit(60);
@@ -52,10 +57,11 @@ void ScrambleGame::playGame()
 
             player.moveCheck();
             player.shootBlaster(bullet);
+            player.shootMissiles(missile);
 
         }
 
-        player.move(bullet);
+        player.move(bullet, missile);
         // Clear the whole window before rendering a new frame
         window.clear();
 
@@ -63,6 +69,8 @@ void ScrambleGame::playGame()
         window.draw(player);
         for (int i = 0; i < 4; i++)
            window.draw(bullet[i]);
+        for (int i = 0; i < 2; i++)
+            window.draw(missile[i]);
         // End the current frame and display its contents on screen
         window.display();
     }

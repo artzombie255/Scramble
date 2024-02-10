@@ -12,16 +12,16 @@ public:
 	~Player();
 	//int getUsableMissiles();
 	//int getUsableShots();
-	void shootMissiles();
+	void shootMissiles(sf::RectangleShape[]);
 	void shootBlaster(sf::RectangleShape[]);
 	void addPoints(int);
 	void crash(Enemy);
 	void hit(Enemy);
 	void moveCheck();
-	void move(sf::RectangleShape[]);
+	void move(sf::RectangleShape[], sf::RectangleShape[]);
 
 private:
 	bool usableMissiles[2] = { 1, 1 }, usableShots[4] = { 1, 1, 1, 1 };
-	int lives = 3, points = 0, fuelUseSpeed = 10, fuel = 128, yMove = 0, xMove = 0;
+	int lives = 3, points = 0, fuelUseSpeed = 10, fuel = 128, yMove = 0, xMove = 0, sTimer = 0, mTimer = 0, mxMove[2] = {}, myMove[2] = {};
 };
 
