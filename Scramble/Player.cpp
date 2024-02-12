@@ -41,7 +41,7 @@ void Player::shootMissiles(sf::RectangleShape missile[])
 		{
 			missile[0].setPosition(getPosition().x + 90, getPosition().y + 20);
 			usableMissiles[0] = false;
-			std::cout << "1";
+			//std::cout << "1";
 			mxMove[0] = 5;
 			mTimer = 0;
 		}
@@ -49,7 +49,7 @@ void Player::shootMissiles(sf::RectangleShape missile[])
 		{
 			missile[1].setPosition(getPosition().x + 90, getPosition().y + 20);
 			usableMissiles[1] = false;
-			std::cout << "2";
+			//std::cout << "2";
 			mxMove[1] = 5;
 			mTimer = 0;
 		}
@@ -65,28 +65,28 @@ void Player::shootBlaster(sf::RectangleShape bullet[])
 		{
 			bullet[0].setPosition(getPosition().x + 90, getPosition().y + 20);
 			usableShots[0] = false;
-			std::cout << "1";
+			//std::cout << "1";
 			sTimer = 0;
 		}
 		else if (usableShots[1] == true)
 		{
 			bullet[1].setPosition(getPosition().x + 90, getPosition().y + 20);
 			usableShots[1] = false;
-			std::cout << "2";
+			//std::cout << "2";
 			sTimer = 0;
 		}
 		else if (usableShots[2] == true)
 		{
 			bullet[2].setPosition(getPosition().x + 90, getPosition().y + 20);
 			usableShots[2] = false;
-			std::cout << "3";
+			//std::cout << "3";
 			sTimer = 0;
 		}
 		else if (usableShots[3] == true)
 		{
 			bullet[3].setPosition(getPosition().x + 90, getPosition().y + 20);
 			usableShots[3] = false;
-			std::cout << "4";
+			//std::cout << "4";
 			sTimer = 0;
 		}
 	}
@@ -95,17 +95,48 @@ void Player::shootBlaster(sf::RectangleShape bullet[])
 
 void Player::addPoints(int tempPoints)
 {
-
+	points += tempPoints;
+	return;
 }
 
 
-void Player::crash(Enemy)
+void Player::crash(std::vector<Enemy*> enemyVec)
 {
 
 }
 
-void Player::hit(Enemy)
+void Player::hit(std::vector<Enemy*> enemyVec, sf::RectangleShape bullet[], sf::RectangleShape missile[])
 {
+	bool hit = false;
+
+	for (int j = 0; j < enemyVec.size(); j++)
+	{
+		for (int i = 0; i < 4; i++)
+			if (bullet[i].getPosition().y >= enemyVec.at(j)->getPosition().y &&
+				bullet[i].getPosition().y <= enemyVec.at(j)->getPosition().y + 50 &&
+				bullet[i].getPosition().x >= enemyVec.at(j)->getPosition().x &&
+				bullet[i].getPosition().x <= enemyVec.at(j)->getPosition().x + 30)
+			{
+				hit = true;
+				bullet[i].setPosition(900, 600);
+			}
+		for (int i = 0; i < 2; i++)
+			if (missile[i].getPosition().y >= enemyVec.at(j)->getPosition().y &&
+				missile[i].getPosition().y <= enemyVec.at(j)->getPosition().y + 50 &&
+				missile[i].getPosition().x >= enemyVec.at(j)->getPosition().x &&
+				missile[i].getPosition().x <= enemyVec.at(j)->getPosition().x + 30)
+			{
+				hit = true;
+			}
+		if (hit == true)
+		{
+			addPoints(enemyVec.at(j)->getPoints());
+			enemyVec.at(j)->setPosition(-100, -100);
+			//delete enemyVec.at(i);
+			std::cout << points;
+		}
+		hit = false;
+	}
 }
 
 

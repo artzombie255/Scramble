@@ -30,6 +30,7 @@ void ScrambleGame::playGame()
     sf::RenderWindow window(sf::VideoMode(800, 600), "Scramble");
 	Player player;
     sf::RectangleShape bullet[4], missile[2];
+    std::vector<Enemy*> enemyVec;
     
     for (int i = 0; i < 4; i++)
     {
@@ -44,6 +45,7 @@ void ScrambleGame::playGame()
 
     window.setFramerateLimit(60);
 
+    enemyVec.push_back(new Rockets());
 
     while (window.isOpen())
     {
@@ -61,7 +63,12 @@ void ScrambleGame::playGame()
 
         }
 
+      
         player.move(bullet, missile);
+        for (int i = 0; i < enemyVec.size(); i++)
+        {
+            player.hit(enemyVec, bullet, missile);
+        }
         // Clear the whole window before rendering a new frame
         window.clear();
 
@@ -71,8 +78,17 @@ void ScrambleGame::playGame()
            window.draw(bullet[i]);
         for (int i = 0; i < 2; i++)
             window.draw(missile[i]);
+        for (int i = 0; i < enemyVec.size(); i++)
+        {
+            enemyVec.at(i)->print(window);
+        }
         // End the current frame and display its contents on screen
         window.display();
+    }
+
+    for (int i = enemyVec.size() - 1; i >= 0; i--)
+    {
+        delete enemyVec.at(i);
     }
 
 }

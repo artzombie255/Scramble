@@ -1,13 +1,16 @@
 #pragma once
 #include <iostream>
+#include "Entity.h"
 
 
-class Enemy
+class Enemy: public Entity
 {
 public:
 	Enemy();
 	~Enemy();
-	int getPoints();
+	virtual int getPoints();
+	virtual void print(sf::RenderWindow&);
+
 protected:
 	int points;
 	bool destroyable = true;

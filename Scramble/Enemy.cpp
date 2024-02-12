@@ -13,3 +13,8 @@ int Enemy::getPoints()
 {
 	return points;
 }
+
+
+void Enemy::print(sf::RenderWindow& window)
+{
+}

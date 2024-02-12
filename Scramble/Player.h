@@ -15,8 +15,8 @@ public:
 	void shootMissiles(sf::RectangleShape[]);
 	void shootBlaster(sf::RectangleShape[]);
 	void addPoints(int);
-	void crash(Enemy);
-	void hit(Enemy);
+	void crash(std::vector<Enemy*>);
+	void hit(std::vector<Enemy*>, sf::RectangleShape[], sf::RectangleShape[]);
 	void moveCheck();
 	void move(sf::RectangleShape[], sf::RectangleShape[]);
 
