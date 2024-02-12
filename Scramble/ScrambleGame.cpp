@@ -27,9 +27,9 @@ ScrambleGame::~ScrambleGame()
 
 void ScrambleGame::playGame()
 {
-	sf::RenderWindow window(sf::VideoMode(800, 600), "Scramble");
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Scramble");
 	Player player;
-    sf::RectangleShape bullet[4], missile[4];
+    sf::RectangleShape bullet[4], missile[2];
     
     for (int i = 0; i < 4; i++)
     {

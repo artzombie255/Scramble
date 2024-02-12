@@ -41,5 +41,5 @@ void Level::loadLevel()
 //piece and idetifies if it has struck something
 bool Level::checkCollision(Player user)
 {
-
+    return true;
 }

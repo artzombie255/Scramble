@@ -13,6 +13,6 @@ public:
 	void loadLevel();
 	bool checkCollision(Player);
 private:
-	std::vector<char> levelArrVec[25]
+	std::vector<char> levelArrVec[25];
 };
 
