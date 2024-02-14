@@ -10,5 +10,6 @@ public:
 	int getX();
 protected:
 	int Y, X;
+	const int TOTAL_BULLETS = 4;
 };
 

@@ -9,6 +9,12 @@ Enemy::~Enemy()
 {
 }
 
+void Enemy::move(sf::Clock clock)
+{
+	sf::RectangleShape::move(-1, 0);
+	return;
+}
+
 int Enemy::getPoints()
 {
 	return points;

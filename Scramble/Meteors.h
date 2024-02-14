@@ -7,6 +7,7 @@ class Meteors : public Enemy
 public:
 	Meteors();
 	~Meteors();
+	void move();
 	void print(sf::RenderWindow&);
 };
 
