@@ -2,7 +2,7 @@
 
 Level::Level()
 {
-
+    
 }
 
 Level::~Level()
@@ -37,9 +37,16 @@ void Level::loadLevel()
 
 }
 
+void Level::colorSwap()
+{
+
+}
+
 //checks for position of pieces in each type of 
 //piece and idetifies if it has struck something
 bool Level::checkCollision(Player user)
 {
     return true;
 }
+
+
