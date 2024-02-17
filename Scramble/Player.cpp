@@ -102,7 +102,20 @@ void Player::addPoints(int tempPoints)
 
 void Player::crash(std::vector<Enemy*> enemyVec)
 {
-
+	for (int i = 0; i < enemyVec.size(); i++)
+	{
+		if (getPosition().y <= enemyVec.at(i)->getPosition().y + enemyVec.at(i)->getSize().y &&
+			getPosition().y + getSize().y >= enemyVec.at(i)->getPosition().y &&
+			getPosition().x <= enemyVec.at(i)->getPosition().x + enemyVec.at(i)->getSize().x &&
+			getPosition().x + getSize().x >= enemyVec.at(i)->getPosition().x)
+		{
+			lives--;
+			if (lives == 0);
+			//play end animation
+			else;
+			//respawn
+		}
+	}
 }
 
 void Player::hit(std::vector<Enemy*> enemyVec, sf::RectangleShape bullet[], sf::RectangleShape missile[])
@@ -113,18 +126,18 @@ void Player::hit(std::vector<Enemy*> enemyVec, sf::RectangleShape bullet[], sf::
 	{
 		for (int i = 0; i < TOTAL_BULLETS; i++)
 			if (bullet[i].getPosition().y >= enemyVec.at(j)->getPosition().y &&
-				bullet[i].getPosition().y <= enemyVec.at(j)->getPosition().y + 50 &&
+				bullet[i].getPosition().y <= enemyVec.at(j)->getPosition().y + enemyVec.at(j)->getSize().y &&
 				bullet[i].getPosition().x >= enemyVec.at(j)->getPosition().x &&
-				bullet[i].getPosition().x <= enemyVec.at(j)->getPosition().x + 30)
+				bullet[i].getPosition().x <= enemyVec.at(j)->getPosition().x + enemyVec.at(j)->getSize().x)
 			{
 				hit = true;
 				bullet[i].setPosition(900, 600);
 			}
 		for (int i = 0; i < 2; i++)
 			if (missile[i].getPosition().y >= enemyVec.at(j)->getPosition().y &&
-				missile[i].getPosition().y <= enemyVec.at(j)->getPosition().y + 50 &&
+				missile[i].getPosition().y <= enemyVec.at(j)->getPosition().y + enemyVec.at(j)->getSize().y &&
 				missile[i].getPosition().x >= enemyVec.at(j)->getPosition().x &&
-				missile[i].getPosition().x <= enemyVec.at(j)->getPosition().x + 30)
+				missile[i].getPosition().x <= enemyVec.at(j)->getPosition().x + enemyVec.at(j)->getSize().x)
 			{
 				hit = true;
 				missile[i].setPosition(900, 700);

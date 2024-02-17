@@ -50,7 +50,7 @@ void ScrambleGame::playGame()
     window.setFramerateLimit(60);
 
     for (int i = 20; i > 0; i--)
-        enemyVec.push_back(new Rockets());
+        enemyVec.push_back(new Ufo());
   
 
     while (window.isOpen())
@@ -72,8 +72,9 @@ void ScrambleGame::playGame()
         for (int i = 0; i < enemyVec.size(); i++)
         {
             enemyVec.at(i)->move(clock);
-            player.hit(enemyVec, bullet, missile);
         }
+        player.hit(enemyVec, bullet, missile);
+        player.crash(enemyVec);
         // Clear the whole window before rendering a new frame
         window.clear();
 

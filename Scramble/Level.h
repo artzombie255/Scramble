@@ -3,6 +3,7 @@
 #include <string>
 #include <fstream>
 #include "Player.h"
+#include <SFML/Graphics.hpp>
 
 class Level
 {
@@ -15,7 +16,7 @@ public:
 	bool checkCollision(Player);
 private:
 	std::vector<char> levelArrVec[25];
-	Sprite levelSprite[33];
-	Texture levelTexture[33][7];
+	sf::Sprite levelSprite[33];
+	sf::Texture levelTexture[33][7];
 };
 
