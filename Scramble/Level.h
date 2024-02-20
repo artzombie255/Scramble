@@ -11,8 +11,8 @@ public:
 	Level();
 	~Level();
 	void loadFromFile(std::ifstream, std::string);
-	void loadLevel();
-	void colorSwap();
+	void loadLevel(sf::RenderWindow);
+	void colorSwap(int);
 	bool checkCollision(Player);
 private:
 	std::vector<char> levelArrVec[25];
