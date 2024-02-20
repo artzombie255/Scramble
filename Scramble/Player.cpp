@@ -229,3 +229,47 @@ void Player::move(sf::RectangleShape bullet[], sf::RectangleShape missile[])
 	mTimer++;
 	
 }
+
+
+void Player::changeSprite(sf::Clock& clock, sf::Sprite &playerSprite)
+{
+	std::string file, r = "rocket ", p = ".png", num;
+	switch (spriteNum)
+	{
+	case 0:
+		num = "0";
+		break;
+	case 1:
+		num = "1";
+		break;
+	case 2:
+		num = "2";
+		break;
+	case 3:
+		num = "3";
+		break;
+	case 4:
+		num = "4";
+		break;
+	case 5:
+		num = "5";
+		break;
+	case 6:
+		num = "6";
+		break;
+	case 7:
+		num = "7";
+		break;
+	}
+	if (clock.getElapsedTime().asMilliseconds() >= 100)
+	{
+		clock.restart();
+		file = r + num + p ;
+		image.loadFromFile(file);
+		playerSprite.setTexture(image);
+		playerSprite.setScale(3, 3);
+		spriteNum++;
+		if (spriteNum == 8)
+			spriteNum = 0;
+	}
+}

@@ -93,4 +93,30 @@
   <ItemGroup>
     <Text Include="README.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="rocket sprites\rocket 1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="rocket sprites\rocket 2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="rocket sprites\rocket 3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="rocket sprites\rocket 4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="rocket sprites\rocket 5.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="rocket sprites\rocket 6.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="rocket sprites\rocket 7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="rocket sprites\rocket 0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

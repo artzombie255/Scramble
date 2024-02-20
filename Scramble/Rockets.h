@@ -7,7 +7,7 @@ class Rockets : public Enemy
 public:
 	Rockets();
 	~Rockets();
-	void move(sf::Clock clock);
+	void move(sf::Clock &clock);
 	void takeoff();
 	int getPoints();
 	void print(sf::RenderWindow&);

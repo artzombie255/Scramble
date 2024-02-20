@@ -5,7 +5,7 @@ Rockets::Rockets()
 {
 	setSize(sf::Vector2f(30, 50));
 	setOrigin(0, 0);
-	setPosition((rand() % 5000 + 300), 500);
+	setPosition((rand() % 2000 + 300), 500);
 }
 
 
@@ -15,7 +15,7 @@ Rockets::~Rockets()
 }
 
 
-void Rockets::move(sf::Clock clock)
+void Rockets::move(sf::Clock &clock)
 {
 	sf::RectangleShape::move(-1, 0);
 	if (grounded == false)

@@ -31,10 +31,13 @@ void ScrambleGame::playGame()
 	Player player;
     sf::RectangleShape bullet[4], missile[2];
     std::vector<Enemy*> enemyVec;
-    sf::Clock clock;
+    sf::Clock clock, playerSpriteClock;
+    sf::Sprite playerSprite;
     int frame = 0;
     
     srand(time(NULL));
+
+    player.changeSprite(playerSpriteClock, playerSprite);
 
     for (int i = 0; i < TOTAL_BULLETS; i++)
     {
@@ -50,7 +53,10 @@ void ScrambleGame::playGame()
     window.setFramerateLimit(60);
 
     for (int i = 20; i > 0; i--)
+    {
+        enemyVec.push_back(new Rockets());
         enemyVec.push_back(new Ufo());
+    }
   
 
     while (window.isOpen())
@@ -68,6 +74,7 @@ void ScrambleGame::playGame()
             player.shootMissiles(missile);
         }
 
+        player.changeSprite(playerSpriteClock, playerSprite);
         player.move(bullet, missile);
         for (int i = 0; i < enemyVec.size(); i++)
         {
@@ -75,11 +82,11 @@ void ScrambleGame::playGame()
         }
         player.hit(enemyVec, bullet, missile);
         player.crash(enemyVec);
+        playerSprite.setPosition(player.getPosition().x, player.getPosition().y);
         // Clear the whole window before rendering a new frame
         window.clear();
-
         // Draw some graphical entities
-        window.draw(player);
+        window.draw(playerSprite);
         for (int i = 0; i < TOTAL_BULLETS; i++)
            window.draw(bullet[i]);
         for (int i = 0; i < 2; i++)

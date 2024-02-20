@@ -19,9 +19,11 @@ public:
 	void hit(std::vector<Enemy*>, sf::RectangleShape[], sf::RectangleShape[]);
 	void moveCheck();
 	void move(sf::RectangleShape[], sf::RectangleShape[]);
+	void changeSprite(sf::Clock&, sf::Sprite&);
 
 private:
 	bool usableMissiles[2] = { 1, 1 }, usableShots[4] = { 1, 1, 1, 1 };
-	int lives = 3, points = 0, fuelUseSpeed = 10, fuel = 128, yMove = 0, xMove = 0, sTimer = 0, mTimer = 0, mxMove[2] = {}, myMove[2] = {};
+	int lives = 3, points = 0, fuelUseSpeed = 10, fuel = 128, yMove = 0, xMove = 0, sTimer = 0, mTimer = 0, mxMove[2] = {}, myMove[2] = {}, spriteNum = 0;
+	sf::Texture image; 
 };
 

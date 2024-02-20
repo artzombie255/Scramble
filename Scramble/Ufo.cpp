@@ -18,7 +18,7 @@ Ufo::~Ufo()
 }
 
 
-void Ufo::move(sf::Clock clock)
+void Ufo::move(sf::Clock &clock)
 {
 	sf::RectangleShape::move(-1, 0);
 	if (getPosition().x < 800)
