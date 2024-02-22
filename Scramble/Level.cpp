@@ -13,20 +13,23 @@ Level::~Level()
 //takes information from file to make level 
 void Level::loadFromFile(std::ifstream file, std::string fileName)
 {
+    file.loadFromFile(fileName);
+    std::string levelSequence
     std::string temp;
 
-    while (file.is_open())
+    while (file >> temp)
     {
-        file >> temp;
-        file.close();
+        levelSequence += temp;
     }
 
-    while (temp.size() > 0)
+    file.close();
+
+    while (levelSequence.size() > 0)
     {
         for (int i = 0; i < 25; i++)
         {
-            levelArrVec[i % 25].push_back(temp.at(0));
-            temp.erase(0, 1);
+            levelArrVec[i % 25].push_back(levelSequence.at(0));
+            levelSequence.erase(0, 1);
         }
     }
 }
@@ -39,8 +42,7 @@ void Level::loadLevel(sf::RenderWindow window)
 
 void Level::colorSwap(int color)
 {
-	for (int i = 0; i < 33; i++)
-		levelSprite[i].setTexture(levelText[i][color]);
+
 }
 
 //checks for position of pieces in each type of 
