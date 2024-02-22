@@ -33,9 +33,13 @@ void ScrambleGame::playGame()
     std::vector<Enemy*> enemyVec;
     sf::Clock clock, playerSpriteClock;
     sf::Sprite playerSprite;
+    sf::Shader test;
     int frame = 0;
     
     srand(time(NULL));
+
+    test.loadFromFile("Fuel_bar.shader", sf::Shader::Fragment);
+    sf::Shader::bind(&test);
 
     player.changeSprite(playerSpriteClock, playerSprite);
 
@@ -86,7 +90,7 @@ void ScrambleGame::playGame()
         // Clear the whole window before rendering a new frame
         window.clear();
         // Draw some graphical entities
-        window.draw(playerSprite);
+        window.draw(playerSprite, &test);
         for (int i = 0; i < TOTAL_BULLETS; i++)
            window.draw(bullet[i]);
         for (int i = 0; i < 2; i++)

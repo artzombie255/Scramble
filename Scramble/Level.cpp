@@ -40,7 +40,7 @@ void Level::loadLevel(sf::RenderWindow window)
 void Level::colorSwap(int color)
 {
 	for (int i = 0; i < 33; i++)
-		levelSprite[i].setTexture(levelText[i][color]);
+		levelSprite[i].setTexture(levelTexture[i][color]);
 }
 
 //checks for position of pieces in each type of 
