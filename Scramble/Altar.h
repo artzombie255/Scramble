@@ -8,7 +8,7 @@ public:
 	Altar();
 	~Altar();
 	void print(sf::RenderWindow&);
-
+	void changeSprite(sf::Clock&, sf::Sprite&);
 
 };
 

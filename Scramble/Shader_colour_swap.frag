@@ -1,4 +1,4 @@
-shader_type canvas_item;
+precision mediump float;
 
 uniform vec4 outline : hint_color;
 uniform vec4 fill : hint_color;
@@ -13,7 +13,7 @@ void fragment()
 {	
 	vec4 COLOR : hint_color;
 
-	vec4 curr_color = texture(TEXTURE,UV); // Get current color of pixel
+	vec4 curr_color = texture(TEXTURE, UV); // Get current color of pixel
 	if (curr_color == vec4(1,1,1,1)) // white
 	{
         COLOR = outline;

@@ -35,3 +35,8 @@ void Ufo::print(sf::RenderWindow& window)
 {
 	window.draw(*this);
 }
+
+
+void Ufo::changeSprite(sf::Clock&, sf::Sprite&)
+{
+}

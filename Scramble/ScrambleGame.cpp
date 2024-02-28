@@ -32,16 +32,23 @@ void ScrambleGame::playGame()
     sf::RectangleShape bullet[4], missile[2];
     std::vector<Enemy*> enemyVec;
     sf::Clock clock, playerSpriteClock;
-    sf::Sprite playerSprite;
+    sf::Sprite playerSprite, rocketSprite;
+    sf::Texture tempI;
     sf::Shader test;
     int frame = 0;
     
     srand(time(NULL));
 
-    test.loadFromFile("Fuel_bar.shader", sf::Shader::Fragment);
-    sf::Shader::bind(&test);
-
+    //test.loadFromFile("Shader_colour_swap.frag", sf::Shader::Fragment);
+    //test.setUniform("COLOR", sf::Glsl::Vec4());
+    //test.setUniform("TEXTURE", sf::Shader::CurrentTexture);
+    //test.setUniform("UV", sf::Glsl::Vec4());
+    //sf::Shader::bind(&test);
+    //tempI.loadFromFile("rocketEnemy.png");
     player.changeSprite(playerSpriteClock, playerSprite);
+    //rocketSprite.setTexture(tempI);
+    //rocketSprite.scale(5, 5);
+
 
     for (int i = 0; i < TOTAL_BULLETS; i++)
     {
@@ -90,7 +97,8 @@ void ScrambleGame::playGame()
         // Clear the whole window before rendering a new frame
         window.clear();
         // Draw some graphical entities
-        window.draw(playerSprite, &test);
+        window.draw(rocketSprite);
+        window.draw(playerSprite);
         for (int i = 0; i < TOTAL_BULLETS; i++)
            window.draw(bullet[i]);
         for (int i = 0; i < 2; i++)

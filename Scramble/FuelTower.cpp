@@ -23,3 +23,8 @@ void FuelTower::print(sf::RenderWindow& window)
 {
 	window.draw(*this);
 }
+
+
+void FuelTower::changeSprite(sf::Clock&, sf::Sprite&)
+{
+}

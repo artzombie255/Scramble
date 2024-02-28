@@ -26,3 +26,8 @@ int Entity::getX()
 {
 	return X;
 }
+
+
+void Entity::changeSprite(sf::Clock&, sf::Sprite&)
+{
+}

@@ -233,7 +233,7 @@ void Player::move(sf::RectangleShape bullet[], sf::RectangleShape missile[])
 
 void Player::changeSprite(sf::Clock& clock, sf::Sprite &playerSprite)
 {
-	std::string file, r = "rocket ", p = ".png", num;
+	std::string file, r = "player", p = ".png", num;
 	switch (spriteNum)
 	{
 	case 0:

@@ -11,6 +11,7 @@ public:
 	virtual void move(sf::Clock&);
 	virtual int getPoints();
 	virtual void print(sf::RenderWindow&);
+	virtual void changeSprite(sf::Clock&, sf::Sprite&);
 
 protected:
 	int points;

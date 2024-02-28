@@ -8,6 +8,8 @@ public:
 	~Entity();
 	int getY();
 	int getX();
+	virtual void changeSprite(sf::Clock&, sf::Sprite&);
+
 protected:
 	int Y, X;
 	const int TOTAL_BULLETS = 4;

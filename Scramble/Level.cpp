@@ -13,8 +13,7 @@ Level::~Level()
 //takes information from file to make level 
 void Level::loadFromFile(std::ifstream file, std::string fileName)
 {
-    file.loadFromFile(fileName);
-    std::string levelSequence
+    std::string levelSequence;
     std::string temp;
 
     while (file >> temp)

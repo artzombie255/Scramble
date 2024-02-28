@@ -16,3 +16,9 @@ void Altar::print(sf::RenderWindow& window)
 {
 	window.draw(*this);
 }
+
+
+void Altar::changeSprite(sf::Clock&, sf::Sprite&)
+{
+
+}

@@ -17,3 +17,8 @@ void Base::print(sf::RenderWindow& window)
 {
 	window.draw(*this);
 }
+
+
+void Base::changeSprite(sf::Clock&, sf::Sprite&)
+{
+}

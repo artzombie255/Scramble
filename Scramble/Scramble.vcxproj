@@ -178,14 +178,17 @@
     <Text Include="README.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="rocket sprites\rocket 1.png" />
-    <Image Include="rocket sprites\rocket 2.png" />
-    <Image Include="rocket sprites\rocket 3.png" />
-    <Image Include="rocket sprites\rocket 4.png" />
-    <Image Include="rocket sprites\rocket 5.png" />
-    <Image Include="rocket sprites\rocket 6.png" />
-    <Image Include="rocket sprites\rocket 7.png" />
-    <Image Include="rocket sprites\rocket 0.png" />
+    <None Include="Shader_colour_swap.frag" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="player0.png" />
+    <Image Include="player1.png" />
+    <Image Include="player2.png" />
+    <Image Include="player3.png" />
+    <Image Include="player4.png" />
+    <Image Include="player5.png" />
+    <Image Include="player6.png" />
+    <Image Include="player7.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
