@@ -20,8 +20,9 @@ void Rockets::move(sf::Clock &clock)
 	sf::RectangleShape::move(-1, 0);
 	if (grounded == false)
 		sf::RectangleShape::move(0, -2);
-	if (clock.getElapsedTime().asSeconds() >= 1 && getPosition().x < 450)
+	if (clock.getElapsedTime().asSeconds() >= 1 && getPosition().x < 386 && getPosition().x > 10)
 	{
+		std::cout << "takeoff";
 		clock.restart();
 		takeoff();
 	}
@@ -47,14 +48,15 @@ int Rockets::getPoints()
 
 void Rockets::print(sf::RenderWindow& window)
 {
+	sprite.setPosition(getPosition().x, getPosition().y);
 	window.draw(*this);
+	//window.draw(sprite);
 }
 
 
-void Rockets::changeSprite(sf::Clock& clock, sf::Sprite& sprite)
+void Rockets::changeSprite(int palette)
 {
-	sf::Texture image;
-	std::string file, r = "rocket ", p = ".png", num, color;
+	std::string file, r = "rocket", p = ".png", num, color;
 
 	switch (spriteNum)
 	{
@@ -66,25 +68,9 @@ void Rockets::changeSprite(sf::Clock& clock, sf::Sprite& sprite)
 		break;
 	case 2:
 		num = "2";
-		break;
-	case 3:
-		num = "3";
-		break;
-	case 4:
-		num = "4";
-		break;
-	case 5:
-		num = "5";
-		break;
-	case 6:
-		num = "6";
-		break;
-	case 7:
-		num = "7";
-		break;
 	}
 
-	/*
+	
 	switch (palette)
 	{
 	case 0:
@@ -108,17 +94,20 @@ void Rockets::changeSprite(sf::Clock& clock, sf::Sprite& sprite)
 	case 6:
 		color = "6";
 		break;
-	}*/
+	}
 
-	if (clock.getElapsedTime().asMilliseconds() >= 100)
+	if (spriteClock.getElapsedTime().asMilliseconds() >= 250)
 	{
-		clock.restart();
-		file = color + r + num + p;
+		spriteClock.restart();
+		if (grounded == false)
+			file = color + r + num + p;
+		else
+			file = color + r + "0" + p;
 		image.loadFromFile(file);
 		sprite.setTexture(image);
 		sprite.setScale(3, 3);
 		spriteNum++;
-		if (spriteNum == 8)
+		if (spriteNum == 3)
 			spriteNum = 0;
 	}
 }

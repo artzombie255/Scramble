@@ -26,6 +26,6 @@ void Enemy::print(sf::RenderWindow& window)
 }
 
 
-void Enemy::changeSprite(sf::Clock&, sf::Sprite&)
+void Enemy::changeSprite(int)
 {
 }

@@ -123,5 +123,23 @@
     <Image Include="player0.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="1rocket1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="1rocket2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="1rocket0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="0rocket1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="0rocket2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="0rocket0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

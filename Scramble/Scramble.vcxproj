@@ -181,6 +181,12 @@
     <None Include="Shader_colour_swap.frag" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="0rocket0.png" />
+    <Image Include="0rocket1.png" />
+    <Image Include="0rocket2.png" />
+    <Image Include="1rocket0.png" />
+    <Image Include="1rocket1.png" />
+    <Image Include="1rocket2.png" />
     <Image Include="player0.png" />
     <Image Include="player1.png" />
     <Image Include="player2.png" />

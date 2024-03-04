@@ -11,12 +11,13 @@ public:
 	void takeoff();
 	int getPoints();
 	void print(sf::RenderWindow&);
-	void changeSprite(sf::Clock&, sf::Sprite&);
+	void changeSprite(int);
 
 
 private:
 	bool grounded = true;
 	int spriteNum = 0;
+	sf::Clock spriteClock;
 
 };
 

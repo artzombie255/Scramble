@@ -11,10 +11,12 @@ public:
 	virtual void move(sf::Clock&);
 	virtual int getPoints();
 	virtual void print(sf::RenderWindow&);
-	virtual void changeSprite(sf::Clock&, sf::Sprite&);
+	virtual void changeSprite(int);
 
 protected:
 	int points;
 	bool destroyable = true;
+	sf::Sprite sprite;
+	sf::Texture image;
 };
 

@@ -33,6 +33,7 @@ int Player::getUsableShots()
 */
 
 
+//checks if the key is pressed and there are available missiles then shoots them
 void Player::shootMissiles(sf::RectangleShape missile[])
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::K) && mTimer > 3)
@@ -57,6 +58,7 @@ void Player::shootMissiles(sf::RectangleShape missile[])
 }
 
 
+//checks if the key is pressed and there are available bullet then shoots them
 void Player::shootBlaster(sf::RectangleShape bullet[])
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::J) && sTimer > 5)
@@ -93,6 +95,7 @@ void Player::shootBlaster(sf::RectangleShape bullet[])
 }
 
 
+//adds to the players points
 void Player::addPoints(int tempPoints)
 {
 	points += tempPoints;
@@ -100,6 +103,7 @@ void Player::addPoints(int tempPoints)
 }
 
 
+//detects when the player crashes and calls level to deal with it
 void Player::crash(std::vector<Enemy*> enemyVec)
 {
 	for (int i = 0; i < enemyVec.size(); i++)
@@ -118,6 +122,8 @@ void Player::crash(std::vector<Enemy*> enemyVec)
 	}
 }
 
+
+//detects when an enemy is hit and manages it
 void Player::hit(std::vector<Enemy*> enemyVec, sf::RectangleShape bullet[], sf::RectangleShape missile[])
 {
 	bool hit = false;
@@ -154,6 +160,7 @@ void Player::hit(std::vector<Enemy*> enemyVec, sf::RectangleShape bullet[], sf::
 }
 
 
+//checks if keys are pressed and starts movement
 void Player::moveCheck()
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
@@ -186,20 +193,21 @@ void Player::moveCheck()
 }
 
 
+//moves player based on pressed keys
 void Player::move(sf::RectangleShape bullet[], sf::RectangleShape missile[])
 {
 	//getPosition().x + 100, getPosition().y + 20;
 	RectangleShape::move(xMove, yMove);
-	if (getPosition().x <= 10 || getPosition().y <= 10 || getPosition().x >= 290 || getPosition().y >= 550)
+	if (getPosition().x <= 10 || getPosition().y <= 106 || getPosition().x >= 226 || getPosition().y >= 718)
 	{
 		if (getPosition().x <= 10)
 			RectangleShape::setPosition(10, getPosition().y);
-		if (getPosition().y <= 10)
-			RectangleShape::setPosition(getPosition().x, 10);
-		if (getPosition().x >= 290)
-			RectangleShape::setPosition(290, getPosition().y);
-		if (getPosition().y >= 550)
-			RectangleShape::setPosition(getPosition().x, 550);
+		if (getPosition().y <= 106)
+			RectangleShape::setPosition(getPosition().x, 106);
+		if (getPosition().x >= 226)
+			RectangleShape::setPosition(226, getPosition().y);
+		if (getPosition().y >= 718)
+			RectangleShape::setPosition(getPosition().x, 718);
 	}
 	for (int i = 0; i < TOTAL_BULLETS; i++)
 	{
@@ -217,7 +225,7 @@ void Player::move(sf::RectangleShape bullet[], sf::RectangleShape missile[])
 			mxMove[i]--;
 		if (myMove[i] < 5)
 			myMove[i]++;
-		if (missile[i].getPosition().y > 600)
+		if (missile[i].getPosition().y > 672)
 		{
 			usableMissiles[i] = true;
 			missile[i].setPosition(1000, 1000);
@@ -231,6 +239,7 @@ void Player::move(sf::RectangleShape bullet[], sf::RectangleShape missile[])
 }
 
 
+//changes sprites to animate them
 void Player::changeSprite(sf::Clock& clock, sf::Sprite &playerSprite)
 {
 	std::string file, r = "player", p = ".png", num;
