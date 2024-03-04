@@ -13,24 +13,23 @@ Level::~Level()
 //takes information from file to make level 
 void Level::loadFromFile(std::ifstream file, std::string fileName)
 {
-    std::string levelSequence;
-    std::string temp;
+    file.loadFromFile(fileName);
 
-    while (file >> temp)
-    {
-        levelSequence += temp;
-    }
-
-    file.close();
-
-    while (levelSequence.size() > 0)
-    {
-        for (int i = 0; i < 25; i++)
-        {
-            levelArrVec[i % 25].push_back(levelSequence.at(0));
-            levelSequence.erase(0, 1);
-        }
-    }
+	while (file.is_open())
+	{
+		std::string temp;
+		int i = 0;
+		while (std::getline(file, temp))
+		{
+			while (temp.size() > 0)
+			{
+				level[i].push_back(temp.at(0));
+				temp.erase(0, 1);
+			}
+			i++;
+		}
+		file.close();
+	}
 }
 
 //loads each level into sfml
