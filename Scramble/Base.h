@@ -8,7 +8,7 @@ public:
 	Base();
 	~Base();
 	void print(sf::RenderWindow&);
-	void changeSprite(sf::Clock&, sf::Sprite&);
+	void changeSprite(int);
 
 };
 

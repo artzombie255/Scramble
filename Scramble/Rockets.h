@@ -17,7 +17,5 @@ public:
 private:
 	bool grounded = true;
 	int spriteNum = 0;
-	sf::Clock spriteClock;
-
 };
 

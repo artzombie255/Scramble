@@ -9,7 +9,8 @@ public:
 	~FuelTower();
 	int getFuel();
 	void print(sf::RenderWindow&);
-	void changeSprite(sf::Clock&, sf::Sprite&);
+	void changeSprite(int);
+	int getPoints();
 
 private:
 	int housedFuel = 24;

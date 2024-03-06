@@ -18,5 +18,7 @@ protected:
 	bool destroyable = true;
 	sf::Sprite sprite;
 	sf::Texture image;
+	sf::Clock spriteClock;
+	std::string name;
 };
 

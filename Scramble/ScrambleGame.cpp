@@ -71,6 +71,8 @@ void ScrambleGame::playGame()
     {
         enemyVec.push_back(new Rockets());
         enemyVec.push_back(new Ufo());
+        enemyVec.push_back(new FuelTower());
+        enemyVec.push_back(new Altar());
     }
   
     //window
@@ -115,15 +117,11 @@ void ScrambleGame::playGame()
         window.clear();
 
         //Draw some graphical entities
-        for (int i = 0; i < TOTAL_BULLETS; i++)
-           window.draw(bullet[i]);
-        for (int i = 0; i < 2; i++)
-            window.draw(missile[i]);
         for (int i = 0; i < enemyVec.size(); i++)
         {
             enemyVec.at(i)->print(window);
             //get rid of off screen enemies
-            if (enemyVec.at(i)->getPosition().x < 0)
+            if (enemyVec.at(i)->getPosition().x < 0 || enemyVec.at(i)->getPosition().y < 96)
             {
                 delete enemyVec.at(i);
                 for (int j = i + 1; j < enemyVec.size(); j++)
@@ -134,6 +132,10 @@ void ScrambleGame::playGame()
 
             }
         }
+        for (int i = 0; i < TOTAL_BULLETS; i++)
+            window.draw(bullet[i]);
+        for (int i = 0; i < 2; i++)
+            window.draw(missile[i]);
         window.draw(playerSprite);
 
         // End the current frame and display its contents on screen

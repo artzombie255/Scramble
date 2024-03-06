@@ -3,7 +3,7 @@
 
 Rockets::Rockets()
 {
-	setSize(sf::Vector2f(30, 50));
+	setSize(sf::Vector2f(48, 48));
 	setOrigin(0, 0);
 	setPosition((rand() % 2000 + 300), 500);
 }
@@ -20,7 +20,7 @@ void Rockets::move(sf::Clock &clock)
 	sf::RectangleShape::move(-1, 0);
 	if (grounded == false)
 		sf::RectangleShape::move(0, -2);
-	if (clock.getElapsedTime().asSeconds() >= 1 && getPosition().x < 386 && getPosition().x > 10)
+	if (clock.getElapsedTime().asSeconds() >= 1 && getPosition().x < 386 && getPosition().x > 10 && grounded == true)
 	{
 		std::cout << "takeoff";
 		clock.restart();
@@ -32,6 +32,7 @@ void Rockets::move(sf::Clock &clock)
 
 void Rockets::takeoff()
 {
+	//std::cout << "sprking";
 	grounded = false;
 	return;
 }
@@ -49,8 +50,8 @@ int Rockets::getPoints()
 void Rockets::print(sf::RenderWindow& window)
 {
 	sprite.setPosition(getPosition().x, getPosition().y);
-	window.draw(*this);
-	//window.draw(sprite);
+	//window.draw(*this);
+	window.draw(sprite);
 }
 
 

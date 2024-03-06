@@ -3,7 +3,10 @@
 
 FuelTower::FuelTower()
 {
-
+	setSize(sf::Vector2f(50, 50));
+	setOrigin(0, 0);
+	setPosition((rand() % 2000 + 300), 500);
+	name = "FuelTower.png";
 }
 
 
@@ -21,10 +24,19 @@ int FuelTower::getFuel()
 
 void FuelTower::print(sf::RenderWindow& window)
 {
-	window.draw(*this);
+	sprite.setPosition(getPosition().x, getPosition().y);
+	//window.draw(*this);
+	window.draw(sprite);
 }
 
 
-void FuelTower::changeSprite(sf::Clock&, sf::Sprite&)
+void FuelTower::changeSprite(int palette)
 {
+	Enemy::changeSprite(palette);
+}
+
+
+int FuelTower::getPoints()
+{
+	return 150;
 }

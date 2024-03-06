@@ -9,7 +9,7 @@ public:
 	~Ufo();
 	void move(sf::Clock&);
 	void print(sf::RenderWindow&);
-	void changeSprite(sf::Clock&, sf::Sprite&);
+	void changeSprite(int);
 
 
 private:

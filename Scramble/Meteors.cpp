@@ -3,6 +3,10 @@
 
 Meteors::Meteors()
 {
+	setSize(sf::Vector2f(48, 48));
+	setOrigin(0, 0);
+	setPosition((rand() % 2000 + 300), 500);
+	name = "meteor.png";
 }
 
 
@@ -19,10 +23,13 @@ void Meteors::move()
 
 void Meteors::print(sf::RenderWindow& window)
 {
-	window.draw(*this);
+	sprite.setPosition(getPosition().x, getPosition().y);
+	//window.draw(*this);
+	window.draw(sprite);
 }
 
 
-void Meteors::changeSprite(sf::Clock&, sf::Sprite&)
+void Meteors::changeSprite(int palette)
 {
+	Enemy::changeSprite(palette);
 }

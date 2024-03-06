@@ -4,11 +4,12 @@
 Ufo::Ufo()
 {
 	points = 100;
-	setSize(sf::Vector2f(25, 25));
+	setSize(sf::Vector2f(48, 48));
 	setOrigin(0, 0);
 	setPosition((rand() % 5000 + 300), 500);
 	start = getPosition().y;
 	moveDir = -5;
+	name = "Ufo.png";
 }
 
 
@@ -33,10 +34,13 @@ void Ufo::move(sf::Clock &clock)
 
 void Ufo::print(sf::RenderWindow& window)
 {
-	window.draw(*this);
+	sprite.setPosition(getPosition().x, getPosition().y);
+	//window.draw(*this);
+	window.draw(sprite);
 }
 
 
-void Ufo::changeSprite(sf::Clock&, sf::Sprite&)
+void Ufo::changeSprite(int palette)
 {
+	Enemy::changeSprite(palette);
 }
