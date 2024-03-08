@@ -6,9 +6,9 @@ Level::Level()
 		for (int z = 0; z < 7; z++)
 		{
 			std::string tempI, tempZ;
-			tempI = i.std::to_string();
-			tempZ = z.std::to_string();
-
+			tempI = std::to_string(i);
+			tempZ = std::to_string(z);
+			 
 			levelTexture[i][z].loadFromFile(tempZ + "map" + tempI + ".png");
 		}
 
@@ -25,9 +25,9 @@ Level::~Level()
 }
 
 //takes information from file to make level 
-void Level::loadFromFile(std::ifstream file, std::string fileName)
+void Level::readFromFile(std::ifstream file, std::string fileName)
 {
-    //file.loadFromFile(fileName);
+    file.open(fileName);
 
 	while (file.is_open())
 	{
@@ -37,7 +37,7 @@ void Level::loadFromFile(std::ifstream file, std::string fileName)
 		{
 			while (temp.size() > 0)
 			{
-				//level[i].push_back(temp.at(0));
+				levelArrVec[i].push_back(temp.at(0));
 				temp.erase(0, 1);
 			}
 			i++;
@@ -289,7 +289,7 @@ void Level::loadLevel(sf::RenderWindow window)
 	}
 
 	window.display();
-	if (level[0].size() > 28)
+	if (levelArrVec[0].size() > 28)
 	{
 		for (int i = 0; i < 28; i++)
 		{
@@ -302,7 +302,7 @@ void Level::loadLevel(sf::RenderWindow window)
 		window.clear();
 	}
 }
-}
+
 
 void Level::colorSwap(int palette)
 {

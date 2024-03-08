@@ -28,7 +28,7 @@ void Enemy::print(sf::RenderWindow& window)
 
 void Enemy::changeSprite(int palette)
 {
-	std::string file, color;
+	std::string file, color, t = "./sprites/";
 
 	switch (palette)
 	{
@@ -58,7 +58,7 @@ void Enemy::changeSprite(int palette)
 	if (spriteClock.getElapsedTime().asMilliseconds() >= 250)
 	{
 		spriteClock.restart();
-		file = color + name;
+		file = t + color + name;
 		image.loadFromFile(file);
 		sprite.setTexture(image);
 		sprite.setScale(3, 3);

@@ -242,7 +242,7 @@ void Player::move(sf::RectangleShape bullet[], sf::RectangleShape missile[])
 //changes sprites to animate them
 void Player::changeSprite(sf::Clock& clock, sf::Sprite &playerSprite)
 {
-	std::string file, r = "player", p = ".png", num;
+	std::string file, num;
 	switch (spriteNum)
 	{
 	case 0:
@@ -273,7 +273,7 @@ void Player::changeSprite(sf::Clock& clock, sf::Sprite &playerSprite)
 	if (clock.getElapsedTime().asMilliseconds() >= 100)
 	{
 		clock.restart();
-		file = r + num + p ;
+		file = "./sprites/player" + num + ".png" ;
 		image.loadFromFile(file);
 		playerSprite.setTexture(image);
 		playerSprite.setScale(3, 3);

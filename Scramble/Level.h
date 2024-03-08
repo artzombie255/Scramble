@@ -10,7 +10,7 @@ class Level
 public:
 	Level();
 	~Level();
-	void loadFromFile(std::ifstream, std::string);
+	void readFromFile(std::ifstream, std::string);
 	void loadLevel(sf::RenderWindow);
 	void colorSwap(int);
 	bool checkCollision(Player);

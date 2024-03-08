@@ -57,7 +57,7 @@ void Rockets::print(sf::RenderWindow& window)
 
 void Rockets::changeSprite(int palette)
 {
-	std::string file, r = "rocket", p = ".png", num, color;
+	std::string file, num, color;
 
 	switch (spriteNum)
 	{
@@ -101,9 +101,9 @@ void Rockets::changeSprite(int palette)
 	{
 		spriteClock.restart();
 		if (grounded == false)
-			file = color + r + num + p;
+			file = "./sprites/" + color + "rocket" + num + ".png";
 		else
-			file = color + r + "0" + p;
+			file = "./sprites/" + color + "rocket" + "0" + ".png";
 		image.loadFromFile(file);
 		sprite.setTexture(image);
 		sprite.setScale(3, 3);
