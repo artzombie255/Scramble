@@ -4,7 +4,7 @@
 #include "Enemy.h"
 #include "Entity.h"
 #include "FuelTower.h"
-//#include "Level.h"
+#include "Level.h"
 #include "Meteors.h"
 #include "Player.h"
 #include "Rockets.h"
@@ -34,10 +34,11 @@ void ScrambleGame::playGame()
 	Player player;
     sf::RectangleShape bullet[4], missile[2];
     std::vector<Enemy*> enemyVec;
-    sf::Clock clock, playerSpriteClock;
+    sf::Clock clock, playerSpriteClock, fuelClock;
     sf::Sprite playerSprite, rocketSprite;
     sf::Texture tempI;
     sf::Shader test;
+    Level level;
     int palette;
     
     srand(time(NULL));
@@ -99,7 +100,9 @@ void ScrambleGame::playGame()
             enemyVec.at(i)->changeSprite(0);
         }
 
+
         //move entities
+        player.fuelLoss(fuelClock);
         player.move(bullet, missile);
         for (int i = 0; i < enemyVec.size(); i++)
         {
@@ -117,6 +120,7 @@ void ScrambleGame::playGame()
         window.clear();
 
         //Draw some graphical entities
+
         for (int i = 0; i < enemyVec.size(); i++)
         {
             enemyVec.at(i)->print(window);
@@ -137,6 +141,8 @@ void ScrambleGame::playGame()
         for (int i = 0; i < 2; i++)
             window.draw(missile[i]);
         window.draw(playerSprite);
+
+        //level.loadLevel(window);
 
         // End the current frame and display its contents on screen
         window.display();

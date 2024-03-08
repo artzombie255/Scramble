@@ -10,6 +10,7 @@ public:
 	~Enemy();
 	virtual void move(sf::Clock&);
 	virtual int getPoints();
+	virtual int getFuel();
 	virtual void print(sf::RenderWindow&);
 	virtual void changeSprite(int);
 

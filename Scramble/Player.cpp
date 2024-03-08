@@ -151,12 +151,20 @@ void Player::hit(std::vector<Enemy*> enemyVec, sf::RectangleShape bullet[], sf::
 		if (hit == true)
 		{
 			addPoints(enemyVec.at(j)->getPoints());
+			addFuel(enemyVec.at(j)->getFuel());
 			enemyVec.at(j)->setPosition(-100, -100);
 			//delete enemyVec.at(j);
-			std::cout << points;
+			//std::cout << points;
 		}
 		hit = false;
 	}
+}
+
+
+//animates the explosions, what else
+void Player::animateBoom(std::string name)
+{
+
 }
 
 
@@ -281,4 +289,24 @@ void Player::changeSprite(sf::Clock& clock, sf::Sprite &playerSprite)
 		if (spriteNum == 8)
 			spriteNum = 0;
 	}
+}
+
+
+void Player::fuelLoss(sf::Clock& clock)
+{
+	if (clock.getElapsedTime().asMilliseconds() >= 1000/(60/fuelUseSpeed))
+	{
+		clock.restart();
+		fuel--;
+		std::cout << fuel << std::endl;
+	}
+}
+
+
+void Player::addFuel(int tempFuel)
+{
+	fuel += tempFuel;
+	if (fuel > 128)
+		fuel = 128;
+	return;
 }

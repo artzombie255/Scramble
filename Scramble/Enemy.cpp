@@ -21,6 +21,12 @@ int Enemy::getPoints()
 }
 
 
+int Enemy::getFuel()
+{
+	return 0;
+}
+
+
 void Enemy::print(sf::RenderWindow& window)
 {
 }
