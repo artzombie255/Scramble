@@ -10,8 +10,6 @@ class Player: public Entity
 public:
 	Player();
 	~Player();
-	//int getUsableMissiles();
-	//int getUsableShots();
 	void shootMissiles(sf::RectangleShape[]);
 	void shootBlaster(sf::RectangleShape[]);
 	void addPoints(int);
@@ -26,7 +24,7 @@ public:
 
 private:
 	bool usableMissiles[2] = { 1, 1 }, usableShots[4] = { 1, 1, 1, 1 };
-	int lives = 3, points = 0, fuelUseSpeed = 10, fuel = 128, yMove = 0, xMove = 0, sTimer = 0, mTimer = 0, mxMove[2] = {}, myMove[2] = {}, spriteNum = 0, boomNum = 0;
+	int lives = 3, points = 0, fuelUseSpeed = 10, fuel = 30, yMove = 0, xMove = 0, sTimer = 0, mTimer = 0, mxMove[2] = {}, myMove[2] = {}, spriteNum = 0, boomNum = 0;
 	sf::Texture image; 
 };
 

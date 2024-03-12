@@ -205,7 +205,10 @@ void Player::moveCheck()
 void Player::move(sf::RectangleShape bullet[], sf::RectangleShape missile[])
 {
 	//getPosition().x + 100, getPosition().y + 20;
-	RectangleShape::move(xMove, yMove);
+	if (fuel > 0)
+		RectangleShape::move(xMove, yMove);
+	else 
+		RectangleShape::move(3, 3);
 	if (getPosition().x <= 10 || getPosition().y <= 106 || getPosition().x >= 226 || getPosition().y >= 718)
 	{
 		if (getPosition().x <= 10)

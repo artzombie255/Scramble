@@ -9,7 +9,9 @@ Ufo::Ufo()
 	setPosition((rand() % 5000 + 300), 500);
 	start = getPosition().y;
 	moveDir = -5;
-	name = "Ufo.png";
+	image.loadFromFile("./sprites/Ufo.png");
+	sprite.setTexture(image);
+	sprite.setScale(3, 3);
 }
 
 
@@ -42,5 +44,4 @@ void Ufo::print(sf::RenderWindow& window)
 
 void Ufo::changeSprite(int palette)
 {
-	Enemy::changeSprite(palette);
 }

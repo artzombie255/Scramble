@@ -33,13 +33,15 @@ void ScrambleGame::playGame()
     sf::RenderWindow window(sf::VideoMode(672, 816), "Scramble");
 	Player player;
     sf::RectangleShape bullet[4], missile[2];
+    //can hold any enemy, deletes them when they are killed
     std::vector<Enemy*> enemyVec;
-    sf::Clock clock, playerSpriteClock, fuelClock;
+    //animations and palette swaps
+    sf::Clock clock, playerSpriteClock, fuelClock, paletteClock;
     sf::Sprite playerSprite, rocketSprite;
     sf::Texture tempI;
     sf::Shader test;
     Level level;
-    int palette;
+    int palette = 0;
     
     srand(time(NULL));
 
@@ -94,10 +96,17 @@ void ScrambleGame::playGame()
         }
 
         //change sprites for palette change and animations
+        if (paletteClock.getElapsedTime().asMilliseconds() > 10000)
+        {
+            palette++;
+            paletteClock.restart();
+        }
+        if (palette == 7)
+            palette = 0;
         player.changeSprite(playerSpriteClock, playerSprite);
         for (int i = enemyVec.size() - 1; i > 0; i--)
         {
-            enemyVec.at(i)->changeSprite(0);
+            enemyVec.at(i)->changeSprite(palette);
         }
 
 
