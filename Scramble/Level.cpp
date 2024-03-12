@@ -56,16 +56,19 @@ void Level::loadLevel(sf::RenderWindow window)
 		for (int j = 0; j < 28; j++)
 		{
 			// Verifies within acceptable ASCII ranges
-			// 30-39 for 0-9 | 60-119 for a-w
-			if ((i >= 30 && i <= 39) || (i >= 60 && i <= 119))
+			// 48-57 for 0-9 | 97-119 for a-w
+			if ((i >= 48 && i <= 57) || (i >= 97 && i <= 119))
 			{
-				if (i >= 30 && i <= 39)
-					offset = 30;
+				if (i >= 48 && i <= 57)
+					offset = 48;
 				else
-					offset = 50;
+					offset = 87;
 
 				levelSprite[j - offset].setPosition(i * 24, 96 + i * 24);
 				window.draw(levelSprite[j - offset]);
+			}
+			else if (i == 120 || i == 121)
+			{
 			}
 			else
 			{
