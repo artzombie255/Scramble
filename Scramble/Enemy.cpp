@@ -61,12 +61,10 @@ void Enemy::changeSprite(int palette)
 		break;
 	}
 
-	if (spriteClock.getElapsedTime().asMilliseconds() >= 250)
-	{
-		spriteClock.restart();
-		file = t + color + name;
-		image.loadFromFile(file);
-		sprite.setTexture(image);
-		sprite.setScale(3, 3);
-	}
+	spriteClock.restart();
+	file = t + color + name;
+	image.loadFromFile(file);
+	sprite.setTexture(image);
+	sprite.setScale(3, 3);
+
 }

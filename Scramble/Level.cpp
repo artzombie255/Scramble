@@ -9,7 +9,7 @@ Level::Level()
 			tempI = std::to_string(i);
 			tempZ = std::to_string(z);
 			 
-			levelTexture[i][z].loadFromFile(tempZ + "map" + tempI + ".png");
+			levelTexture[i][z].loadFromFile("./sprites/" + tempZ + "map/" + tempZ + "map" + tempI + ".png");
 		}
 
 	for (int i = 0; i < 33; i++)
@@ -25,30 +25,31 @@ Level::~Level()
 }
 
 //takes information from file to make level 
-void Level::readFromFile(std::ifstream file, std::string fileName)
+void Level::readFromFile(std::string fileName)
 {
+	std::ifstream file;
     file.open(fileName);
 
-	while (file.is_open())
+	if (file.is_open())
 	{
 		std::string temp;
-		int i = 0;
-		while (std::getline(file, temp))
+		for (int i = 0; i < 28; i++)
 		{
+			std::getline(file, temp);
 			while (temp.size() > 0)
 			{
 				levelArrVec[i].push_back(temp.at(0));
 				temp.erase(0, 1);
 			}
-			i++;
 		}
 		file.close();
+		std::cout << "1 loaded";
 	}
 }
 
 
 //loads each level into sfml
-void Level::loadLevel(sf::RenderWindow window)
+void Level::loadLevel(sf::RenderWindow &window)
 {
 	int offset;
 	for (int i = 0; i < levelArrVec[0].size(); i++)
@@ -64,15 +65,16 @@ void Level::loadLevel(sf::RenderWindow window)
 				else
 					offset = 87;
 
-				levelSprite[j - offset].setPosition(i * 24, 96 + i * 24);
-				window.draw(levelSprite[j - offset]);
+				levelSprite[i - offset].setPosition(i * 24, 96 + i * 24);
+				window.draw(levelSprite[i - offset]);
 			}
 			else if (i == 120 || i == 121)
 			{
+				std::cout << "ignore";
 			}
 			else
 			{
-				throw std::exception("INVALID LEVEL ENTRY");
+				//throw std::exception("INVALID LEVEL ENTRY");
 			}
 		}
 	}
@@ -93,14 +95,10 @@ void Level::loadLevel(sf::RenderWindow window)
 
 void Level::colorSwap(int palette)
 {
-	if (spriteClock.getElapsedTime().asMilliseconds() >= 250)
+	for (int i = 0; i < 33; i++)
 	{
-		spriteClock.restart();
-		for (int i = 0; i < 33; i++)
-		{
-			levelSprite[i].setTexture(levelTexture[i][palette]);
-			levelSprite[i].setScale(3, 3);
-		}
+		levelSprite[i].setTexture(levelTexture[i][palette]);
+		levelSprite[i].setScale(3, 3);
 	}
 }
 

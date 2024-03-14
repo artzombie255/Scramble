@@ -44,7 +44,7 @@ void ScrambleGame::playGame()
     int palette = 0;
     
     srand(time(NULL));
-
+    level.readFromFile("level1.txt");
     //test.loadFromFile("Shader_colour_swap.frag", sf::Shader::Fragment);
     //test.setUniform("COLOR", sf::Glsl::Vec4());
     //test.setUniform("TEXTURE", sf::Shader::CurrentTexture);
@@ -99,15 +99,16 @@ void ScrambleGame::playGame()
         if (paletteClock.getElapsedTime().asMilliseconds() > 10000)
         {
             palette++;
+            if (palette == 7)
+                palette = 0;
+            for (int i = enemyVec.size() - 1; i > 0; i--)
+            {
+                enemyVec.at(i)->changeSprite(palette);
+            }
+            level.colorSwap(palette);
             paletteClock.restart();
         }
-        if (palette == 7)
-            palette = 0;
         player.changeSprite(playerSpriteClock, playerSprite);
-        for (int i = enemyVec.size() - 1; i > 0; i--)
-        {
-            enemyVec.at(i)->changeSprite(palette);
-        }
 
 
         //move entities
@@ -151,7 +152,7 @@ void ScrambleGame::playGame()
             window.draw(missile[i]);
         window.draw(playerSprite);
 
-        //level.loadLevel(window);
+        level.loadLevel(window);
 
         // End the current frame and display its contents on screen
         window.display();

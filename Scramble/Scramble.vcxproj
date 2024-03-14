@@ -175,6 +175,7 @@
     <ClInclude Include="Ufo.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="level1.txt" />
     <Text Include="README.txt" />
   </ItemGroup>
   <ItemGroup>
