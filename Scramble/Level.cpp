@@ -7,7 +7,7 @@ Level::Level()
 		{
 			std::string tempI, tempZ;
 			tempI = std::to_string(i);
-			tempZ = std::to_string(z);
+			tempZ = "1"; //std::to_string(z);
 			 
 			levelTexture[i][z].loadFromFile("./sprites/" + tempZ + "map/" + tempZ + "map" + tempI + ".png");
 		}
@@ -43,7 +43,7 @@ void Level::readFromFile(std::string fileName)
 			}
 		}
 		file.close();
-		std::cout << "1 loaded";
+		//std::cout << "1 loaded";
 	}
 }
 
@@ -52,29 +52,41 @@ void Level::readFromFile(std::string fileName)
 void Level::loadLevel(sf::RenderWindow &window)
 {
 	int offset;
-	for (int i = 0; i < levelArrVec[0].size(); i++)
+
+	/*for (int j = 0; j < 28; j++)
 	{
-		for (int j = 0; j < 28; j++)
+		for (int i = 0; i < 200; i++)
+		{
+			std::cout << levelArrVec[j][i];
+		}
+		std::cout << std::endl;
+	}
+	system("pause");
+	*/
+	for (int j = 0; j < 28; j++)
+	{
+		for (int i = 0; i < levelArrVec[0].size(); i++)
 		{
 			// Verifies within acceptable ASCII ranges
 			// 48-57 for 0-9 | 97-119 for a-w
-			if ((i >= 48 && i <= 57) || (i >= 97 && i <= 119))
+			if ((levelArrVec[j][i] >= 48 && levelArrVec[j][i] <= 57) || (levelArrVec[j][i] >= 97 && levelArrVec[j][i] <= 119))
 			{
-				if (i >= 48 && i <= 57)
+				if (levelArrVec[j][i] >= 48 && levelArrVec[j][i] <= 57)
 					offset = 48;
 				else
 					offset = 87;
 
-				levelSprite[i - offset].setPosition(i * 24, 96 + i * 24);
-				window.draw(levelSprite[i - offset]);
+				levelSprite[levelArrVec[j][i] - offset].setPosition(i * 24, 96 + i * 24);
+				window.draw(levelSprite[levelArrVec[j][i] - offset]);
 			}
-			else if (i == 120 || i == 121)
+			else if (levelArrVec[j][i] == 120 || levelArrVec[j][i] == 121)
 			{
-				std::cout << "ignore";
+				//std::cout << "ignore";
 			}
 			else
 			{
-				//throw std::exception("INVALID LEVEL ENTRY");
+				std::cout << static_cast<int>(levelArrVec[j][i]) << " I: " << i << " J: " << j;
+				throw std::runtime_error("INVALID LEVEL ENTRY");
 			}
 		}
 	}
