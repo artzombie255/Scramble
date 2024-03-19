@@ -18,6 +18,6 @@ private:
 	std::vector<char> levelArrVec[28];
 	sf::Sprite levelSprite[33];
 	sf::Texture levelTexture[33][7];
-	sf::Clock spriteClock;
+	sf::Clock spriteClock, levelClock;
 };
 

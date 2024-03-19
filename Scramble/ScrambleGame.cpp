@@ -36,7 +36,7 @@ void ScrambleGame::playGame()
     //can hold any enemy, deletes them when they are killed
     std::vector<Enemy*> enemyVec;
     //animations and palette swaps
-    sf::Clock clock, playerSpriteClock, fuelClock, paletteClock;
+    sf::Clock clock, playerSpriteClock, fuelClock, paletteClock, levelClock;
     sf::Sprite playerSprite, rocketSprite;
     sf::Texture tempI;
     sf::Shader test;
@@ -45,6 +45,7 @@ void ScrambleGame::playGame()
     
     srand(time(NULL));
     level.readFromFile("level1.txt");
+    level.readFromFile("level2.txt");
     //test.loadFromFile("Shader_colour_swap.frag", sf::Shader::Fragment);
     //test.setUniform("COLOR", sf::Glsl::Vec4());
     //test.setUniform("TEXTURE", sf::Shader::CurrentTexture);
@@ -151,8 +152,9 @@ void ScrambleGame::playGame()
         for (int i = 0; i < 2; i++)
             window.draw(missile[i]);
         window.draw(playerSprite);
-
+       
         level.loadLevel(window);
+    
 
         // End the current frame and display its contents on screen
         window.display();

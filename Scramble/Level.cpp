@@ -49,7 +49,7 @@ void Level::readFromFile(std::string fileName)
 
 
 //loads each level into sfml
-void Level::loadLevel(sf::RenderWindow &window)
+void Level::loadLevel(sf::RenderWindow& window)
 {
 	int offset;
 
@@ -75,8 +75,7 @@ void Level::loadLevel(sf::RenderWindow &window)
 					offset = 48;
 				else
 					offset = 87;
-
-				levelSprite[levelArrVec[j][i] - offset].setPosition(i * 24, 96 + i * 24);
+				levelSprite[levelArrVec[j][i] - offset].setPosition(i * 24, 96 + (j * 24));
 				window.draw(levelSprite[levelArrVec[j][i] - offset]);
 			}
 			else if (levelArrVec[j][i] == 120 || levelArrVec[j][i] == 121)
@@ -91,15 +90,19 @@ void Level::loadLevel(sf::RenderWindow &window)
 		}
 	}
 
-	if (levelArrVec[0].size() > 28)
+	if (levelClock.getElapsedTime().asMilliseconds() >= 200)
 	{
-		for (int i = 0; i < 28; i++)
+		levelClock.restart();
+		if (levelArrVec[0].size() > 28)
 		{
-			for (int z = 0; levelArrVec[i].size() - 1 > z; z++)
+			for (int i = 0; i < 28; i++)
 			{
-				levelArrVec[i][z] = levelArrVec[i][z + 1];
+				for (int z = 0; levelArrVec[i].size() - 1 > z; z++)
+				{
+					levelArrVec[i][z] = levelArrVec[i][z + 1];
+				}
+				levelArrVec[i].pop_back();
 			}
-			levelArrVec[i].pop_back();
 		}
 	}
 }
