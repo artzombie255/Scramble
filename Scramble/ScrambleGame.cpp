@@ -113,7 +113,6 @@ void ScrambleGame::playGame()
 
 
         //move entities
-        player.fuelLoss(fuelClock);
         player.move(bullet, missile);
         for (int i = 0; i < enemyVec.size(); i++)
         {
@@ -152,7 +151,8 @@ void ScrambleGame::playGame()
         for (int i = 0; i < 2; i++)
             window.draw(missile[i]);
         window.draw(playerSprite);
-       
+        player.fuelLoss(fuelClock, window);
+
         level.loadLevel(window);
     
 

@@ -19,7 +19,7 @@ public:
 	void moveCheck();
 	void move(sf::RectangleShape[], sf::RectangleShape[]);
 	void changeSprite(sf::Clock&, sf::Sprite&);
-	void fuelLoss(sf::Clock&);
+	void fuelLoss(sf::Clock&, sf::RenderWindow&);
 	void addFuel(int);
 
 private:

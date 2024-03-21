@@ -197,6 +197,7 @@
     <Image Include="player5.png" />
     <Image Include="player6.png" />
     <Image Include="player7.png" />
+    <Image Include="sprites\fuel8.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

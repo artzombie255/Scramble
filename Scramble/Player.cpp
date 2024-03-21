@@ -234,7 +234,7 @@ void Player::move(sf::RectangleShape bullet[], sf::RectangleShape missile[])
 	{
 		if (mxMove[i] > 0)
 			mxMove[i]--;
-		if (myMove[i] < 5)
+		if (myMove[i] < 3)
 			myMove[i]++;
 		if (missile[i].getPosition().y > 672)
 		{
@@ -295,14 +295,71 @@ void Player::changeSprite(sf::Clock& clock, sf::Sprite &playerSprite)
 }
 
 
-void Player::fuelLoss(sf::Clock& clock)
+void Player::fuelLoss(sf::Clock& clock, sf::RenderWindow& window)
 {
+	int fuelBar = 0;
+	sf::Texture fuelTexture;
+	sf::Sprite fuelSprite;
+	fuelTexture.loadFromFile("./sprites/fuel8.png");
+	fuelSprite.setTexture(fuelTexture);
+	fuelSprite.setScale(3, 3);
+
 	if (clock.getElapsedTime().asMilliseconds() >= 1000/(60/fuelUseSpeed))
 	{
 		clock.restart();
 		fuel--;
 		std::cout << fuel << std::endl;
 	}
+
+	for (int i = 0; i < fuel / 8; i++)
+	{
+		fuelSprite.setPosition(200 + (i * 24), 768);
+		window.draw(fuelSprite);
+		fuelBar++;
+	}
+
+	switch (fuel % 8)
+	{
+	case 7:
+		fuelTexture.loadFromFile("./sprites/fuel7.png");
+		break;
+	case 6:
+		fuelTexture.loadFromFile("./sprites/fuel6.png");
+		break;
+	case 5:
+		fuelTexture.loadFromFile("./sprites/fuel5.png");
+		break;
+	case 4:
+		fuelTexture.loadFromFile("./sprites/fuel4.png");
+		break;
+	case 3:
+		fuelTexture.loadFromFile("./sprites/fuel3.png");
+		break;
+	case 2:
+		fuelTexture.loadFromFile("./sprites/fuel2.png");
+		break;
+	case 1:
+		fuelTexture.loadFromFile("./sprites/fuel1.png");
+		break;
+	case 0: 
+		fuelTexture.loadFromFile("./sprites/fuel0.png");
+	}
+
+
+	fuelSprite.setTexture(fuelTexture);
+	fuelSprite.setPosition(200 + (fuel / 8 * 24), 768);
+	window.draw(fuelSprite);
+	fuelBar++;
+
+
+	for (int i = 1; i < 17 - fuelBar; i++)
+	{
+		fuelTexture.loadFromFile("./sprites/fuel0.png");
+		fuelSprite.setTexture(fuelTexture);
+		fuelSprite.setPosition(200 + (((fuel / 8) + i) * 24), 768);
+		window.draw(fuelSprite);
+	}
+
 }
 
 

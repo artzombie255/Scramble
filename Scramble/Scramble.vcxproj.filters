@@ -95,6 +95,7 @@
     <Text Include="level1.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="level2.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader_colour_swap.frag">
@@ -142,6 +143,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="0rocket0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="sprites\fuel8.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

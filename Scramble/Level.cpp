@@ -7,7 +7,7 @@ Level::Level()
 		{
 			std::string tempI, tempZ;
 			tempI = std::to_string(i);
-			tempZ = "1"; //std::to_string(z);
+			tempZ = std::to_string(z);
 			 
 			levelTexture[i][z].loadFromFile("./sprites/" + tempZ + "map/" + tempZ + "map" + tempI + ".png");
 		}
