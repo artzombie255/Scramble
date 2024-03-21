@@ -59,6 +59,9 @@ void Enemy::changeSprite(int palette)
 	case 6:
 		color = "6";
 		break;
+	case 7:
+		color = "6";
+		break;
 	}
 
 	spriteClock.restart();

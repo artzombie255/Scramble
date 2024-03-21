@@ -75,7 +75,7 @@ void Level::loadLevel(sf::RenderWindow& window)
 					offset = 48;
 				else
 					offset = 87;
-				levelSprite[levelArrVec[j][i] - offset].setPosition(i * 24, 96 + (j * 24));
+				levelSprite[levelArrVec[j][i] - offset].setPosition(i * 24 + k, 96 + (j * 24));
 				window.draw(levelSprite[levelArrVec[j][i] - offset]);
 			}
 			else if (levelArrVec[j][i] == 120 || levelArrVec[j][i] == 121)
@@ -89,22 +89,7 @@ void Level::loadLevel(sf::RenderWindow& window)
 			}
 		}
 	}
-
-	if (levelClock.getElapsedTime().asMilliseconds() >= 200)
-	{
-		levelClock.restart();
-		if (levelArrVec[0].size() > 28)
-		{
-			for (int i = 0; i < 28; i++)
-			{
-				for (int z = 0; levelArrVec[i].size() - 1 > z; z++)
-				{
-					levelArrVec[i][z] = levelArrVec[i][z + 1];
-				}
-				levelArrVec[i].pop_back();
-			}
-		}
-	}
+	k--;
 }
 
 
@@ -117,11 +102,10 @@ void Level::colorSwap(int palette)
 	}
 }
 
+
 //checks for position of pieces in each type of 
 //piece and idetifies if it has struck something
 bool Level::checkCollision(Player user)
 {
     return true;
 }
-
-

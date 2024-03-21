@@ -78,6 +78,11 @@ void ScrambleGame::playGame()
         enemyVec.push_back(new FuelTower());
         enemyVec.push_back(new Altar());
     }
+
+    for (int i = enemyVec.size() - 1; i > 0; i--)
+    {
+        enemyVec.at(i)->changeSprite(palette);
+    }
   
     //window
     while (window.isOpen())

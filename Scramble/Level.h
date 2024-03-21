@@ -15,6 +15,7 @@ public:
 	void colorSwap(int);
 	bool checkCollision(Player);
 private:
+	int k = 0;
 	std::vector<char> levelArrVec[28];
 	sf::Sprite levelSprite[33];
 	sf::Texture levelTexture[33][7];
