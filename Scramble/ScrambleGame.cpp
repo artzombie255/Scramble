@@ -40,12 +40,21 @@ void ScrambleGame::playGame()
     sf::Sprite playerSprite, rocketSprite;
     sf::Texture tempI;
     sf::Shader test;
+    sf::View viewPort;
     Level level;
     int palette = 0;
     
+
+    viewPort.setCenter(336, 408);
+    viewPort.setSize(672, 816);
+
     srand(time(NULL));
     level.readFromFile("level1.txt");
-    level.readFromFile("level2.txt");
+    //level.readFromFile("level2.txt");
+    //level.readFromFile("level3.txt");
+    //level.readFromFile("level4.txt");
+    //level.readFromFile("level5.txt");
+    //level.readFromFile("level6.txt");
     //test.loadFromFile("Shader_colour_swap.frag", sf::Shader::Fragment);
     //test.setUniform("COLOR", sf::Glsl::Vec4());
     //test.setUniform("TEXTURE", sf::Shader::CurrentTexture);
@@ -118,7 +127,7 @@ void ScrambleGame::playGame()
 
 
         //move entities
-        player.move(bullet, missile);
+        player.move(bullet, missile, viewPort);
         for (int i = 0; i < enemyVec.size(); i++)
         {
             enemyVec.at(i)->move(clock);
@@ -156,9 +165,9 @@ void ScrambleGame::playGame()
         for (int i = 0; i < 2; i++)
             window.draw(missile[i]);
         window.draw(playerSprite);
-        player.fuelLoss(fuelClock, window);
+        player.fuelLoss(fuelClock, window, viewPort);
 
-        level.loadLevel(window);
+        level.loadLevel(window, viewPort);
     
 
         // End the current frame and display its contents on screen

@@ -11,12 +11,12 @@ public:
 	Level();
 	~Level();
 	void readFromFile(std::string);
-	void loadLevel(sf::RenderWindow&);
+	void loadLevel(sf::RenderWindow&, sf::View&);
 	void colorSwap(int);
 	bool checkCollision(Player);
 private:
 	int k = 0;
-	std::vector<char> levelArrVec[28];
+	std::vector<char> levelArrVec[25];
 	sf::Sprite levelSprite[33];
 	sf::Texture levelTexture[33][7];
 	sf::Clock spriteClock, levelClock;

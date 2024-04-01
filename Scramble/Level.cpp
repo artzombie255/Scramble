@@ -33,7 +33,7 @@ void Level::readFromFile(std::string fileName)
 	if (file.is_open())
 	{
 		std::string temp;
-		for (int i = 0; i < 28; i++)
+		for (int i = 0; i < 25; i++)
 		{
 			std::getline(file, temp);
 			while (temp.size() > 0)
@@ -49,7 +49,7 @@ void Level::readFromFile(std::string fileName)
 
 
 //loads each level into sfml
-void Level::loadLevel(sf::RenderWindow& window)
+void Level::loadLevel(sf::RenderWindow& window, sf::View& viewPort)
 {
 	int offset;
 
@@ -63,7 +63,7 @@ void Level::loadLevel(sf::RenderWindow& window)
 	}
 	system("pause");
 	*/
-	for (int j = 0; j < 28; j++)
+	for (int j = 0; j < 25; j++)
 	{
 		for (int i = 0; i < levelArrVec[0].size(); i++)
 		{
@@ -75,7 +75,7 @@ void Level::loadLevel(sf::RenderWindow& window)
 					offset = 48;
 				else
 					offset = 87;
-				levelSprite[levelArrVec[j][i] - offset].setPosition(i * 24 + k, 96 + (j * 24));
+				levelSprite[levelArrVec[j][i] - offset].setPosition(i * 24, 96 + (j * 24));
 				window.draw(levelSprite[levelArrVec[j][i] - offset]);
 			}
 			else if (levelArrVec[j][i] == 120 || levelArrVec[j][i] == 121)
@@ -89,7 +89,8 @@ void Level::loadLevel(sf::RenderWindow& window)
 			}
 		}
 	}
-	k--;
+	viewPort.move(3, 0);
+	window.setView(viewPort);
 }
 
 

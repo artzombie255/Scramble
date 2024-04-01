@@ -17,14 +17,14 @@ public:
 	void hit(std::vector<Enemy*>, sf::RectangleShape[], sf::RectangleShape[]);
 	void animateBoom(std::string);
 	void moveCheck();
-	void move(sf::RectangleShape[], sf::RectangleShape[]);
+	void move(sf::RectangleShape[], sf::RectangleShape[], sf::View);
 	void changeSprite(sf::Clock&, sf::Sprite&);
-	void fuelLoss(sf::Clock&, sf::RenderWindow&);
+	void fuelLoss(sf::Clock&, sf::RenderWindow&, sf::View);
 	void addFuel(int);
 
 private:
 	bool usableMissiles[2] = { 1, 1 }, usableShots[4] = { 1, 1, 1, 1 };
-	int lives = 3, points = 0, fuelUseSpeed = 10, fuel = 124, yMove = 0, xMove = 0, sTimer = 0, mTimer = 0, mxMove[2] = {}, myMove[2] = {}, spriteNum = 0, boomNum = 0;
+	int lives = 3, points = 0, fuelUseSpeed = 10, fuel = 128, yMove = 0, xMove = 1, sTimer = 0, mTimer = 0, mxMove[2] = {}, myMove[2] = {}, spriteNum = 0, boomNum = 0;
 	sf::Texture image; 
 };
 

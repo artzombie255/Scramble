@@ -3,15 +3,17 @@
 
 Enemy::Enemy()
 {
+
 }
 
 Enemy::~Enemy()
 {
+
 }
 
 void Enemy::move(sf::Clock &clock)
 {
-	sf::RectangleShape::move(-1, 0);
+	//sf::RectangleShape::move(-1, 0);
 	return;
 }
 
