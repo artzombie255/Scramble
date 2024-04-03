@@ -9,13 +9,17 @@ class Level
 {
 public:
 	Level();
+	Level(int);
 	~Level();
 	void readFromFile(std::string);
 	void loadLevel(sf::RenderWindow&, sf::View&);
 	void colorSwap(int);
 	bool checkCollision(Player);
+	sf::Sprite getSprite();
+	void setLevelArrVec(std::vector<char>[25]);
+
 private:
-	int k = 0;
+	int k = 0, levelOffset;
 	std::vector<char> levelArrVec[25];
 	sf::Sprite levelSprite[33];
 	sf::Texture levelTexture[33][7];

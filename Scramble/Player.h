@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
+#include <SFML/Window.hpp>
 #include <iostream>
 #include "Enemy.h"
 #include "Entity.h"
@@ -14,6 +15,7 @@ public:
 	void shootBlaster(sf::RectangleShape[]);
 	void addPoints(int);
 	void crash(std::vector<Enemy*>);
+	void crash(std::vector<char>[], sf::Sprite);
 	void hit(std::vector<Enemy*>, sf::RectangleShape[], sf::RectangleShape[]);
 	void animateBoom(std::string);
 	void moveCheck();

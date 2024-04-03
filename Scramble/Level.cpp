@@ -1,16 +1,60 @@
 #include "Level.h"
 
+
+//level 1: 361, level 2: 223, level 3: 227, level 4: 329, level 5: 225, level 6: 139 
+
+
 Level::Level()
 {
+	levelOffset = 0;
 	for (int i = 0; i < 33; i++)
 		for (int z = 0; z < 7; z++)
 		{
 			std::string tempI, tempZ;
 			tempI = std::to_string(i);
 			tempZ = std::to_string(z);
-			 
+
 			levelTexture[i][z].loadFromFile("./sprites/" + tempZ + "map/" + tempZ + "map" + tempI + ".png");
 		}
+
+	for (int i = 0; i < 33; i++)
+	{
+		levelSprite[i].setTexture(levelTexture[i][0]);
+		levelSprite[i].setScale(3, 3);
+	}
+}
+
+
+Level::Level(int levelNum)
+{
+	levelOffset = 0;
+	for (int i = 0; i < 33; i++)
+		for (int z = 0; z < 7; z++)
+		{
+			std::string tempI, tempZ;
+			tempI = std::to_string(i);
+			tempZ = std::to_string(z);
+
+			levelTexture[i][z].loadFromFile("./sprites/" + tempZ + "map/" + tempZ + "map" + tempI + ".png");
+		}
+
+	switch (levelNum)
+	{
+	case 6:
+		levelOffset += 225;
+	case 5:
+		levelOffset += 329;
+	case 4:
+		levelOffset += 227;
+	case 3:
+		levelOffset += 223;
+	case 2:
+		levelOffset += 361;
+	case 1:
+		std::cout << "";
+	}
+
+	levelOffset = 0;
 
 	for (int i = 0; i < 33; i++)
 	{
@@ -65,7 +109,7 @@ void Level::loadLevel(sf::RenderWindow& window, sf::View& viewPort)
 	*/
 	for (int j = 0; j < 25; j++)
 	{
-		for (int i = 0; i < levelArrVec[0].size(); i++)
+		for (int i = (viewPort.getCenter().x - 336) / 24; i < (viewPort.getCenter().x - 336) / 24 + 30; i++)
 		{
 			// Verifies within acceptable ASCII ranges
 			// 48-57 for 0-9 | 97-119 for a-w
@@ -75,7 +119,7 @@ void Level::loadLevel(sf::RenderWindow& window, sf::View& viewPort)
 					offset = 48;
 				else
 					offset = 87;
-				levelSprite[levelArrVec[j][i] - offset].setPosition(i * 24, 96 + (j * 24));
+				levelSprite[levelArrVec[j][i] - offset].setPosition((i + levelOffset) * 24, 96 + (j * 24));
 				window.draw(levelSprite[levelArrVec[j][i] - offset]);
 			}
 			else if (levelArrVec[j][i] == 120 || levelArrVec[j][i] == 121)
@@ -109,4 +153,22 @@ void Level::colorSwap(int palette)
 bool Level::checkCollision(Player user)
 {
     return true;
+}
+
+
+sf::Sprite Level::getSprite()
+{
+	return levelSprite[0];
+}
+
+
+void Level::setLevelArrVec(std::vector<char> tempLevelArrVec[25])
+{
+	for (int j = 0; j < 25; j++)
+	{
+		for (int i = 0; i < levelArrVec[0].size(); i++)
+		{
+			tempLevelArrVec[j].push_back(levelArrVec[j][i]);
+		}
+	}
 }

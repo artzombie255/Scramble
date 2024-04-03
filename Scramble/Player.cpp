@@ -106,18 +106,79 @@ void Player::addPoints(int tempPoints)
 //detects when the player crashes and calls level to deal with it
 void Player::crash(std::vector<Enemy*> enemyVec)
 {
+	sf::FloatRect nextPos;
+	sf::FloatRect playerBounds = getGlobalBounds();
+
+	nextPos = playerBounds;
+	nextPos.left += xMove;
+	nextPos.top += yMove;
+
 	for (int i = 0; i < enemyVec.size(); i++)
 	{
-		if (getPosition().y <= enemyVec.at(i)->getPosition().y + enemyVec.at(i)->getSize().y &&
-			getPosition().y + getSize().y >= enemyVec.at(i)->getPosition().y &&
-			getPosition().x <= enemyVec.at(i)->getPosition().x + enemyVec.at(i)->getSize().x &&
-			getPosition().x + getSize().x >= enemyVec.at(i)->getPosition().x)
+		sf::FloatRect enemyBounds = enemyVec.at(i)->getGlobalBounds();
+
+		if (enemyBounds.intersects(nextPos))
 		{
+			std::cout << "hit";
 			lives--;
 			if (lives == 0);
 			//play end animation
-			else;
+			else
+			{
+				//setPosition(-100, -100);
+
+			}
 			//respawn
+		}
+	}
+}
+
+
+void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite)
+{
+	sf::FloatRect nextPos;
+	sf::FloatRect playerBounds = getGlobalBounds();
+	int offset;
+
+	nextPos = playerBounds;
+	nextPos.left += xMove;
+	nextPos.top += yMove;
+
+	for (int j = 0; j < 25; j++)
+	{
+		for (int i = 0; i < levelArrVec[0].size(); i++)
+		{
+			// Verifies within acceptable ASCII ranges
+			// 48-57 for 0-9 | 97-119 for a-w
+			if ((levelArrVec[j][i] >= 48 && levelArrVec[j][i] <= 57) || (levelArrVec[j][i] >= 97 && levelArrVec[j][i] <= 119))
+			{
+				if (levelArrVec[j][i] >= 48 && levelArrVec[j][i] <= 57)
+					offset = 48;
+				else
+					offset = 87;
+				sprite.setPosition(i * 24, 96 + (j * 24));
+			}
+			else if (levelArrVec[j][i] == 120 || levelArrVec[j][i] == 121)
+			{
+				//std::cout << "ignore";
+			}
+			else
+			{
+				std::cout << static_cast<int>(levelArrVec[j][i]) << " I: " << i << " J: " << j;
+				throw std::runtime_error("INVALID LEVEL ENTRY");
+			}
+
+			sf::FloatRect wallBounds = sprite.getGlobalBounds();
+
+			if (wallBounds.intersects(nextPos))
+			{
+				std::cout << "collide";
+				lives--;
+				if (lives == 0);
+				//play end animation
+				else;
+				//respawn
+			}
 		}
 	}
 }
@@ -173,19 +234,19 @@ void Player::moveCheck()
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
-		xMove = 0;
+		xMove = -1;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
-		xMove = 6;
+		xMove = 7;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
     {
-		yMove = -3;
+		yMove = -4;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
     {
-		yMove = 3;
+		yMove = 4;
     }
 
 
@@ -222,10 +283,10 @@ void Player::move(sf::RectangleShape bullet[], sf::RectangleShape missile[], sf:
 	}
 	for (int i = 0; i < TOTAL_BULLETS; i++)
 	{
-		if (bullet[i].getPosition().x > viewPort.getCenter().x * 2)
+		if (bullet[i].getPosition().x > viewPort.getCenter().x + 336)
 		{ 
 			usableShots[i] = true;
-			bullet[i].setPosition(1000, 1000);
+			bullet[i].setPosition(-100, -100);
 		}
 		else 
 			bullet[i].RectangleShape::move(13, 0);
@@ -239,7 +300,7 @@ void Player::move(sf::RectangleShape bullet[], sf::RectangleShape missile[], sf:
 		if (missile[i].getPosition().y > 672)
 		{
 			usableMissiles[i] = true;
-			missile[i].setPosition(1000, 1000);
+			missile[i].setPosition(-100, 1000);
 		}
 		else
 			missile[i].RectangleShape::move(mxMove[i], myMove[i]);

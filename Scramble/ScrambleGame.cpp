@@ -41,8 +41,21 @@ void ScrambleGame::playGame()
     sf::Texture tempI;
     sf::Shader test;
     sf::View viewPort;
+    //level 1: 361, level 2: 223, level 3: 227, level 4: 329, level 5: 225, level 6: 139 
+    int currentLevel = 1;
+
     Level level;
+        //levels[6] =
+   // {
+      //  Level(1),
+     //   Level(2),
+//Level(3),
+    //    Level(4),
+    //    Level(5),
+//Level(6)
+    //};
     int palette = 0;
+    std::vector<char> levelArrVec[25];
     
 
     viewPort.setCenter(336, 408);
@@ -50,11 +63,11 @@ void ScrambleGame::playGame()
 
     srand(time(NULL));
     level.readFromFile("level1.txt");
-    //level.readFromFile("level2.txt");
-    //level.readFromFile("level3.txt");
-    //level.readFromFile("level4.txt");
-    //level.readFromFile("level5.txt");
-    //level.readFromFile("level6.txt");
+    level.readFromFile("level2.txt");
+    level.readFromFile("level3.txt");
+    level.readFromFile("level4.txt");
+    level.readFromFile("level5.txt");
+    level.readFromFile("level6.txt");
     //test.loadFromFile("Shader_colour_swap.frag", sf::Shader::Fragment);
     //test.setUniform("COLOR", sf::Glsl::Vec4());
     //test.setUniform("TEXTURE", sf::Shader::CurrentTexture);
@@ -64,7 +77,6 @@ void ScrambleGame::playGame()
     player.changeSprite(playerSpriteClock, playerSprite);
     //rocketSprite.setTexture(tempI);
     //rocketSprite.scale(5, 5);
-
 
     //setup
     for (int i = 0; i < TOTAL_BULLETS; i++)
@@ -77,6 +89,9 @@ void ScrambleGame::playGame()
         missile[i].setSize(sf::Vector2f(10, 10));
         missile[i].setOrigin(0, 0);
     }
+
+   // for (int i = 0; i < 6; i++)
+        level.setLevelArrVec(levelArrVec);
 
     window.setFramerateLimit(60);
 
@@ -120,7 +135,8 @@ void ScrambleGame::playGame()
             {
                 enemyVec.at(i)->changeSprite(palette);
             }
-            level.colorSwap(palette);
+           // for (int i = 0; i < 6; i++)
+                level.colorSwap(palette);
             paletteClock.restart();
         }
         player.changeSprite(playerSpriteClock, playerSprite);
@@ -136,6 +152,7 @@ void ScrambleGame::playGame()
         //process interactions
         player.hit(enemyVec, bullet, missile);
         player.crash(enemyVec);
+        player.crash(levelArrVec, level.getSprite());
 
         //set up player sprite to print
         playerSprite.setPosition(player.getPosition().x, player.getPosition().y);
