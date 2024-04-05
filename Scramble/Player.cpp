@@ -6,7 +6,7 @@
 
 Player::Player()
 {
-	setSize(sf::Vector2f(100, 40));
+	setSize(sf::Vector2f(96, 48));
 	setOrigin(0, 0);
 	setPosition(400, 200);
 }
@@ -119,7 +119,7 @@ void Player::crash(std::vector<Enemy*> enemyVec)
 
 		if (enemyBounds.intersects(nextPos))
 		{
-			std::cout << "hit";
+			//std::cout << "hit";
 			lives--;
 			if (lives == 0);
 			//play end animation
@@ -164,7 +164,7 @@ void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite)
 			}
 			else
 			{
-				std::cout << static_cast<int>(levelArrVec[j][i]) << " I: " << i << " J: " << j;
+				//std::cout << static_cast<int>(levelArrVec[j][i]) << " I: " << i << " J: " << j;
 				throw std::runtime_error("INVALID LEVEL ENTRY");
 			}
 
@@ -172,7 +172,7 @@ void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite)
 
 			if (wallBounds.intersects(nextPos))
 			{
-				std::cout << "collide";
+				//std::cout << "collide";
 				lives--;
 				if (lives == 0);
 				//play end animation
@@ -188,36 +188,55 @@ void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite)
 void Player::hit(std::vector<Enemy*> enemyVec, sf::RectangleShape bullet[], sf::RectangleShape missile[])
 {
 	bool hit = false;
+	sf::FloatRect nextPos;
 
 	for (int j = 0; j < enemyVec.size(); j++)
 	{
+		sf::FloatRect enemyBounds = enemyVec.at(j)->getGlobalBounds();
 		for (int i = 0; i < TOTAL_BULLETS; i++)
-			if (bullet[i].getPosition().y >= enemyVec.at(j)->getPosition().y &&
-				bullet[i].getPosition().y <= enemyVec.at(j)->getPosition().y + enemyVec.at(j)->getSize().y &&
-				bullet[i].getPosition().x >= enemyVec.at(j)->getPosition().x &&
-				bullet[i].getPosition().x <= enemyVec.at(j)->getPosition().x + enemyVec.at(j)->getSize().x)
-			{
-				hit = true;
-				bullet[i].setPosition(900, 600);
-			}
-		for (int i = 0; i < 2; i++)
-			if (missile[i].getPosition().y >= enemyVec.at(j)->getPosition().y &&
-				missile[i].getPosition().y <= enemyVec.at(j)->getPosition().y + enemyVec.at(j)->getSize().y &&
-				missile[i].getPosition().x >= enemyVec.at(j)->getPosition().x &&
-				missile[i].getPosition().x <= enemyVec.at(j)->getPosition().x + enemyVec.at(j)->getSize().x)
-			{
-				hit = true;
-				missile[i].setPosition(900, 700);
-			}
-		if (hit == true)
 		{
-			addPoints(enemyVec.at(j)->getPoints());
-			addFuel(enemyVec.at(j)->getFuel());
-			enemyVec.at(j)->setPosition(-100, -100);
-			//delete enemyVec.at(j);
-			//std::cout << points;
+			sf::FloatRect bulletBounds = bullet[i].getGlobalBounds();
+			nextPos = bulletBounds;
+
+			if (enemyBounds.intersects(nextPos))
+			{
+				hit = true;
+				bullet[i].setPosition(-100, -100);
+				usableShots[i] = true;
+				if (hit == true)
+				{
+					addPoints(enemyVec.at(j)->getPoints());
+					addFuel(enemyVec.at(j)->getFuel());
+					enemyVec.at(j)->setPosition(-100, -100);
+					//delete enemyVec.at(j);
+					//std::cout << points;
+				}
+				hit = false;
+			}
 		}
-		hit = false;
+		for (int i = 0; i < 2; i++)
+		{
+			sf::FloatRect missileBounds = missile[i].getGlobalBounds();
+			nextPos = missileBounds;
+			nextPos.left += mxMove[i];
+			nextPos.top += myMove[i];
+
+			if (enemyBounds.intersects(nextPos))
+			{
+				hit = true;
+				missile[i].setPosition(-100, 900);
+				usableMissiles[i] = true;
+				if (hit == true)
+				{
+					addPoints(enemyVec.at(j)->getPoints());
+					addFuel(enemyVec.at(j)->getFuel());
+					enemyVec.at(j)->setPosition(-100, -100);
+					//delete enemyVec.at(j);
+					//std::cout << points;
+				}
+				hit = false;
+			}
+		}
 	}
 }
 
@@ -368,8 +387,8 @@ void Player::fuelLoss(sf::Clock& clock, sf::RenderWindow& window, sf::View viewP
 	if (clock.getElapsedTime().asMilliseconds() >= 1000/(60/fuelUseSpeed))
 	{
 		clock.restart();
-		fuel--;
-		std::cout << fuel << std::endl;
+		//fuel--;
+		//std::cout << fuel << std::endl;
 	}
 
 	for (int i = 0; i < fuel / 8; i++)

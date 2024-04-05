@@ -128,7 +128,7 @@ void Level::loadLevel(sf::RenderWindow& window, sf::View& viewPort)
 			}
 			else
 			{
-				std::cout << static_cast<int>(levelArrVec[j][i]) << " I: " << i << " J: " << j;
+				//std::cout << static_cast<int>(levelArrVec[j][i]) << " I: " << i << " J: " << j;
 				throw std::runtime_error("INVALID LEVEL ENTRY");
 			}
 		}
