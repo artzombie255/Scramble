@@ -62,10 +62,10 @@ void ScrambleGame::playGame()
     viewPort.setSize(672, 816);
 
     srand(time(NULL));
-    level.readFromFile("level1.txt");
-    level.readFromFile("level2.txt");
-    level.readFromFile("level3.txt");
-    level.readFromFile("level4.txt");
+    //level.readFromFile("level1.txt");
+    //level.readFromFile("level2.txt");
+    //level.readFromFile("level3.txt");
+    //level.readFromFile("level4.txt");
     level.readFromFile("level5.txt");
     level.readFromFile("level6.txt");
     //test.loadFromFile("Shader_colour_swap.frag", sf::Shader::Fragment);
@@ -155,7 +155,7 @@ void ScrambleGame::playGame()
         player.crash(levelArrVec, level.getSprite());
 
         //set up player sprite to print
-        playerSprite.setPosition(player.getPosition().x, player.getPosition().y);
+        playerSprite.setPosition(player.getPosition().x - 39, player.getPosition().y - 9);
 
         // Clear the whole window before rendering a new frame
         window.clear();

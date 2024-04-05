@@ -6,7 +6,7 @@
 
 Player::Player()
 {
-	setSize(sf::Vector2f(96, 48));
+	setSize(sf::Vector2f(57, 33));
 	setOrigin(0, 0);
 	setPosition(400, 200);
 }
@@ -18,21 +18,6 @@ Player::~Player()
 }
 
 
-/*returns missiles available
-int Player::getUsableMissiles()
-{
-	return usableMissiles&;
-}
-
-
-//returns shots available
-int Player::getUsableShots()
-{
-	//return usableShots;
-}
-*/
-
-
 //checks if the key is pressed and there are available missiles then shoots them
 void Player::shootMissiles(sf::RectangleShape missile[])
 {
@@ -40,7 +25,7 @@ void Player::shootMissiles(sf::RectangleShape missile[])
 	{
 		if (usableMissiles[0] == true)
 		{
-			missile[0].setPosition(getPosition().x + 90, getPosition().y + 20);
+			missile[0].setPosition(getPosition().x + 57, getPosition().y + 20);
 			usableMissiles[0] = false;
 			//std::cout << "1";
 			mxMove[0] = 5;
@@ -48,7 +33,7 @@ void Player::shootMissiles(sf::RectangleShape missile[])
 		}
 		else if (usableMissiles[1] == true)
 		{
-			missile[1].setPosition(getPosition().x + 90, getPosition().y + 20);
+			missile[1].setPosition(getPosition().x + 57, getPosition().y + 20);
 			usableMissiles[1] = false;
 			//std::cout << "2";
 			mxMove[1] = 5;
@@ -65,28 +50,28 @@ void Player::shootBlaster(sf::RectangleShape bullet[])
 	{
 		if (usableShots[TOTAL_BULLETS - 4] == true)
 		{
-			bullet[TOTAL_BULLETS - 4].setPosition(getPosition().x + 90, getPosition().y + 20);
+			bullet[TOTAL_BULLETS - 4].setPosition(getPosition().x + 57, getPosition().y + 20);
 			usableShots[TOTAL_BULLETS - 4] = false;
 			//std::cout << "1";
 			sTimer = 0;
 		}
 		else if (usableShots[TOTAL_BULLETS - 3] == true)
 		{
-			bullet[TOTAL_BULLETS - 3].setPosition(getPosition().x + 90, getPosition().y + 20);
+			bullet[TOTAL_BULLETS - 3].setPosition(getPosition().x + 57, getPosition().y + 20);
 			usableShots[TOTAL_BULLETS - 3] = false;
 			//std::cout << "2";
 			sTimer = 0;
 		}
 		else if (usableShots[TOTAL_BULLETS - 2] == true)
 		{
-			bullet[TOTAL_BULLETS - 2].setPosition(getPosition().x + 90, getPosition().y + 20);
+			bullet[TOTAL_BULLETS - 2].setPosition(getPosition().x + 57, getPosition().y + 20);
 			usableShots[TOTAL_BULLETS - 2] = false;
 			//std::cout << "3";
 			sTimer = 0;
 		}
 		else if (usableShots[TOTAL_BULLETS - 1] == true)
 		{
-			bullet[TOTAL_BULLETS - 1].setPosition(getPosition().x + 90, getPosition().y + 20);
+			bullet[TOTAL_BULLETS - 1].setPosition(getPosition().x + 57, getPosition().y + 20);
 			usableShots[TOTAL_BULLETS - 1] = false;
 			//std::cout << "4";
 			sTimer = 0;
@@ -109,6 +94,7 @@ void Player::crash(std::vector<Enemy*> enemyVec)
 	sf::FloatRect nextPos;
 	sf::FloatRect playerBounds = getGlobalBounds();
 
+	//makes a float rect that has where the player will move to next
 	nextPos = playerBounds;
 	nextPos.left += xMove;
 	nextPos.top += yMove;
@@ -117,9 +103,10 @@ void Player::crash(std::vector<Enemy*> enemyVec)
 	{
 		sf::FloatRect enemyBounds = enemyVec.at(i)->getGlobalBounds();
 
+		//compares player and enemies
 		if (enemyBounds.intersects(nextPos))
 		{
-			//std::cout << "hit";
+			std::cout << "hit";
 			lives--;
 			if (lives == 0);
 			//play end animation
@@ -140,6 +127,7 @@ void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite)
 	sf::FloatRect playerBounds = getGlobalBounds();
 	int offset;
 
+	//makes a float rect that has where the player will move to next
 	nextPos = playerBounds;
 	nextPos.left += xMove;
 	nextPos.top += yMove;
@@ -165,14 +153,15 @@ void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite)
 			else
 			{
 				//std::cout << static_cast<int>(levelArrVec[j][i]) << " I: " << i << " J: " << j;
-				throw std::runtime_error("INVALID LEVEL ENTRY");
+				//throw std::runtime_error("INVALID LEVEL ENTRY");
 			}
 
 			sf::FloatRect wallBounds = sprite.getGlobalBounds();
 
+			//compares player and walls
 			if (wallBounds.intersects(nextPos))
 			{
-				//std::cout << "collide";
+				std::cout << "collide";
 				lives--;
 				if (lives == 0);
 				//play end animation
@@ -398,7 +387,7 @@ void Player::fuelLoss(sf::Clock& clock, sf::RenderWindow& window, sf::View viewP
 		fuelBar++;
 	}
 
-	if (fuelBar != 16)
+	if (fuelBar != 16 && fuel > 0)
 	{
 		switch (fuel % 8)
 		{
@@ -438,7 +427,10 @@ void Player::fuelLoss(sf::Clock& clock, sf::RenderWindow& window, sf::View viewP
 	{
 		fuelTexture.loadFromFile("./sprites/fuel0.png");
 		fuelSprite.setTexture(fuelTexture);
-		fuelSprite.setPosition(viewPort.getCenter().x - 136 + (((fuel / 8) + i) * 24), 768);
+		if (fuel > 0)
+			fuelSprite.setPosition(viewPort.getCenter().x - 136 + (((fuel / 8) + i) * 24), 768);
+		else 
+			fuelSprite.setPosition(viewPort.getCenter().x - 136 + ((i - 1) * 24), 768);
 		window.draw(fuelSprite);
 	}
 

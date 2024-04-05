@@ -15,7 +15,7 @@ public:
 	void shootBlaster(sf::RectangleShape[]);
 	void addPoints(int);
 	void crash(std::vector<Enemy*>);
-	void crash(std::vector<char>[], sf::Sprite);
+	void crash(std::vector<char>[25], sf::Sprite);
 	void hit(std::vector<Enemy*>, sf::RectangleShape[], sf::RectangleShape[]);
 	void animateBoom(std::string);
 	void moveCheck();
