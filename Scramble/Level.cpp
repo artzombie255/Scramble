@@ -53,8 +53,6 @@ Level::Level(int levelNum)
 		levelOffset += 223;
 	case 2:
 		levelOffset += 361;
-	case 1:
-		std::cout << "";
 	}
 
 	levelOffset = 0;
@@ -140,7 +138,7 @@ void Level::loadLevel(sf::RenderWindow& window, sf::View& viewPort)
 			}
 		}
 	}
-	viewPort.move(3, 0);
+	viewPort.move(30, 0);
 	window.setView(viewPort);
 }
 
@@ -171,6 +169,7 @@ sf::Sprite Level::getSprite()
 
 void Level::setLevelArrVec(std::vector<char> tempLevelArrVec[25])
 {
+	tempLevelArrVec->clear();
 	for (int j = 0; j < 25; j++)
 	{
 		for (int i = 0; i < levelArrVec[0].size(); i++)
