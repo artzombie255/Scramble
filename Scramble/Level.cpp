@@ -107,6 +107,7 @@ void Level::loadLevel(sf::RenderWindow& window, sf::View& viewPort)
 	}
 	system("pause");
 	*/
+
 	for (int j = 0; j < 25; j++)
 	{
 		for (int i = (viewPort.getCenter().x - 336) / 24; i < (viewPort.getCenter().x - 336) / 24 + 30; i++)

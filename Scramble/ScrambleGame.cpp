@@ -44,7 +44,7 @@ void ScrambleGame::playGame()
     //level 1: 361, level 2: 223, level 3: 227, level 4: 329, level 5: 225, level 6: 139 
     int currentLevel = 1;
 
-    Level level;
+    Level* level = new Level[6];
         //levels[6] =
    // {
       //  Level(1),
@@ -62,21 +62,15 @@ void ScrambleGame::playGame()
     viewPort.setSize(672, 816);
 
     srand(time(NULL));
-    //level.readFromFile("level1.txt");
-    //level.readFromFile("level2.txt");
-    //level.readFromFile("level3.txt");
-    //level.readFromFile("level4.txt");
-    level.readFromFile("level5.txt");
-    level.readFromFile("level6.txt");
-    //test.loadFromFile("Shader_colour_swap.frag", sf::Shader::Fragment);
-    //test.setUniform("COLOR", sf::Glsl::Vec4());
-    //test.setUniform("TEXTURE", sf::Shader::CurrentTexture);
-    //test.setUniform("UV", sf::Glsl::Vec4());
-    //sf::Shader::bind(&test);
-    //tempI.loadFromFile("2rocket0.png");
+    level[0].readFromFile("level1.txt");
+    level[1].readFromFile("level2.txt");
+    level[2].readFromFile("level3.txt");
+    level[3].readFromFile("level4.txt");
+    level[4].readFromFile("level5.txt");
+    level[5].readFromFile("level6.txt");
+    
     player.changeSprite(playerSpriteClock, playerSprite);
-    //rocketSprite.setTexture(tempI);
-    //rocketSprite.scale(5, 5);
+ 
 
     //setup
     for (int i = 0; i < TOTAL_BULLETS; i++)
@@ -91,7 +85,7 @@ void ScrambleGame::playGame()
     }
 
    // for (int i = 0; i < 6; i++)
-        level.setLevelArrVec(levelArrVec);
+        level->setLevelArrVec(levelArrVec);
 
     window.setFramerateLimit(60);
 
@@ -136,7 +130,7 @@ void ScrambleGame::playGame()
                 enemyVec.at(i)->changeSprite(palette);
             }
            // for (int i = 0; i < 6; i++)
-                level.colorSwap(palette);
+                level->colorSwap(palette);
             paletteClock.restart();
         }
         player.changeSprite(playerSpriteClock, playerSprite);
@@ -152,7 +146,7 @@ void ScrambleGame::playGame()
         //process interactions
         player.hit(enemyVec, bullet, missile);
         player.crash(enemyVec);
-        player.crash(levelArrVec, level.getSprite());
+        player.crash(levelArrVec, level->getSprite());
 
         //set up player sprite to print
         playerSprite.setPosition(player.getPosition().x - 39, player.getPosition().y - 9);
@@ -184,7 +178,7 @@ void ScrambleGame::playGame()
         window.draw(playerSprite);
         player.fuelLoss(fuelClock, window, viewPort);
 
-        level.loadLevel(window, viewPort);
+        level->loadLevel(window, viewPort);
     
 
         // End the current frame and display its contents on screen
@@ -196,5 +190,7 @@ void ScrambleGame::playGame()
     {
         delete enemyVec.at(i);
     }
+
+    delete level;
 
 }
