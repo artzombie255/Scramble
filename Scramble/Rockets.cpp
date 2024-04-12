@@ -20,7 +20,8 @@ void Rockets::move(sf::Clock &clock)
 	//sf::RectangleShape::move(-1, 0);
 	if (grounded == false)
 		sf::RectangleShape::move(0, -2);
-	if (clock.getElapsedTime().asSeconds() >= 1 && getPosition().x < 386 && getPosition().x > 10 && grounded == true)
+	if (clock.getElapsedTime().asSeconds() >= 1 && getPosition().x < 386 
+		&& getPosition().x > 10 && grounded == true)
 	{
 		std::cout << "takeoff";
 		clock.restart();

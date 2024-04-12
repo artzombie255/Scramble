@@ -50,28 +50,32 @@ void Player::shootBlaster(sf::RectangleShape bullet[])
 	{
 		if (usableShots[TOTAL_BULLETS - 4] == true)
 		{
-			bullet[TOTAL_BULLETS - 4].setPosition(getPosition().x + 57, getPosition().y + 20);
+			bullet[TOTAL_BULLETS - 4].setPosition
+			(getPosition().x + 57, getPosition().y + 20);
 			usableShots[TOTAL_BULLETS - 4] = false;
 			//std::cout << "1";
 			sTimer = 0;
 		}
 		else if (usableShots[TOTAL_BULLETS - 3] == true)
 		{
-			bullet[TOTAL_BULLETS - 3].setPosition(getPosition().x + 57, getPosition().y + 20);
+			bullet[TOTAL_BULLETS - 3].setPosition
+			(getPosition().x + 57, getPosition().y + 20);
 			usableShots[TOTAL_BULLETS - 3] = false;
 			//std::cout << "2";
 			sTimer = 0;
 		}
 		else if (usableShots[TOTAL_BULLETS - 2] == true)
 		{
-			bullet[TOTAL_BULLETS - 2].setPosition(getPosition().x + 57, getPosition().y + 20);
+			bullet[TOTAL_BULLETS - 2].setPosition
+			(getPosition().x + 57, getPosition().y + 20);
 			usableShots[TOTAL_BULLETS - 2] = false;
 			//std::cout << "3";
 			sTimer = 0;
 		}
 		else if (usableShots[TOTAL_BULLETS - 1] == true)
 		{
-			bullet[TOTAL_BULLETS - 1].setPosition(getPosition().x + 57, getPosition().y + 20);
+			bullet[TOTAL_BULLETS - 1].setPosition
+			(getPosition().x + 57, getPosition().y + 20);
 			usableShots[TOTAL_BULLETS - 1] = false;
 			//std::cout << "4";
 			sTimer = 0;
@@ -138,7 +142,8 @@ void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite)
 		{
 			// Verifies within acceptable ASCII ranges
 			// 48-57 for 0-9 | 97-119 for a-w
-			if ((levelArrVec[j][i] >= 48 && levelArrVec[j][i] <= 57) || (levelArrVec[j][i] >= 97 && levelArrVec[j][i] <= 119))
+			if ((levelArrVec[j][i] >= 48 && levelArrVec[j][i] <= 57) || 
+				(levelArrVec[j][i] >= 97 && levelArrVec[j][i] <= 119))
 			{
 				if (levelArrVec[j][i] >= 48 && levelArrVec[j][i] <= 57)
 					offset = 48;
@@ -174,7 +179,8 @@ void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite)
 
 
 //detects when an enemy is hit and manages it
-void Player::hit(std::vector<Enemy*> enemyVec, sf::RectangleShape bullet[], sf::RectangleShape missile[])
+void Player::hit(std::vector<Enemy*> enemyVec, 
+	sf::RectangleShape bullet[], sf::RectangleShape missile[])
 {
 	bool hit = false;
 	sf::FloatRect nextPos;
@@ -258,11 +264,13 @@ void Player::moveCheck()
     }
 
 
-    if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+    if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Left) 
+		&& !sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
     	xMove = 3;
     }
-    if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+    if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Up) 
+		&& !sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
     {
 		yMove = 0;
     }
@@ -271,14 +279,16 @@ void Player::moveCheck()
 
 
 //moves player based on pressed keys
-void Player::move(sf::RectangleShape bullet[], sf::RectangleShape missile[], sf::View viewPort)
+void Player::move(sf::RectangleShape bullet[], 
+	sf::RectangleShape missile[], sf::View viewPort)
 {
 	//getPosition().x + 100, getPosition().y + 20;
 	if (fuel > 0)
 		RectangleShape::move(xMove, yMove);
 	else 
 		RectangleShape::move(3, 3);
-	if (getPosition().x <= viewPort.getCenter().x - 326 || getPosition().y <= 106 || getPosition().x >= viewPort.getCenter().x - 50 || getPosition().y >= 718)
+	if (getPosition().x <= viewPort.getCenter().x - 326 || getPosition().y <= 106 
+		|| getPosition().x >= viewPort.getCenter().x - 50 || getPosition().y >= 718)
 	{
 		if (getPosition().x <= viewPort.getCenter().x - 326)
 			RectangleShape::setPosition(viewPort.getCenter().x - 326, getPosition().y);
@@ -364,7 +374,8 @@ void Player::changeSprite(sf::Clock& clock, sf::Sprite &playerSprite)
 }
 
 
-void Player::fuelLoss(sf::Clock& clock, sf::RenderWindow& window, sf::View viewPort)
+void Player::fuelLoss(sf::Clock& clock, 
+	sf::RenderWindow& window, sf::View viewPort)
 {
 	int fuelBar = 0;
 	sf::Texture fuelTexture;
@@ -428,7 +439,8 @@ void Player::fuelLoss(sf::Clock& clock, sf::RenderWindow& window, sf::View viewP
 		fuelTexture.loadFromFile("./sprites/fuel0.png");
 		fuelSprite.setTexture(fuelTexture);
 		if (fuel > 0)
-			fuelSprite.setPosition(viewPort.getCenter().x - 136 + (((fuel / 8) + i) * 24), 768);
+			fuelSprite.setPosition
+			(viewPort.getCenter().x - 136 + (((fuel / 8) + i) * 24), 768);
 		else 
 			fuelSprite.setPosition(viewPort.getCenter().x - 136 + ((i - 1) * 24), 768);
 		window.draw(fuelSprite);

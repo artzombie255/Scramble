@@ -1,7 +1,8 @@
 #include "Level.h"
 
 
-//level 1: 361, level 2: 223, level 3: 227, level 4: 329, level 5: 225, level 6: 139 
+//level 1: 361, level 2: 223, level 3: 227, 
+// level 4: 329, level 5: 225, level 6: 139 
 
 
 Level::Level()
@@ -14,7 +15,8 @@ Level::Level()
 			tempI = std::to_string(i);
 			tempZ = std::to_string(z);
 
-			levelTexture[i][z].loadFromFile("./sprites/" + tempZ + "map/" + tempZ + "map" + tempI + ".png");
+			levelTexture[i][z].loadFromFile
+			("./sprites/" + tempZ + "map/" + tempZ + "map" + tempI + ".png");
 		}
 
 	for (int i = 0; i < 33; i++)
@@ -35,7 +37,8 @@ Level::Level(int levelNum)
 			tempI = std::to_string(i);
 			tempZ = std::to_string(z);
 
-			levelTexture[i][z].loadFromFile("./sprites/" + tempZ + "map/" + tempZ + "map" + tempI + ".png");
+			levelTexture[i][z].loadFromFile
+			("./sprites/" + tempZ + "map/" + tempZ + "map" + tempI + ".png");
 		}
 
 	switch (levelNum)
@@ -110,17 +113,20 @@ void Level::loadLevel(sf::RenderWindow& window, sf::View& viewPort)
 
 	for (int j = 0; j < 25; j++)
 	{
-		for (int i = (viewPort.getCenter().x - 336) / 24; i < (viewPort.getCenter().x - 336) / 24 + 30; i++)
+		for (int i = (viewPort.getCenter().x - 336) / 24; 
+			i < (viewPort.getCenter().x - 336) / 24 + 30; i++)
 		{
 			// Verifies within acceptable ASCII ranges
 			// 48-57 for 0-9 | 97-119 for a-w
-			if ((levelArrVec[j][i] >= 48 && levelArrVec[j][i] <= 57) || (levelArrVec[j][i] >= 97 && levelArrVec[j][i] <= 119))
+			if ((levelArrVec[j][i] >= 48 && levelArrVec[j][i] <= 57) || 
+				(levelArrVec[j][i] >= 97 && levelArrVec[j][i] <= 119))
 			{
 				if (levelArrVec[j][i] >= 48 && levelArrVec[j][i] <= 57)
 					offset = 48;
 				else
 					offset = 87;
-				levelSprite[levelArrVec[j][i] - offset].setPosition((i + levelOffset) * 24, 96 + (j * 24));
+				levelSprite[levelArrVec[j][i] - offset].setPosition
+				((i + levelOffset) * 24, 96 + (j * 24));
 				window.draw(levelSprite[levelArrVec[j][i] - offset]);
 			}
 			else if (levelArrVec[j][i] == 120 || levelArrVec[j][i] == 121)
