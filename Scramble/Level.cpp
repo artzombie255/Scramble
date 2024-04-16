@@ -1,7 +1,7 @@
 #include "Level.h"
 
 
-//level 1: 361, level 2: 223, level 3: 227, 
+//level 1: 361, level 2: 225, level 3: 227, 
 // level 4: 329, level 5: 225, level 6: 139 
 
 
@@ -50,12 +50,12 @@ Level::Level(int levelNum)
 	case 4:
 		levelOffset += 227;
 	case 3:
-		levelOffset += 223;
+		levelOffset += 225;
 	case 2:
 		levelOffset += 361;
 	}
 
-	levelOffset = 0;
+	//levelOffset = 0;
 
 	for (int i = 0; i < 33; i++)
 	{
@@ -111,8 +111,8 @@ void Level::loadLevel(sf::RenderWindow& window, sf::View& viewPort)
 
 	for (int j = 0; j < 25; j++)
 	{
-		for (int i = (viewPort.getCenter().x - 336) / 24; 
-			i < (viewPort.getCenter().x - 336) / 24 + 30; i++)
+		for (int i = ((viewPort.getCenter().x - 336) / 24) - (levelOffset); 
+			i < (viewPort.getCenter().x - 336) / 24 - levelOffset + 30; i++)
 		{
 			// Verifies within acceptable ASCII ranges
 			// 48-57 for 0-9 | 97-119 for a-w
@@ -134,11 +134,11 @@ void Level::loadLevel(sf::RenderWindow& window, sf::View& viewPort)
 			else
 			{
 				//std::cout << static_cast<int>(levelArrVec[j][i]) << " I: " << i << " J: " << j;
-				throw std::runtime_error("INVALID LEVEL ENTRY");
+				//throw std::runtime_error("INVALID LEVEL ENTRY");
 			}
 		}
 	}
-	viewPort.move(30, 0);
+	viewPort.move(3, 0);
 	window.setView(viewPort);
 }
 
@@ -177,4 +177,26 @@ void Level::setLevelArrVec(std::vector<char> tempLevelArrVec[25])
 			tempLevelArrVec[j].push_back(levelArrVec[j][i]);
 		}
 	}
+}
+
+//adjust these nums
+int Level::currentLevel(sf::View& view)
+{
+	if (view.getCenter().x - 336 < 8824)
+		return 1;
+	else if (view.getCenter().x - 336 < 18016 && view.getCenter().x - 336 >= 8824)
+		return 2;
+	else if (view.getCenter().x - 336 < 19864 && view.getCenter().x - 336 >= 18016)
+		return 3;
+	else if (view.getCenter().x - 336 < 27760 && view.getCenter().x - 336 >= 19864)
+		return 4;
+	else if (view.getCenter().x - 336 < 33160 && view.getCenter().x - 336 >= 27760)
+		return 5;
+	else if (view.getCenter().x - 336 > 33160)
+		return 6;
+}
+
+int Level::getOffset()
+{
+	return levelOffset;
 }

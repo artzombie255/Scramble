@@ -17,9 +17,11 @@ public:
 	bool checkCollision(Player);
 	sf::Sprite getSprite();
 	void setLevelArrVec(std::vector<char>[25]);
+	int currentLevel(sf::View&);
+	int getOffset();
 
 private:
-	int k = 0, levelOffset;
+	int levelOffset;
 	std::vector<char> levelArrVec[25];
 	sf::Sprite levelSprite[33];
 	sf::Texture levelTexture[33][7];

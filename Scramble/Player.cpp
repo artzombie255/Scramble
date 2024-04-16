@@ -125,7 +125,7 @@ void Player::crash(std::vector<Enemy*> enemyVec)
 }
 
 
-void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite)
+void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite, int levelOffset)
 {
 	sf::FloatRect nextPos;
 	sf::FloatRect playerBounds = getGlobalBounds();
@@ -149,7 +149,7 @@ void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite)
 					offset = 48;
 				else
 					offset = 87;
-				sprite.setPosition(i * 24, 96 + (j * 24));
+				sprite.setPosition((i + levelOffset) * 24, 96 + (j * 24));
 			}
 			else if (levelArrVec[j][i] == 120 || levelArrVec[j][i] == 121)
 			{

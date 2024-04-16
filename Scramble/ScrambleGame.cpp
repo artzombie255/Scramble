@@ -53,15 +53,8 @@ void ScrambleGame::playGame()
         Level(5),
         Level(6)
     };
-        //levels[6] =
-   // {
-      //  Level(1),
-     //   Level(2),
-//Level(3),
-    //    Level(4),
-    //    Level(5),
-//Level(6)
-    //};
+       
+
     int palette = 0;
     std::vector<char> levelArrVec[25];
     
@@ -69,10 +62,11 @@ void ScrambleGame::playGame()
     viewPort.setCenter(336, 408);
     viewPort.setSize(672, 816);
 
+
     srand(time(NULL));
     level[0].readFromFile("level1.txt");
     level[0].readFromFile("level2.txt");
-    //level[1].readFromFile("level1.txt");
+    //level[0].readFromFile("level1.txt");
     level[1].readFromFile("level2.txt");
     level[1].readFromFile("level3.txt");
     level[2].readFromFile("level3.txt");
@@ -143,7 +137,7 @@ void ScrambleGame::playGame()
                 enemyVec.at(i)->changeSprite(palette);
             }
             for (int i = 0; i < 6; i++)
-                level[currentLevel].colorSwap(palette);
+                level[i].colorSwap(palette);
             paletteClock.restart();
         }
         player.changeSprite(playerSpriteClock, playerSprite);
@@ -157,17 +151,18 @@ void ScrambleGame::playGame()
             enemyVec.at(i)->move(clock);
         }
 
-        if (currentLevel != level.currentLevel())
+        if (currentLevel != level->currentLevel(viewPort))
         {
-            currentLevel++;
-            level[currentLevel].setLevelArrVec(levelArrVec);
+            std::cout << "change level" << currentLevel + 1;
+            currentLevel = level->currentLevel(viewPort);
+            level[currentLevel - 1].setLevelArrVec(levelArrVec);
         }
 
 
         //process interactions
         player.hit(enemyVec, bullet, missile);
         player.crash(enemyVec);
-        player.crash(levelArrVec, level[0].getSprite());
+        player.crash(levelArrVec, level[0].getSprite(), level[currentLevel - 1].getOffset());
 
         //set up player sprite to print
         playerSprite.setPosition(player.getPosition().x - 39, player.getPosition().y - 9);
