@@ -23,8 +23,8 @@ public:
 private:
 	int levelOffset;
 	std::vector<char> levelArrVec[25];
-	sf::Sprite levelSprite[33];
-	sf::Texture levelTexture[33][7];
+	sf::Sprite levelSprite[34];
+	sf::Texture levelTexture[34][7];
 	sf::Clock spriteClock, levelClock;
 };
 

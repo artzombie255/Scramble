@@ -8,7 +8,7 @@
 Level::Level()
 {
 	levelOffset = 0;
-	for (int i = 0; i < 33; i++)
+	for (int i = 0; i < 34; i++)
 		for (int z = 0; z < 7; z++)
 		{
 			std::string tempI, tempZ;
@@ -19,7 +19,7 @@ Level::Level()
 			("./sprites/" + tempZ + "map/" + tempZ + "map" + tempI + ".png");
 		}
 
-	for (int i = 0; i < 33; i++)
+	for (int i = 0; i < 34; i++)
 	{
 		levelSprite[i].setTexture(levelTexture[i][0]);
 		levelSprite[i].setScale(3, 3);
@@ -30,7 +30,7 @@ Level::Level()
 Level::Level(int levelNum)
 {
 	levelOffset = 0;
-	for (int i = 0; i < 33; i++)
+	for (int i = 0; i < 34; i++)
 		for (int z = 0; z < 7; z++)
 		{
 			std::string tempI, tempZ;
@@ -57,7 +57,7 @@ Level::Level(int levelNum)
 
 	//levelOffset = 0;
 
-	for (int i = 0; i < 33; i++)
+	for (int i = 0; i < 34; i++)
 	{
 		levelSprite[i].setTexture(levelTexture[i][0]);
 		levelSprite[i].setScale(3, 3);
@@ -117,17 +117,23 @@ void Level::loadLevel(sf::RenderWindow& window, sf::View& viewPort)
 			// Verifies within acceptable ASCII ranges
 			// 48-57 for 0-9 | 97-119 for a-w
 			if ((levelArrVec[j][i] >= 48 && levelArrVec[j][i] <= 57) || 
-				(levelArrVec[j][i] >= 97 && levelArrVec[j][i] <= 119))
+				(levelArrVec[j][i] >= 97 && levelArrVec[j][i] <= 119)
+				|| levelArrVec[j][i] == 75)
 			{
 				if (levelArrVec[j][i] >= 48 && levelArrVec[j][i] <= 57)
 					offset = 48;
+				else if(levelArrVec[j][i] == 75)
+					offset = 42;
 				else
 					offset = 87;
 				levelSprite[levelArrVec[j][i] - offset].setPosition
 				((i + levelOffset) * 24, 96 + (j * 24));
 				window.draw(levelSprite[levelArrVec[j][i] - offset]);
 			}
-			else if (levelArrVec[j][i] == 120 || levelArrVec[j][i] == 121)
+			else if (levelArrVec[j][i] == 120 || levelArrVec[j][i] == 121
+				|| levelArrVec[j][i] == 82 || levelArrVec[j][i] == 85
+				|| levelArrVec[j][i] == 65 || levelArrVec[j][i] == 70
+				|| levelArrVec[j][i] == 66 || levelArrVec[j][i] == 79)
 			{
 				//std::cout << "ignore";
 			}
@@ -145,7 +151,7 @@ void Level::loadLevel(sf::RenderWindow& window, sf::View& viewPort)
 
 void Level::colorSwap(int palette)
 {
-	for (int i = 0; i < 33; i++)
+	for (int i = 0; i < 34; i++)
 	{
 		levelSprite[i].setTexture(levelTexture[i][palette]);
 		levelSprite[i].setScale(3, 3);
