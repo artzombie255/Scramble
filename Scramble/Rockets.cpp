@@ -9,6 +9,14 @@ Rockets::Rockets()
 }
 
 
+Rockets::Rockets(int x, int y)
+{
+	setSize(sf::Vector2f(48, 48));
+	setOrigin(0, 0);
+	setPosition(x, y);
+}
+
+
 Rockets::~Rockets()
 {
 

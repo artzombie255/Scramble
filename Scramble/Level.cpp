@@ -1,4 +1,12 @@
 #include "Level.h"
+#include "Altar.h"
+#include "Base.h"
+#include "Enemy.h"
+#include "Entity.h"
+#include "FuelTower.h"
+#include "Meteors.h"
+#include "Rockets.h"
+#include "Ufo.h"
 
 
 //level 1: 361, level 2: 225, level 3: 227, 
@@ -72,7 +80,7 @@ Level::~Level()
 //takes information from file to make level 
 void Level::readFromFile(std::string fileName)
 {
-	std::ifstream file;
+	std::fstream file;
     file.open(fileName);
 
 	if (file.is_open())
@@ -93,8 +101,27 @@ void Level::readFromFile(std::string fileName)
 }
 
 
+void Level::setEntities (std::vector<Enemy*>& enemyVec)
+{
+	int x, y;
+	for (int j = 0; j < 25; j++)
+	{
+		for (int i = 0; i < levelArrVec->size(); i++)
+		{
+			if (levelArrVec[j][i] == 82)
+			{
+				std::cout << "rocket:" << i << "\n" << j << "\n";
+				x = (i + levelOffset) * 24;
+				y = 96 + (j * 24);
+				enemyVec.push_back(new Rockets(x, y));
+			}
+		}
+	}
+}
+
+
 //loads each level into sfml
-void Level::loadLevel(sf::RenderWindow& window, sf::View& viewPort)
+void Level::loadLevel(sf::RenderWindow& window, sf::View& viewPort, std::vector<Enemy*> &enemyVec)
 {
 	int offset;
 
@@ -135,7 +162,7 @@ void Level::loadLevel(sf::RenderWindow& window, sf::View& viewPort)
 				|| levelArrVec[j][i] == 65 || levelArrVec[j][i] == 70
 				|| levelArrVec[j][i] == 66 || levelArrVec[j][i] == 79)
 			{
-				//std::cout << "ignore";
+				
 			}
 			else
 			{

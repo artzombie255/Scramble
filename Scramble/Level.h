@@ -4,6 +4,7 @@
 #include <fstream>
 #include "Player.h"
 #include <SFML/Graphics.hpp>
+#include "Enemy.h"
 
 class Level
 {
@@ -12,7 +13,8 @@ public:
 	Level(int);
 	~Level();
 	void readFromFile(std::string);
-	void loadLevel(sf::RenderWindow&, sf::View&);
+	void setEntities(std::vector<Enemy*>&);
+	void loadLevel(sf::RenderWindow&, sf::View&, std::vector<Enemy*>&);
 	void colorSwap(int);
 	bool checkCollision(Player);
 	sf::Sprite getSprite();

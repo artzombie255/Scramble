@@ -6,6 +6,7 @@ class Rockets : public Enemy
 {
 public:
 	Rockets();
+	Rockets(int x, int y);
 	~Rockets();
 	void move(sf::Clock &clock);
 	void takeoff();

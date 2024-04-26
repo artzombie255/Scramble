@@ -77,6 +77,13 @@ void ScrambleGame::playGame()
     level[4].readFromFile("level6.txt");
     level[5].readFromFile("level6.txt");
     
+    level[0].setEntities(enemyVec);
+    level[1].setEntities(enemyVec);
+    level[2].setEntities(enemyVec);
+    level[3].setEntities(enemyVec);
+    level[4].setEntities(enemyVec);
+    level[5].setEntities(enemyVec);
+
     player.changeSprite(playerSpriteClock, playerSprite);
  
 
@@ -103,6 +110,7 @@ void ScrambleGame::playGame()
         enemyVec.push_back(new FuelTower());
         enemyVec.push_back(new Altar());
     }
+
 
     for (int i = enemyVec.size() - 1; i > 0; i--)
     {
@@ -194,7 +202,7 @@ void ScrambleGame::playGame()
         window.draw(playerSprite);
         player.fuelLoss(fuelClock, window, viewPort);
 
-        level[currentLevel - 1].loadLevel(window, viewPort);
+        level[currentLevel - 1].loadLevel(window, viewPort, enemyVec);
         
 
         // End the current frame and display its contents on screen
