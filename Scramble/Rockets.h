@@ -8,7 +8,7 @@ public:
 	Rockets();
 	Rockets(int x, int y);
 	~Rockets();
-	void move(sf::Clock &clock);
+	void move(sf::Clock &clock, sf::View);
 	void takeoff();
 	int getPoints();
 	void print(sf::RenderWindow&);

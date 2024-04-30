@@ -52,15 +52,15 @@ Level::Level(int levelNum)
 	switch (levelNum)
 	{
 	case 6:
-		levelOffset += 225;
+		levelOffset += 224;
 	case 5:
-		levelOffset += 329;
+		levelOffset += 328;
 	case 4:
-		levelOffset += 227;
+		levelOffset += 226;
 	case 3:
-		levelOffset += 225;
+		levelOffset += 224;
 	case 2:
-		levelOffset += 361;
+		levelOffset += 360;
 	}
 
 	//levelOffset = 0;
@@ -100,6 +100,12 @@ void Level::readFromFile(std::string fileName)
 	}
 }
 
+void Level::clearVec()
+{
+	levelArrVec->clear();
+	return;
+}
+
 
 void Level::setEntities (std::vector<Enemy*>& enemyVec)
 {
@@ -114,6 +120,14 @@ void Level::setEntities (std::vector<Enemy*>& enemyVec)
 				x = (i + levelOffset) * 24;
 				y = 96 + (j * 24);
 				enemyVec.push_back(new Rockets(x, y));
+			}
+
+			if (levelArrVec[j][i] == 85)
+			{
+				std::cout << "ufo:" << i << "\n" << j << "\n";
+				x = (i + levelOffset) * 24;
+				y = 96 + (j * 24);
+				enemyVec.push_back(new Ufo(x, y));
 			}
 		}
 	}
@@ -143,6 +157,8 @@ void Level::loadLevel(sf::RenderWindow& window, sf::View& viewPort, std::vector<
 		{
 			// Verifies within acceptable ASCII ranges
 			// 48-57 for 0-9 | 97-119 for a-w
+			std::cout << ((viewPort.getCenter().x - 336) / 24) - (levelOffset) << std::endl;
+			std::cout << (viewPort.getCenter().x - 336) / 24 - levelOffset + 30 << std::endl;
 			if ((levelArrVec[j][i] >= 48 && levelArrVec[j][i] <= 57) || 
 				(levelArrVec[j][i] >= 97 && levelArrVec[j][i] <= 119)
 				|| levelArrVec[j][i] == 75)
@@ -186,14 +202,6 @@ void Level::colorSwap(int palette)
 }
 
 
-//checks for position of pieces in each type of 
-//piece and idetifies if it has struck something
-bool Level::checkCollision(Player user)
-{
-    return true;
-}
-
-
 sf::Sprite Level::getSprite()
 {
 	return levelSprite[0];
@@ -215,17 +223,17 @@ void Level::setLevelArrVec(std::vector<char> tempLevelArrVec[25])
 //adjust these nums
 int Level::currentLevel(sf::View& view)
 {
-	if (view.getCenter().x - 336 < 8824)
+	if (view.getCenter().x - 336 < 8840)
 		return 1;
-	else if (view.getCenter().x - 336 < 18016 && view.getCenter().x - 336 >= 8824)
+	else if (view.getCenter().x - 336 < 16016 && view.getCenter().x - 336 >= 8840)
 		return 2;
-	else if (view.getCenter().x - 336 < 19864 && view.getCenter().x - 336 >= 18016)
+	else if (view.getCenter().x - 336 < 19440 && view.getCenter().x - 336 >= 16016)
 		return 3;
-	else if (view.getCenter().x - 336 < 27760 && view.getCenter().x - 336 >= 19864)
+	else if (view.getCenter().x - 336 < 27512 && view.getCenter().x - 336 >= 19440)
 		return 4;
-	else if (view.getCenter().x - 336 < 33160 && view.getCenter().x - 336 >= 27760)
+	else if (view.getCenter().x - 336 < 32688 && view.getCenter().x - 336 >= 27512)
 		return 5;
-	else if (view.getCenter().x - 336 > 33160)
+	else if (view.getCenter().x - 336 > 32688)
 		return 6;
 }
 

@@ -8,7 +8,7 @@ class Enemy: public Entity
 public:
 	Enemy();
 	~Enemy();
-	virtual void move(sf::Clock&);
+	virtual void move(sf::Clock&, sf::View);
 	virtual int getPoints();
 	virtual int getFuel();
 	virtual void print(sf::RenderWindow&);

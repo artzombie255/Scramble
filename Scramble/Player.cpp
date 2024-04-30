@@ -1,6 +1,7 @@
 #include "Player.h"
 #include <iostream>
 #include "Enemy.h"
+#include "Level.h"
 #include <vector>
 
 
@@ -93,7 +94,7 @@ void Player::addPoints(int tempPoints)
 
 
 //detects when the player crashes and calls level to deal with it
-void Player::crash(std::vector<Enemy*> enemyVec)
+void Player::crash(std::vector<Enemy*> enemyVec, int currentLevel,Level level[6], sf::View &viewport)
 {
 	sf::FloatRect nextPos;
 	sf::FloatRect playerBounds = getGlobalBounds();
@@ -116,8 +117,7 @@ void Player::crash(std::vector<Enemy*> enemyVec)
 			//play end animation
 			else
 			{
-				//setPosition(-100, -100);
-
+				
 			}
 			//respawn
 		}
@@ -125,7 +125,7 @@ void Player::crash(std::vector<Enemy*> enemyVec)
 }
 
 
-void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite, int levelOffset)
+void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite, int currentLevel, Level level[6], sf::View &viewport)
 {
 	sf::FloatRect nextPos;
 	sf::FloatRect playerBounds = getGlobalBounds();
@@ -149,7 +149,7 @@ void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite, int lev
 					offset = 48;
 				else
 					offset = 87;
-				sprite.setPosition((i + levelOffset) * 24, 96 + (j * 24));
+				sprite.setPosition((i + level[currentLevel - 1].getOffset()) * 24, 96 + (j * 24));
 			}
 			else if (levelArrVec[j][i] == 120 || levelArrVec[j][i] == 121)
 			{
@@ -171,7 +171,41 @@ void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite, int lev
 				if (lives == 0);
 				//play end animation
 				else;
-				//respawn
+				{
+					level[0].clearVec();
+					level[1].clearVec();
+					level[2].clearVec();
+					level[3].clearVec();
+					level[4].clearVec();
+					level[5].clearVec();
+
+					switch (currentLevel)
+					{
+					case 1:
+						viewport.setCenter(337, 408);
+						setPosition(400, 200);
+						break;
+					case 2:
+						viewport.setCenter(336, 408);
+						setPosition(100, 100);
+						break;
+					case 3:
+						viewport.setCenter(336, 408);
+						setPosition(100, 100);
+						break;
+					case 4:
+						viewport.setCenter(336, 408);
+						setPosition(100, 100);
+						break;
+					case 5:
+						viewport.setCenter(336, 408);
+						setPosition(100, 100);
+						break;
+					case 6:
+						viewport.setCenter(336, 408);
+						setPosition(100, 100);
+					}
+				}
 			}
 		}
 	}
