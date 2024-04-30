@@ -23,13 +23,13 @@ Rockets::~Rockets()
 }
 
 
-void Rockets::move(sf::Clock &clock)
+void Rockets::move(sf::Clock &clock, sf::View viewport)
 {
 	//sf::RectangleShape::move(-1, 0);
 	if (grounded == false)
 		sf::RectangleShape::move(0, -2);
-	if (clock.getElapsedTime().asSeconds() >= 1 && getPosition().x < 386 
-		&& getPosition().x > 10 && grounded == true)
+	if (clock.getElapsedTime().asSeconds() >= 1 && getPosition().x < viewport.getCenter().x
+		&& getPosition().x > viewport.getCenter().x - 370 && grounded == true)
 	{
 		std::cout << "takeoff";
 		clock.restart();

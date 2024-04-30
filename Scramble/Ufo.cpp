@@ -14,6 +14,19 @@ Ufo::Ufo()
 	sprite.setScale(3, 3);
 }
 
+Ufo::Ufo(int x, int y)
+{
+	points = 100;
+	setSize(sf::Vector2f(48, 48));
+	setOrigin(0, 0);
+	setPosition(x, y);
+	start = getPosition().y;
+	moveDir = -5;
+	image.loadFromFile("./sprites/Ufo.png");
+	sprite.setTexture(image);
+	sprite.setScale(3, 3);
+}
+
 
 Ufo::~Ufo()
 {
@@ -21,10 +34,10 @@ Ufo::~Ufo()
 }
 
 
-void Ufo::move(sf::Clock &clock)
+void Ufo::move(sf::Clock &clock, sf::View viewport)
 {
 	//sf::RectangleShape::move(-1, 0);
-	if (getPosition().x < 800)
+	//if (getPosition().x < 800)
 		sf::RectangleShape::move(0, moveDir);
 
 	if (getPosition().y >= start)

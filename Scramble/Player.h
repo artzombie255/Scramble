@@ -5,6 +5,7 @@
 #include <iostream>
 #include "Enemy.h"
 #include "Entity.h"
+#include "Level.h"
 
 class Player: public Entity
 {
@@ -14,8 +15,8 @@ public:
 	void shootMissiles(sf::RectangleShape[]);
 	void shootBlaster(sf::RectangleShape[]);
 	void addPoints(int);
-	void crash(std::vector<Enemy*>);
-	void crash(std::vector<char>[25], sf::Sprite, int);
+	void crash(std::vector<Enemy*>, int, Level[6], sf::View&);
+	void crash(std::vector<char>[25], sf::Sprite, int, Level[6], sf::View&);
 	void hit(std::vector<Enemy*>, sf::RectangleShape[], sf::RectangleShape[]);
 	void animateBoom(std::string);
 	void moveCheck();
