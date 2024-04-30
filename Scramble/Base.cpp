@@ -29,3 +29,8 @@ void Base::changeSprite(int palette)
 {
 	Enemy::changeSprite(palette);
 }
+
+int Base::getPoints()
+{
+	return 800;
+}

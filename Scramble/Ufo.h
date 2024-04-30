@@ -10,6 +10,7 @@ public:
 	void move(sf::Clock&);
 	void print(sf::RenderWindow&);
 	void changeSprite(int);
+	int getPoints();
 
 
 private:

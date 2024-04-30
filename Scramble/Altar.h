@@ -9,6 +9,7 @@ public:
 	~Altar();
 	void print(sf::RenderWindow&);
 	void changeSprite(int);
+	int getPoints();
 
 };
 

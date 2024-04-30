@@ -508,3 +508,8 @@ void Player::addFuel(int tempFuel)
 		fuel = 128;
 	return;
 }
+
+int Player::getScore()
+{
+	return points;
+}

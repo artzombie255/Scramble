@@ -116,6 +116,37 @@ void ScrambleGame::playGame()
     {
         enemyVec.at(i)->changeSprite(palette);
     }
+
+    //scoring text
+    sf::Font font;
+    font.loadFromFile("arcade-legacy.ttf");
+
+    int score = player.getScore();
+    int highScore = 10000;
+
+    std::string scoreStr = std::to_string(score);
+    std::string highSStr = std::to_string(highScore);
+    
+    sf::Text highSTxt;
+    highSTxt.setString(highSStr);
+    highSTxt.setFont(font);
+    highSTxt.move(400, 22);
+    highSTxt.setCharacterSize(highSTxt.getCharacterSize() * 3 / 4);
+    sf::Text scoreTxt;
+    scoreTxt.setString(scoreStr);
+    scoreTxt.setFont(font);
+    scoreTxt.move(100, 22);
+    scoreTxt.setCharacterSize(scoreTxt.getCharacterSize() * 3 / 4);
+    sf::Text upTxt;
+    upTxt.setString("1UP");
+    upTxt.setFont(font);
+    upTxt.move(100, 0);
+    upTxt.setCharacterSize(upTxt.getCharacterSize() * 3 / 4);
+    sf::Text highScoreTxt;
+    highScoreTxt.setString("HIGH SCORE");
+    highScoreTxt.setFont(font);
+    highScoreTxt.move(400, 0);
+    highScoreTxt.setCharacterSize(highScoreTxt.getCharacterSize() * 3 / 4);
   
     //window
     while (window.isOpen())
@@ -206,7 +237,16 @@ void ScrambleGame::playGame()
         
 
         // End the current frame and display its contents on screen
+        window.draw(upTxt);
+        window.draw(highSTxt);
+        window.draw(highScoreTxt);
+        window.draw(scoreTxt);
+        score = player.getScore();
         window.display();
+        upTxt.move(3, 0);
+        highSTxt.move(3, 0);
+        highScoreTxt.move(3, 0);
+        scoreTxt.move(3, 0);
     }
 
     //clean up

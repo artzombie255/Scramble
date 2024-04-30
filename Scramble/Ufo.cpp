@@ -45,3 +45,9 @@ void Ufo::print(sf::RenderWindow& window)
 void Ufo::changeSprite(int palette)
 {
 }
+
+int Ufo::getPoints()
+{
+	return 100;
+}
+

@@ -28,3 +28,10 @@ void Altar::changeSprite(int palette)
 {
 	Enemy::changeSprite(palette);
 }
+
+int Altar::getPoints()
+{
+	srand(time(NULL));
+
+	return (rand() % 3 + 1) * 100;
+}
