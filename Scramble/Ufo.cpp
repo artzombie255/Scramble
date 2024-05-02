@@ -36,7 +36,6 @@ Ufo::~Ufo()
 
 void Ufo::move(sf::Clock &clock, sf::View viewport)
 {
-	//sf::RectangleShape::move(-1, 0);
 	//if (getPosition().x < 800)
 		sf::RectangleShape::move(0, moveDir);
 
@@ -50,7 +49,6 @@ void Ufo::move(sf::Clock &clock, sf::View viewport)
 void Ufo::print(sf::RenderWindow& window)
 {
 	sprite.setPosition(getPosition().x, getPosition().y);
-	//window.draw(*this);
 	window.draw(sprite);
 }
 

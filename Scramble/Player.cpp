@@ -142,7 +142,7 @@ void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite, int cur
 		{
 			// Verifies within acceptable ASCII ranges
 			// 48-57 for 0-9 | 97-119 for a-w
-			if ((levelArrVec[j][i] >= 48 && levelArrVec[j][i] <= 57) || 
+			if ((levelArrVec[j][i] >= 48 && levelArrVec[j][i] <= 57) ||
 				(levelArrVec[j][i] >= 97 && levelArrVec[j][i] <= 119))
 			{
 				if (levelArrVec[j][i] >= 48 && levelArrVec[j][i] <= 57)
@@ -150,15 +150,6 @@ void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite, int cur
 				else
 					offset = 87;
 				sprite.setPosition((i + level[currentLevel - 1].getOffset()) * 24, 96 + (j * 24));
-			}
-			else if (levelArrVec[j][i] == 120 || levelArrVec[j][i] == 121)
-			{
-				//std::cout << "ignore";
-			}
-			else
-			{
-				//std::cout << static_cast<int>(levelArrVec[j][i]) << " I: " << i << " J: " << j;
-				//throw std::runtime_error("INVALID LEVEL ENTRY");
 			}
 
 			sf::FloatRect wallBounds = sprite.getGlobalBounds();
@@ -473,7 +464,7 @@ void Player::fuelLoss(sf::Clock& clock,
 	if (clock.getElapsedTime().asMilliseconds() >= 1000/(60/fuelUseSpeed))
 	{
 		clock.restart();
-		//fuel--;
+		fuel--;
 		//std::cout << fuel << std::endl;
 	}
 
@@ -543,7 +534,14 @@ void Player::addFuel(int tempFuel)
 	return;
 }
 
+
 int Player::getScore()
 {
 	return points;
+}
+
+
+int Player::getLives()
+{
+	return lives;
 }

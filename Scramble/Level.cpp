@@ -121,13 +121,26 @@ void Level::setEntities (std::vector<Enemy*>& enemyVec)
 				y = 96 + (j * 24);
 				enemyVec.push_back(new Rockets(x, y));
 			}
-
-			if (levelArrVec[j][i] == 85)
+			else if (levelArrVec[j][i] == 85)
 			{
 				std::cout << "ufo:" << i << "\n" << j << "\n";
 				x = (i + levelOffset) * 24;
 				y = 96 + (j * 24);
 				enemyVec.push_back(new Ufo(x, y));
+			}
+			else if (levelArrVec[j][i] == 70)
+			{
+				std::cout << "fuel tank:" << i << "\n" << j << "\n";
+				x = (i + levelOffset) * 24;
+				y = 96 + (j * 24);
+				enemyVec.push_back(new FuelTower(x, y));
+			}
+			else if (levelArrVec[j][i] == 65)
+			{
+				std::cout << "Altar:" << i << "\n" << j << "\n";
+				x = (i + levelOffset) * 24;
+				y = 96 + (j * 24);
+				enemyVec.push_back(new Altar(x, y));
 			}
 		}
 	}
@@ -139,17 +152,6 @@ void Level::loadLevel(sf::RenderWindow& window, sf::View& viewPort, std::vector<
 {
 	int offset;
 
-	/*for (int j = 0; j < 28; j++)
-	{
-		for (int i = 0; i < 200; i++)
-		{
-			std::cout << levelArrVec[j][i];
-		}
-		std::cout << std::endl;
-	}
-	system("pause");
-	*/
-
 	for (int j = 0; j < 25; j++)
 	{
 		for (int i = ((viewPort.getCenter().x - 336) / 24) - (levelOffset); 
@@ -157,8 +159,8 @@ void Level::loadLevel(sf::RenderWindow& window, sf::View& viewPort, std::vector<
 		{
 			// Verifies within acceptable ASCII ranges
 			// 48-57 for 0-9 | 97-119 for a-w
-			std::cout << ((viewPort.getCenter().x - 336) / 24) - (levelOffset) << std::endl;
-			std::cout << (viewPort.getCenter().x - 336) / 24 - levelOffset + 30 << std::endl;
+			//std::cout << ((viewPort.getCenter().x - 336) / 24) - (levelOffset) << std::endl;
+			//std::cout << (viewPort.getCenter().x - 336) / 24 - levelOffset + 30 << std::endl;
 			if ((levelArrVec[j][i] >= 48 && levelArrVec[j][i] <= 57) || 
 				(levelArrVec[j][i] >= 97 && levelArrVec[j][i] <= 119)
 				|| levelArrVec[j][i] == 75)
@@ -179,11 +181,6 @@ void Level::loadLevel(sf::RenderWindow& window, sf::View& viewPort, std::vector<
 				|| levelArrVec[j][i] == 66 || levelArrVec[j][i] == 79)
 			{
 				
-			}
-			else
-			{
-				//std::cout << static_cast<int>(levelArrVec[j][i]) << " I: " << i << " J: " << j;
-				//throw std::runtime_error("INVALID LEVEL ENTRY");
 			}
 		}
 	}
