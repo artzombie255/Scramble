@@ -198,7 +198,7 @@ void ScrambleGame::playGame()
         //process interactions
         player.hit(enemyVec, bullet, missile);
         player.crash(enemyVec, currentLevel, level, viewPort);
-        player.crash(levelArrVec, level[0].getSprite(), currentLevel, level, viewPort);
+        player.crash(levelArrVec, level[0].getSprite(), currentLevel, level, viewPort, enemyVec);
 
         //set up player sprite to print
         playerSprite.setPosition(player.getPosition().x - 39, player.getPosition().y - 9);
@@ -232,6 +232,11 @@ void ScrambleGame::playGame()
 
         level[currentLevel - 1].loadLevel(window, viewPort, enemyVec);
         
+        scoreStr = std::to_string(score);
+        highSStr = std::to_string(highScore);
+
+        scoreTxt.setString(scoreStr);
+        highSTxt.setString(highSStr);
 
         // End the current frame and display its contents on screen
         window.draw(upTxt);

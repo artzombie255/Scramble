@@ -125,7 +125,7 @@ void Player::crash(std::vector<Enemy*> enemyVec, int currentLevel,Level level[6]
 }
 
 
-void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite, int currentLevel, Level level[6], sf::View &viewport)
+void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite, int currentLevel, Level level[6], sf::View &viewport, std::vector<Enemy*> enemyVec)
 {
 	sf::FloatRect nextPos;
 	sf::FloatRect playerBounds = getGlobalBounds();
@@ -172,17 +172,20 @@ void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite, int cur
 				//play end animation
 				else;
 				{
-					level[0].clearVec();
-					level[1].clearVec();
-					level[2].clearVec();
-					level[3].clearVec();
-					level[4].clearVec();
-					level[5].clearVec();
+					//level[0].clearVec();
+					//level[1].clearVec();
+					//level[2].clearVec();
+					//level[3].clearVec();
+					//level[4].clearVec();
+					//level[5].clearVec();
+					level[0].setEntities(enemyVec);
+					level[2].setEntities(enemyVec);
+					level[4].setEntities(enemyVec);
 
 					switch (currentLevel)
 					{
 					case 1:
-						viewport.setCenter(337, 408);
+						viewport.setCenter(336, 408);
 						setPosition(400, 200);
 						break;
 					case 2:

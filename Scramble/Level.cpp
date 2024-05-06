@@ -157,8 +157,8 @@ void Level::loadLevel(sf::RenderWindow& window, sf::View& viewPort, std::vector<
 		{
 			// Verifies within acceptable ASCII ranges
 			// 48-57 for 0-9 | 97-119 for a-w
-			std::cout << ((viewPort.getCenter().x - 336) / 24) - (levelOffset) << std::endl;
-			std::cout << (viewPort.getCenter().x - 336) / 24 - levelOffset + 30 << std::endl;
+			//std::cout << ((viewPort.getCenter().x - 336) / 24) - (levelOffset) << std::endl;
+			//std::cout << (viewPort.getCenter().x - 336) / 24 - levelOffset + 30 << std::endl;
 			if ((levelArrVec[j][i] >= 48 && levelArrVec[j][i] <= 57) || 
 				(levelArrVec[j][i] >= 97 && levelArrVec[j][i] <= 119)
 				|| levelArrVec[j][i] == 75)
