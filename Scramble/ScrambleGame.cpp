@@ -53,7 +53,29 @@ void ScrambleGame::playGame()
         Level(5),
         Level(6)
     };
-       
+
+    sf::Texture counterText[6];
+    sf::Sprite counterSprite[6];
+    for (int i = 0; i < 6; i++)
+    {
+        std::string tempI;
+        tempI = std::to_string(i);
+        counterText[i].loadFromFile("./sprites/levelNum" + tempI + ".png");
+    }
+
+    for (int i = 0; i < 6; i++)
+    {
+        counterSprite[i].setTexture(counterText[i]);
+        counterSprite[i].setScale(3, 3);
+    }
+    sf::Texture onLevelText, offLevelText;
+    sf::Sprite onLevelSprite, offLevelSprite;
+    onLevelText.loadFromFile("levelCount1.png");
+    offLevelText.loadFromFile("levelCount0.png");
+    onLevelSprite.setTexture(onLevelText);
+    offLevelSprite.setTexture(offLevelText);
+    onLevelSprite.setScale(3, 3);
+    offLevelSprite.setScale(3, 3);
 
     int palette = 0;
     std::vector<char> levelArrVec[25];

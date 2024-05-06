@@ -16,7 +16,7 @@
 Level::Level()
 {
 	levelOffset = 0;
-	currentLevel = 0;
+	levelOn = 0;
 	for (int i = 0; i < 34; i++)
 		for (int z = 0; z < 7; z++)
 		{
