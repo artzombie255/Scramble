@@ -182,7 +182,7 @@ void Level::loadLevel(sf::RenderWindow& window, sf::View& viewPort, std::vector<
 				|| levelArrVec[j][i] == 66 || levelArrVec[j][i] == 79)
 			{
 				if (levelArrVec[j][i] == 121)
-					currentLevel++;
+					levelOn++;
 			}
 		}
 	}
@@ -222,7 +222,7 @@ void Level::setLevelArrVec(std::vector<char> tempLevelArrVec[25])
 //adjust these nums
 int Level::currentLevel()
 {
-	return currentLevel;
+	return levelOn;
 }
 
 int Level::getOffset()
