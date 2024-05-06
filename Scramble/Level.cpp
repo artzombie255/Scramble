@@ -62,7 +62,6 @@ Level::Level(int levelNum)
 	case 2:
 		levelOffset += 360;
 	}
-
 	//levelOffset = 0;
 
 	for (int i = 0; i < 34; i++)
@@ -154,8 +153,8 @@ void Level::loadLevel(sf::RenderWindow& window, sf::View& viewPort, std::vector<
 
 	for (int j = 0; j < 25; j++)
 	{
-		for (int i = ((viewPort.getCenter().x - 336) / 24); 
-			i < (viewPort.getCenter().x - 336) / 24 + 30; i++)
+		for (int i = ((viewPort.getCenter().x - 336) / 24 - levelOffset); 
+			i < (viewPort.getCenter().x - 336) / 24 + 30 - levelOffset; i++)
 		{
 			// Verifies within acceptable ASCII ranges
 			// 48-57 for 0-9 | 97-119 for a-w
@@ -174,13 +173,6 @@ void Level::loadLevel(sf::RenderWindow& window, sf::View& viewPort, std::vector<
 				levelSprite[levelArrVec[j][i] - offset].setPosition
 				((i + levelOffset) * 24, 96 + (j * 24));
 				window.draw(levelSprite[levelArrVec[j][i] - offset]);
-			}
-			else if (levelArrVec[j][i] == 120 || levelArrVec[j][i] == 121
-				|| levelArrVec[j][i] == 82 || levelArrVec[j][i] == 85
-				|| levelArrVec[j][i] == 65 || levelArrVec[j][i] == 70
-				|| levelArrVec[j][i] == 66 || levelArrVec[j][i] == 79)
-			{
-				
 			}
 		}
 	}

@@ -252,6 +252,7 @@ void ScrambleGame::playGame()
         scoreTxt.setPosition(100 + textMove, 22);
         upTxt.setPosition(100 + textMove, 0);
         highScoreTxt.setPosition(400 + textMove, 0);
+        std::cout << viewPort.getCenter().x << std::endl;
     }
 
     //clean up
