@@ -25,6 +25,7 @@ public:
 	void fuelLoss(sf::Clock&, sf::RenderWindow&, sf::View);
 	void addFuel(int);
 	int getScore();
+	int getLives();
 
 private:
 	bool usableMissiles[2] = { 1, 1 }, usableShots[4] = { 1, 1, 1, 1 };

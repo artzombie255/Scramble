@@ -37,9 +37,9 @@ void ScrambleGame::playGame()
     std::vector<Enemy*> enemyVec;
     //animations and palette swaps
     sf::Clock clock, playerSpriteClock, fuelClock, paletteClock, levelClock;
-    sf::Sprite playerSprite, rocketSprite;
-    sf::Texture tempI;
-    sf::Shader test;
+    sf::Sprite playerSprite, rocketSprite, lifeSprite;
+    sf::Texture lifeTexture;
+
     sf::View viewPort;
     //level 1: 361, level 2: 223, level 3: 227, level 4: 329, level 5: 225, level 6: 139 
     int currentLevel = 1;
@@ -58,6 +58,10 @@ void ScrambleGame::playGame()
     int palette = 0;
     std::vector<char> levelArrVec[25];
     
+
+    lifeTexture.loadFromFile("./sprites/lives.png");
+    lifeSprite.setTexture(lifeTexture);
+    lifeSprite.setScale(3, 3);
 
     viewPort.setCenter(336, 408);
     viewPort.setSize(672, 816);
@@ -99,15 +103,6 @@ void ScrambleGame::playGame()
     level[0].setLevelArrVec(levelArrVec);
 
     window.setFramerateLimit(60);
-
-    /*for (int i = 20; i > 0; i--)
-    {
-        enemyVec.push_back(new Rockets());
-        enemyVec.push_back(new Ufo());
-        enemyVec.push_back(new FuelTower());
-        enemyVec.push_back(new Altar());
-    }
-    */
 
     for (int i = enemyVec.size() - 1; i > 0; i--)
     {
@@ -239,6 +234,12 @@ void ScrambleGame::playGame()
         highSTxt.setString(highSStr);
 
         // End the current frame and display its contents on screen
+        for (int i = 0; i < player.getLives(); i++)
+        {
+            lifeSprite.setPosition(viewPort.getCenter().x - (viewPort.getSize().x / 2) + (50 * i), 764);
+            window.draw(lifeSprite);
+        }
+
         window.draw(upTxt);
         window.draw(highSTxt);
         window.draw(highScoreTxt);

@@ -3,9 +3,18 @@
 
 FuelTower::FuelTower()
 {
-	setSize(sf::Vector2f(50, 50));
+	setSize(sf::Vector2f(48, 48));
 	setOrigin(0, 0);
 	setPosition((rand() % 2000 + 300), 500);
+	name = "FuelTower.png";
+}
+
+
+FuelTower::FuelTower(int x, int y)
+{
+	setSize(sf::Vector2f(48, 48));
+	setOrigin(0, 0);
+	setPosition(x, y);
 	name = "FuelTower.png";
 }
 

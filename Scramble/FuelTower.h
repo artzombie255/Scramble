@@ -6,6 +6,7 @@ class FuelTower: public Enemy
 {
 public:
 	FuelTower();
+	FuelTower(int, int);
 	~FuelTower();
 	int getFuel();
 	void print(sf::RenderWindow&);
