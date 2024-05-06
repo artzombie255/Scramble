@@ -23,6 +23,7 @@ public:
 
 private:
 	int levelOffset;
+	int currentLevel;
 	std::vector<char> levelArrVec[25];
 	sf::Sprite levelSprite[34];
 	sf::Texture levelTexture[34][7];

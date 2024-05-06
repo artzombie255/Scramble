@@ -16,6 +16,7 @@
 Level::Level()
 {
 	levelOffset = 0;
+	currentLevel = 0;
 	for (int i = 0; i < 34; i++)
 		for (int z = 0; z < 7; z++)
 		{
@@ -180,7 +181,8 @@ void Level::loadLevel(sf::RenderWindow& window, sf::View& viewPort, std::vector<
 				|| levelArrVec[j][i] == 65 || levelArrVec[j][i] == 70
 				|| levelArrVec[j][i] == 66 || levelArrVec[j][i] == 79)
 			{
-				
+				if (levelArrVec[j][i] == 121)
+					currentLevel++;
 			}
 		}
 	}
@@ -218,20 +220,9 @@ void Level::setLevelArrVec(std::vector<char> tempLevelArrVec[25])
 }
 
 //adjust these nums
-int Level::currentLevel(sf::View& view)
+int Level::currentLevel()
 {
-	if (view.getCenter().x - 336 < 8840)
-		return 1;
-	else if (view.getCenter().x - 336 < 16016 && view.getCenter().x - 336 >= 8840)
-		return 2;
-	else if (view.getCenter().x - 336 < 19440 && view.getCenter().x - 336 >= 16016)
-		return 3;
-	else if (view.getCenter().x - 336 < 27512 && view.getCenter().x - 336 >= 19440)
-		return 4;
-	else if (view.getCenter().x - 336 < 32688 && view.getCenter().x - 336 >= 27512)
-		return 5;
-	else if (view.getCenter().x - 336 > 32688)
-		return 6;
+	return currentLevel;
 }
 
 int Level::getOffset()
