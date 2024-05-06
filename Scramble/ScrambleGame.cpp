@@ -70,11 +70,11 @@ void ScrambleGame::playGame()
     srand(time(NULL));
     level[0].readFromFile("level1.txt");
     level[0].readFromFile("level2.txt");
-    //level[0].readFromFile("level1.txt");
+    //level[1].readFromFile("level1.txt");
     level[1].readFromFile("level2.txt");
     level[1].readFromFile("level3.txt");
     level[2].readFromFile("level3.txt");
-    level[2].readFromFile("level4.txt");
+    level[2].readFromFile("level4.txt");  
     level[3].readFromFile("level4.txt");
     level[3].readFromFile("level5.txt");
     level[4].readFromFile("level5.txt");
@@ -226,7 +226,7 @@ void ScrambleGame::playGame()
         player.fuelLoss(fuelClock, window, viewPort);
 
         level[currentLevel - 1].loadLevel(window, viewPort, enemyVec);
-        
+
         scoreStr = std::to_string(score);
         highSStr = std::to_string(highScore);
 

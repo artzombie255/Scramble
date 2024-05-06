@@ -527,7 +527,7 @@ void Player::fuelLoss(sf::Clock& clock,
 	if (clock.getElapsedTime().asMilliseconds() >= 1000/(60/fuelUseSpeed))
 	{
 		clock.restart();
-		fuel--;
+		//fuel--;
 		//std::cout << fuel << std::endl;
 	}
 

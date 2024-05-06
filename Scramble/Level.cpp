@@ -154,8 +154,8 @@ void Level::loadLevel(sf::RenderWindow& window, sf::View& viewPort, std::vector<
 
 	for (int j = 0; j < 25; j++)
 	{
-		for (int i = ((viewPort.getCenter().x - 336) / 24) - (levelOffset); 
-			i < (viewPort.getCenter().x - 336) / 24 - levelOffset + 30; i++)
+		for (int i = ((viewPort.getCenter().x - 336) / 24); 
+			i < (viewPort.getCenter().x - 336) / 24 + 30; i++)
 		{
 			// Verifies within acceptable ASCII ranges
 			// 48-57 for 0-9 | 97-119 for a-w
