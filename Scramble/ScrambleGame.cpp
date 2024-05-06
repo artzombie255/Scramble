@@ -231,7 +231,11 @@ void ScrambleGame::playGame()
         highSStr = std::to_string(highScore);
 
         scoreTxt.setString(scoreStr);
-        highSTxt.setString(highSStr);
+        if (highScore > 10000)
+            highSTxt.setString(scoreStr);
+        else
+            highSTxt.setString(highSStr);
+        
 
         // End the current frame and display its contents on screen
         for (int i = 0; i < player.getLives(); i++)

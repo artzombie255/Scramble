@@ -18,11 +18,12 @@ public:
 	void colorSwap(int);
 	sf::Sprite getSprite();
 	void setLevelArrVec(std::vector<char>[25]);
-	int currentLevel(sf::View&);
+	int currentLevel();
 	int getOffset();
 
 private:
 	int levelOffset;
+	int levelOn;
 	std::vector<char> levelArrVec[25];
 	sf::Sprite levelSprite[34];
 	sf::Texture levelTexture[34][7];
