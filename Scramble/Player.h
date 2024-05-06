@@ -15,8 +15,8 @@ public:
 	void shootMissiles(sf::RectangleShape[]);
 	void shootBlaster(sf::RectangleShape[]);
 	void addPoints(int);
-	void crash(std::vector<Enemy*>, int, Level[6], sf::View&);
-	void crash(std::vector<char>[25], sf::Sprite, int, Level[6], sf::View&, std::vector <Enemy*>);
+	void crash(std::vector<Enemy*>&, int, Level[6], sf::View&, int, int&);
+	void crash(std::vector<char>[25], sf::Sprite, int, Level[6], sf::View&, std::vector <Enemy*>&, int, int&);
 	void hit(std::vector<Enemy*>, sf::RectangleShape[], sf::RectangleShape[]);
 	void animateBoom(std::string);
 	void moveCheck();
@@ -31,7 +31,7 @@ private:
 	bool usableMissiles[2] = { 1, 1 }, usableShots[4] = { 1, 1, 1, 1 };
 	int lives = 3, points = 0, fuelUseSpeed = 10, fuel = 128, yMove = 0, 
 		xMove = 1, sTimer = 0, mTimer = 0, mxMove[2] = {}, myMove[2] = {}, 
-		spriteNum = 0, boomNum = 0;
+		spriteNum = 0, boomNum = 0, tempPoints = 0;
 	sf::Texture image; 
 };
 

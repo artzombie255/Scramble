@@ -62,11 +62,11 @@ void Enemy::changeSprite(int palette)
 		color = "6";
 		break;
 	case 7:
-		color = "6";
+		color = "7";
 		break;
 	}
 
-	spriteClock.restart();
+	//spriteClock.restart();
 	file = t + color + name;
 	image.loadFromFile(file);
 	sprite.setTexture(image);

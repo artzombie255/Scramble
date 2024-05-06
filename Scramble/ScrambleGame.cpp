@@ -42,7 +42,7 @@ void ScrambleGame::playGame()
 
     sf::View viewPort;
     //level 1: 361, level 2: 223, level 3: 227, level 4: 329, level 5: 225, level 6: 139 
-    int currentLevel = 1;
+    int currentLevel = 1, textMove = 0;
 
     Level* level = new Level[6]
     {
@@ -122,22 +122,22 @@ void ScrambleGame::playGame()
     sf::Text highSTxt;
     highSTxt.setString(highSStr);
     highSTxt.setFont(font);
-    highSTxt.move(400, 22);
+    highSTxt.setPosition(400, 22);
     highSTxt.setCharacterSize(highSTxt.getCharacterSize() * 3 / 4);
     sf::Text scoreTxt;
     scoreTxt.setString(scoreStr);
     scoreTxt.setFont(font);
-    scoreTxt.move(100, 22);
+    scoreTxt.setPosition(100, 22);
     scoreTxt.setCharacterSize(scoreTxt.getCharacterSize() * 3 / 4);
     sf::Text upTxt;
     upTxt.setString("1UP");
     upTxt.setFont(font);
-    upTxt.move(100, 0);
+    upTxt.setPosition(100, 0);
     upTxt.setCharacterSize(upTxt.getCharacterSize() * 3 / 4);
     sf::Text highScoreTxt;
     highScoreTxt.setString("HIGH SCORE");
     highScoreTxt.setFont(font);
-    highScoreTxt.move(400, 0);
+    highScoreTxt.setPosition(400, 0);
     highScoreTxt.setCharacterSize(highScoreTxt.getCharacterSize() * 3 / 4);
   
     //window
@@ -192,8 +192,8 @@ void ScrambleGame::playGame()
 
         //process interactions
         player.hit(enemyVec, bullet, missile);
-        player.crash(enemyVec, currentLevel, level, viewPort);
-        player.crash(levelArrVec, level[0].getSprite(), currentLevel, level, viewPort, enemyVec);
+        player.crash(enemyVec, currentLevel, level, viewPort, palette, textMove);
+        player.crash(levelArrVec, level[0].getSprite(), currentLevel, level, viewPort, enemyVec, palette, textMove);
 
         //set up player sprite to print
         playerSprite.setPosition(player.getPosition().x - 39, player.getPosition().y - 9);
@@ -246,10 +246,12 @@ void ScrambleGame::playGame()
         window.draw(scoreTxt);
         score = player.getScore();
         window.display();
-        upTxt.move(3, 0);
-        highSTxt.move(3, 0);
-        highScoreTxt.move(3, 0);
-        scoreTxt.move(3, 0);
+        textMove += 3;
+
+        highSTxt.setPosition(400 + textMove, 22);
+        scoreTxt.setPosition(100 + textMove, 22);
+        upTxt.setPosition(100 + textMove, 0);
+        highScoreTxt.setPosition(400 + textMove, 0);
     }
 
     //clean up

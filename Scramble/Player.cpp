@@ -94,7 +94,7 @@ void Player::addPoints(int tempPoints)
 
 
 //detects when the player crashes and calls level to deal with it
-void Player::crash(std::vector<Enemy*> enemyVec, int currentLevel,Level level[6], sf::View &viewport)
+void Player::crash(std::vector<Enemy*> &enemyVec, int currentLevel,Level level[6], sf::View &viewport, int palette, int &textMove)
 {
 	sf::FloatRect nextPos;
 	sf::FloatRect playerBounds = getGlobalBounds();
@@ -113,19 +113,64 @@ void Player::crash(std::vector<Enemy*> enemyVec, int currentLevel,Level level[6]
 		{
 			std::cout << "hit";
 			lives--;
-			if (lives == 0);
+			fuel = 128;
+			if (lives <= 0);
 			//play end animation
 			else
 			{
-				
+				textMove = 0;
+			
+				tempPoints = points;
+				for (int i = enemyVec.size() - 1; i >= 0; i--)
+				{
+					enemyVec.at(i)->setPosition(-200, -200);
+				}
+				points = tempPoints;
+
+				level[0].setEntities(enemyVec);
+				level[2].setEntities(enemyVec);
+				level[4].setEntities(enemyVec);
+
+				for (int i = enemyVec.size() - 1; i > 0; i--)
+				{
+					enemyVec.at(i)->changeSprite(palette);
+				}
+
+				switch (currentLevel)
+				{
+				case 1:
+					viewport.setCenter(336, 408);
+					setPosition(400, 200);
+					break;
+				case 2:
+					viewport.setCenter(336, 408);
+					setPosition(400, 200);
+					break;
+				case 3:
+					viewport.setCenter(336, 408);
+					setPosition(400, 200);
+					break;
+				case 4:
+					viewport.setCenter(336, 408);
+					setPosition(400, 200);
+					break;
+				case 5:
+					viewport.setCenter(336, 408);
+					setPosition(400, 200);
+					break;
+				case 6:
+					viewport.setCenter(336, 408);
+					setPosition(400, 200);
+				}
 			}
+			return;
 			//respawn
 		}
 	}
 }
 
 
-void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite, int currentLevel, Level level[6], sf::View &viewport, std::vector<Enemy*> enemyVec)
+void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite, int currentLevel, Level level[6], sf::View &viewport, std::vector<Enemy*> &enemyVec, int palette, int &textMove)
 {
 	sf::FloatRect nextPos;
 	sf::FloatRect playerBounds = getGlobalBounds();
@@ -159,19 +204,33 @@ void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite, int cur
 			{
 				std::cout << "collide";
 				lives--;
-				if (lives == 0);
+				fuel = 128;
+				if (lives <= 0);
 				//play end animation
 				else;
 				{
+					textMove = 0;
 					//level[0].clearVec();
 					//level[1].clearVec();
 					//level[2].clearVec();
 					//level[3].clearVec();
 					//level[4].clearVec();
 					//level[5].clearVec();
+					tempPoints = points;
+					for (int i = enemyVec.size() - 1; i >= 0; i--)
+					{
+						enemyVec.at(i)->setPosition(-200,-200);
+					}
+					points = tempPoints;
+
 					level[0].setEntities(enemyVec);
 					level[2].setEntities(enemyVec);
 					level[4].setEntities(enemyVec);
+
+					for (int i = enemyVec.size() - 1; i > 0; i--)
+					{
+						enemyVec.at(i)->changeSprite(palette);
+					}
 
 					switch (currentLevel)
 					{
@@ -181,25 +240,26 @@ void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite, int cur
 						break;
 					case 2:
 						viewport.setCenter(336, 408);
-						setPosition(100, 100);
+						setPosition(400, 200);
 						break;
 					case 3:
 						viewport.setCenter(336, 408);
-						setPosition(100, 100);
+						setPosition(400, 200);
 						break;
 					case 4:
 						viewport.setCenter(336, 408);
-						setPosition(100, 100);
+						setPosition(400, 200);
 						break;
 					case 5:
 						viewport.setCenter(336, 408);
-						setPosition(100, 100);
+						setPosition(400, 200);
 						break;
 					case 6:
 						viewport.setCenter(336, 408);
-						setPosition(100, 100);
+						setPosition(400, 200);
 					}
 				}
+				return;
 			}
 		}
 	}
@@ -230,7 +290,7 @@ void Player::hit(std::vector<Enemy*> enemyVec,
 				{
 					addPoints(enemyVec.at(j)->getPoints());
 					addFuel(enemyVec.at(j)->getFuel());
-					enemyVec.at(j)->setPosition(-100, -100);
+					enemyVec.at(j)->setPosition(-200, -200);
 					//delete enemyVec.at(j);
 					//std::cout << points;
 				}
@@ -253,7 +313,7 @@ void Player::hit(std::vector<Enemy*> enemyVec,
 				{
 					addPoints(enemyVec.at(j)->getPoints());
 					addFuel(enemyVec.at(j)->getFuel());
-					enemyVec.at(j)->setPosition(-100, -100);
+					enemyVec.at(j)->setPosition(-200, -200);
 					//delete enemyVec.at(j);
 					//std::cout << points;
 				}
