@@ -16,7 +16,6 @@
 Level::Level()
 {
 	levelOffset = 0;
-	levelOn = 0;
 	for (int i = 0; i < 34; i++)
 		for (int z = 0; z < 7; z++)
 		{
@@ -154,7 +153,7 @@ void Level::loadLevel(sf::RenderWindow& window, sf::View& viewPort, std::vector<
 
 	for (int j = 0; j < 25; j++)
 	{
-		for (int i = ((viewPort.getCenter().x - 336) / 24 - levelOffset); 
+		for (int i = ((viewPort.getCenter().x - 336) / 24 - levelOffset);
 			i < (viewPort.getCenter().x - 336) / 24 + 30 - levelOffset; i++)
 		{
 			// Verifies within acceptable ASCII ranges
@@ -175,16 +174,15 @@ void Level::loadLevel(sf::RenderWindow& window, sf::View& viewPort, std::vector<
 				((i + levelOffset) * 24, 96 + (j * 24));
 				window.draw(levelSprite[levelArrVec[j][i] - offset]);
 			}
-			else if (levelArrVec[j][i] == 120 || levelArrVec[j][i] == 121
-				|| levelArrVec[j][i] == 82 || levelArrVec[j][i] == 85
-				|| levelArrVec[j][i] == 65 || levelArrVec[j][i] == 70
-				|| levelArrVec[j][i] == 66 || levelArrVec[j][i] == 79)
-			{
-				if (levelArrVec[j][i] == 121)
-					levelOn++;
-			}
 		}
 	}
+	if (levelArrVec[0][(viewPort.getCenter().x - 336) / 24 - levelOffset] == 'y' && levelChangeCounter > 100)
+	{
+		levelOn++;
+		levelChangeCounter = 0;
+	}
+	levelChangeCounter++;
+	std::cout << levelOn;
 	viewPort.move(3, 0);
 	window.setView(viewPort);
 }

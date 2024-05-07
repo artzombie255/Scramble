@@ -15,8 +15,8 @@ public:
 	void shootMissiles(sf::RectangleShape[]);
 	void shootBlaster(sf::RectangleShape[]);
 	void addPoints(int);
-	void crash(std::vector<Enemy*>&, int, Level[6], sf::View&, int, int&);
-	void crash(std::vector<char>[25], sf::Sprite, int, Level[6], sf::View&, std::vector <Enemy*>&, int, int&);
+	void crash(std::vector<Enemy*>&, int, Level*, sf::View&, int, int&);
+	void crash(std::vector<char>[25], sf::Sprite, int, Level*, sf::View&, std::vector <Enemy*>&, int, int&);
 	void hit(std::vector<Enemy*>, sf::RectangleShape[], sf::RectangleShape[]);
 	void animateBoom(std::string);
 	void moveCheck();

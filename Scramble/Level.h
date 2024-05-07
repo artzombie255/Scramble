@@ -22,8 +22,7 @@ public:
 	int getOffset();
 
 private:
-	int levelOffset;
-	int levelOn;
+	int levelOffset, levelOn = 1, levelChangeCounter = 100;
 	std::vector<char> levelArrVec[25];
 	sf::Sprite levelSprite[34];
 	sf::Texture levelTexture[34][7];

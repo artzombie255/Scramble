@@ -43,7 +43,7 @@ void ScrambleGame::playGame()
     sf::View viewPort;
     //level 1: 361, level 2: 223, level 3: 227, level 4: 329, level 5: 225, level 6: 139 
     int currentLevel = 1, textMove = 0;
-
+    /*
     Level* level = new Level[6]
     {
         Level(1),
@@ -52,7 +52,9 @@ void ScrambleGame::playGame()
         Level(4),
         Level(5),
         Level(6)
-    };
+    };*/
+
+    Level *level = new Level;
 
     sf::Texture counterText[6];
     sf::Sprite counterSprite[6];
@@ -90,8 +92,12 @@ void ScrambleGame::playGame()
 
 
     srand(time(NULL));
-    level[0].readFromFile("level1.txt");
+    /*level[0].readFromFile("level1.txt");
     level[0].readFromFile("level2.txt");
+    level[0].readFromFile("level3.txt");
+    level[0].readFromFile("level4.txt");
+    level[0].readFromFile("level5.txt");
+    level[0].readFromFile("level6.txt");
     //level[1].readFromFile("level1.txt");
     level[1].readFromFile("level2.txt");
     level[1].readFromFile("level3.txt");
@@ -106,6 +112,16 @@ void ScrambleGame::playGame()
     level[0].setEntities(enemyVec);
     level[2].setEntities(enemyVec);
     level[4].setEntities(enemyVec);
+    */
+
+    level->readFromFile("level1.txt");
+    level->readFromFile("level2.txt");
+    level->readFromFile("level3.txt");
+    level->readFromFile("level4.txt");
+    level->readFromFile("level5.txt");
+    level->readFromFile("level6.txt");
+
+    level->setEntities(enemyVec);
 
     player.changeSprite(playerSpriteClock, playerSprite);
  
@@ -122,7 +138,7 @@ void ScrambleGame::playGame()
         missile[i].setOrigin(0, 0);
     }
 
-    level[0].setLevelArrVec(levelArrVec);
+    level->setLevelArrVec(levelArrVec);
 
     window.setFramerateLimit(60);
 
@@ -190,7 +206,7 @@ void ScrambleGame::playGame()
                 enemyVec.at(i)->changeSprite(palette);
             }
             for (int i = 0; i < 6; i++)
-                level[i].colorSwap(palette);
+                level->colorSwap(palette);
             paletteClock.restart();
         }
         player.changeSprite(playerSpriteClock, playerSprite);
@@ -204,18 +220,18 @@ void ScrambleGame::playGame()
             enemyVec.at(i)->move(clock, viewPort);
         }
 
-        if (currentLevel != level->currentLevel(viewPort))
+        if (currentLevel != level->currentLevel())
         {
             std::cout << "change level" << currentLevel + 1;
-            currentLevel = level->currentLevel(viewPort);
-            level[currentLevel - 1].setLevelArrVec(levelArrVec);
+            currentLevel = level->currentLevel();
+            //level.setLevelArrVec(levelArrVec);
         }
 
 
         //process interactions
         player.hit(enemyVec, bullet, missile);
         player.crash(enemyVec, currentLevel, level, viewPort, palette, textMove);
-        player.crash(levelArrVec, level[0].getSprite(), currentLevel, level, viewPort, enemyVec, palette, textMove);
+        player.crash(levelArrVec, level->getSprite(), currentLevel, level, viewPort, enemyVec, palette, textMove);
 
         //set up player sprite to print
         playerSprite.setPosition(player.getPosition().x - 39, player.getPosition().y - 9);
@@ -247,7 +263,7 @@ void ScrambleGame::playGame()
         window.draw(playerSprite);
         player.fuelLoss(fuelClock, window, viewPort);
 
-        level[currentLevel - 1].loadLevel(window, viewPort, enemyVec);
+        level->loadLevel(window, viewPort, enemyVec);
 
         scoreStr = std::to_string(score);
         highSStr = std::to_string(highScore);
@@ -278,7 +294,7 @@ void ScrambleGame::playGame()
         scoreTxt.setPosition(100 + textMove, 22);
         upTxt.setPosition(100 + textMove, 0);
         highScoreTxt.setPosition(400 + textMove, 0);
-        std::cout << viewPort.getCenter().x << std::endl;
+        //std::cout << viewPort.getCenter().x << std::endl;
     }
 
     //clean up
@@ -287,6 +303,6 @@ void ScrambleGame::playGame()
         delete enemyVec.at(i);
     }
 
-    delete[] level;
+    delete level;
 
 }

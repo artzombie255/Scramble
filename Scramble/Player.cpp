@@ -94,7 +94,7 @@ void Player::addPoints(int tempPoints)
 
 
 //detects when the player crashes and calls level to deal with it
-void Player::crash(std::vector<Enemy*> &enemyVec, int currentLevel,Level level[6], sf::View &viewport, int palette, int &textMove)
+void Player::crash(std::vector<Enemy*> &enemyVec, int currentLevel,Level* level, sf::View &viewport, int palette, int &textMove)
 {
 	sf::FloatRect nextPos;
 	sf::FloatRect playerBounds = getGlobalBounds();
@@ -114,9 +114,9 @@ void Player::crash(std::vector<Enemy*> &enemyVec, int currentLevel,Level level[6
 			std::cout << "hit";
 			lives--;
 			fuel = 128;
-			if (lives <= 0);
+			//if (lives <= 0);
 			//play end animation
-			else
+			//else
 			{
 				textMove = 0;
 			
@@ -127,15 +127,13 @@ void Player::crash(std::vector<Enemy*> &enemyVec, int currentLevel,Level level[6
 				}
 				points = tempPoints;
 
-				level[0].setEntities(enemyVec);
-				level[2].setEntities(enemyVec);
-				level[4].setEntities(enemyVec);
+				level->setEntities(enemyVec);
 
 				for (int i = enemyVec.size() - 1; i > 0; i--)
 				{
 					enemyVec.at(i)->changeSprite(palette);
 				}
-
+			//std::cout << "THIS COULD BE DEAD";
 				switch (currentLevel)
 				{
 				case 1:
@@ -170,7 +168,7 @@ void Player::crash(std::vector<Enemy*> &enemyVec, int currentLevel,Level level[6
 }
 
 
-void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite, int currentLevel, Level level[6], sf::View &viewport, std::vector<Enemy*> &enemyVec, int palette, int &textMove)
+void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite, int currentLevel, Level* level, sf::View &viewport, std::vector<Enemy*> &enemyVec, int palette, int &textMove)
 {
 	sf::FloatRect nextPos;
 	sf::FloatRect playerBounds = getGlobalBounds();
@@ -183,20 +181,14 @@ void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite, int cur
 
 	for (int j = 0; j < 25; j++)
 	{
-		for (int i = 0; i < levelArrVec[0].size(); i++)
+		for (int i = ((viewport.getCenter().x - 336) / 24);
+			i < (viewport.getCenter().x - 336) / 24 + 30; i++)
 		{
-			// Verifies within acceptable ASCII ranges
-			// 48-57 for 0-9 | 97-119 for a-w
 			if ((levelArrVec[j][i] >= 48 && levelArrVec[j][i] <= 57) ||
 				(levelArrVec[j][i] >= 97 && levelArrVec[j][i] <= 119))
 			{
-				if (levelArrVec[j][i] >= 48 && levelArrVec[j][i] <= 57)
-					offset = 48;
-				else
-					offset = 87;
-				sprite.setPosition((i + level[currentLevel - 1].getOffset()) * 24, 96 + (j * 24));
+				sprite.setPosition((i) * 24, 96 + (j * 24));
 			}
-
 			sf::FloatRect wallBounds = sprite.getGlobalBounds();
 
 			//compares player and walls
@@ -205,9 +197,9 @@ void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite, int cur
 				std::cout << "collide";
 				lives--;
 				fuel = 128;
-				if (lives <= 0);
+				//if (lives <= 0);
 				//play end animation
-				else;
+				//else;
 				{
 					textMove = 0;
 					//level[0].clearVec();
@@ -223,15 +215,14 @@ void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite, int cur
 					}
 					points = tempPoints;
 
-					level[0].setEntities(enemyVec);
-					level[2].setEntities(enemyVec);
-					level[4].setEntities(enemyVec);
+					level->setEntities(enemyVec);
 
 					for (int i = enemyVec.size() - 1; i > 0; i--)
 					{
 						enemyVec.at(i)->changeSprite(palette);
 					}
-
+					
+					//std::cout << "THIS COULD BE DEAD";
 					switch (currentLevel)
 					{
 					case 1:
