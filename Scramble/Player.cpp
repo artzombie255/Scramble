@@ -476,7 +476,7 @@ void Player::fuelLoss(sf::Clock& clock,
 	{
 		clock.restart();
 		fuel--;
-		//std::cout << fuel << std::endl;
+		std::cout << fuel << std::endl;
 	}
 
 	for (int i = 0; i < fuel / 8; i++)

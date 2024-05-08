@@ -205,7 +205,7 @@ void ScrambleGame::playGame()
 
 
 
-        if(player.getLives() > 0)
+        if (player.getLives() > 0)
         {
             //change sprites for palette change and animations
             if (paletteClock.getElapsedTime().asMilliseconds() > 10000)
@@ -233,30 +233,10 @@ void ScrambleGame::playGame()
                 enemyVec.at(i)->move(clock, viewPort);
             }
 
-        if (currentLevel != level->currentLevel())
-            currentLevel = level->currentLevel();
             if (currentLevel != level->currentLevel())
-            {
-                //std::cout << "change level" << currentLevel + 1;
                 currentLevel = level->currentLevel();
-                //level.setLevelArrVec(levelArrVec);
-            }
 
 
-        //process interactions
-        if (player.hit(enemyVec, bullet, missile) == 1)
-        {
-            //base is destroyed, restart with faster fuel loss
-            int tempPoints;
-            player.addFuel(128);
-            textMove = 0;
-            tempPoints = player.getScore();
-            for (int i = enemyVec.size() - 1; i >= 0; i--)
-            {
-                enemyVec.at(i)->setPosition(-200, -200);
-            }
-            player.setPoints(tempPoints);
-            //process interactions
             if (player.hit(enemyVec, bullet, missile) == 1)
             {
                 int tempPoints;
@@ -271,26 +251,17 @@ void ScrambleGame::playGame()
 
                 level->setEntities(enemyVec);
 
-            for (int i = enemyVec.size() - 1; i > 0; i--)
-            {
-                enemyVec.at(i)->changeSprite(palette);
-            }
-            viewPort.setCenter(336, 408);
-            player.setPosition(400, 200);
-            player.changeFuelSpeed();
-        }
-        player.crash(enemyVec, currentLevel, level, viewPort, palette, textMove);
-        player.crash(levelArrVec, level->getSprite(), currentLevel, 
-            level, viewPort, enemyVec, palette, textMove);
                 for (int i = enemyVec.size() - 1; i > 0; i--)
                 {
                     enemyVec.at(i)->changeSprite(palette);
                 }
                 viewPort.setCenter(336, 408);
                 player.setPosition(400, 200);
+                player.changeFuelSpeed();
             }
-            //player.crash(enemyVec, currentLevel, level, viewPort, palette, textMove);
-            //player.crash(levelArrVec, level->getSprite(), currentLevel, level, viewPort, enemyVec, palette, textMove);
+        player.crash(enemyVec, currentLevel, level, viewPort, palette, textMove);
+        player.crash(levelArrVec, level->getSprite(), currentLevel, 
+        level, viewPort, enemyVec, palette, textMove);
 
         //set up player sprite to print
         playerSprite.setPosition(player.getPosition().x - 39,
@@ -303,24 +274,12 @@ void ScrambleGame::playGame()
 
             //Draw some graphical entities
 
-        for (int i = 0; i < enemyVec.size(); i++)
-        {
-            enemyVec.at(i)->print(window);
-            //get rid of off screen enemies
-            if (enemyVec.at(i)->getPosition().x < 0 
-                || enemyVec.at(i)->getPosition().y < 96)
-            {
-                delete enemyVec.at(i);
-                for (int j = i + 1; j < enemyVec.size(); j++)
-                {
-                    enemyVec.at(j - 1) = enemyVec.at(j);
-                }
-                enemyVec.pop_back();
             for (int i = 0; i < enemyVec.size(); i++)
             {
                 enemyVec.at(i)->print(window);
                 //get rid of off screen enemies
-                if (enemyVec.at(i)->getPosition().x < 0 || enemyVec.at(i)->getPosition().y < 96)
+                if (enemyVec.at(i)->getPosition().x < 0
+                    || enemyVec.at(i)->getPosition().y < 96)
                 {
                     delete enemyVec.at(i);
                     for (int j = i + 1; j < enemyVec.size(); j++)
@@ -328,14 +287,13 @@ void ScrambleGame::playGame()
                         enemyVec.at(j - 1) = enemyVec.at(j);
                     }
                     enemyVec.pop_back();
-
                 }
             }
             for (int i = 0; i < TOTAL_BULLETS; i++)
                 window.draw(bullet[i]);
             for (int i = 0; i < 2; i++)
                 window.draw(missile[i]);
-            window.draw(playerSprite);
+                window.draw(playerSprite);
 
             level->loadLevel(window, viewPort, enemyVec);
 
@@ -362,20 +320,15 @@ void ScrambleGame::playGame()
 
             }
 
-
-        // End the current frame and display its contents on screen
-        for (int i = 0; i < player.getLives(); i++)
-        {
-            lifeSprite.setPosition(viewPort.getCenter().x - 
-                (viewPort.getSize().x / 2) + (50 * i), 764);
-            window.draw(lifeSprite);
-        }
+            
             // End the current frame and display its contents on screen
             for (int i = 0; i < player.getLives(); i++)
             {
                 lifeSprite.setPosition(viewPort.getCenter().x - (viewPort.getSize().x / 2) + (50 * i), 764);
                 window.draw(lifeSprite);
             }
+
+            player.fuelLoss(fuelClock, window, viewPort);
 
             //draws all the text at the top of the screen
             window.draw(upTxt);
@@ -416,5 +369,5 @@ void ScrambleGame::playGame()
     }
 
     delete level;
-
+    
 }
