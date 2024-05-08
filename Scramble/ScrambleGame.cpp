@@ -32,7 +32,7 @@ void ScrambleGame::playGame()
     //play area = 224
     sf::RenderWindow window(sf::VideoMode(672, 816), "Scramble");
 	Player player;
-    sf::RectangleShape bullet[4];
+    sf::RectangleShape bullet[4], missile[2];
     //can hold any enemy, deletes them when they are killed
     std::vector<Enemy*> enemyVec;
     //animations and palette swaps
@@ -45,11 +45,6 @@ void ScrambleGame::playGame()
     sf::Sprite endSprite;
     endText.loadFromFile("./sprites/gameover.png");
     endSprite.setTexture(endText);
-
-    sf::Texture missileTxt;
-    sf::Sprite missile[2];
-    missileTxt.loadFromFile("./sprites/missile4.png");
-    
 
 
     sf::View viewPort;
@@ -122,8 +117,7 @@ void ScrambleGame::playGame()
     }
     for (int i = 0; i < 2; i++)
     {
-        missile[i].setTexture(missileTxt);
-        missile[i].setScale(3, 3);
+       missile[i].setSize(sf::Vector2f(10, 10));
     }
     //sets array of vectors for levels
     level->setLevelArrVec(levelArrVec);
