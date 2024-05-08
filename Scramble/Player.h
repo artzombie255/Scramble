@@ -27,6 +27,7 @@ public:
 	void addFuel(int);
 	int getScore();
 	int getLives();
+	void changeFuelSpeed();
 
 private:
 	bool usableMissiles[2] = { 1, 1 }, usableShots[4] = { 1, 1, 1, 1 };
