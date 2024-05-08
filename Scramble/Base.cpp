@@ -97,7 +97,7 @@ int Base::getPoints()
 }
 
 
-int isBase()
+bool Base::isBase()
 {
 	return true;
 }

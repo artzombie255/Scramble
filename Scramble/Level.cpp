@@ -189,7 +189,7 @@ void Level::loadLevel(sf::RenderWindow& window, sf::View& viewPort, std::vector<
 		}
 	}
 
-	viewPort.move(15, 0);
+	viewPort.move(3, 0);
 	window.setView(viewPort);
 }
 

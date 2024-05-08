@@ -11,6 +11,7 @@ public:
 	void print(sf::RenderWindow&);
 	void changeSprite(int);
 	int getPoints();
+	bool isBase();
 
 private:
 	sf::Clock spriteClock;
