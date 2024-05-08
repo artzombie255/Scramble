@@ -202,6 +202,7 @@
     <Image Include="player6.png" />
     <Image Include="player7.png" />
     <Image Include="sprites\fuel8.png" />
+    <Image Include="sprites\gameover.png" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="arcade-legacy.ttf" />
