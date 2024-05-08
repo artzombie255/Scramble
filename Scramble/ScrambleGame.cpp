@@ -56,6 +56,7 @@ void ScrambleGame::playGame()
 
     Level *level = new Level;
 
+    //sprites and texture for level counter
     sf::Texture counterText[6];
     sf::Sprite counterSprite[6];
     for (int i = 0; i < 6; i++)
@@ -155,6 +156,7 @@ void ScrambleGame::playGame()
     sf::Font font;
     font.loadFromFile("arcade-legacy.ttf");
 
+    //sets high score(the default high score being 10000) and current player score
     int score = player.getScore();
     int highScore = 10000;
 
@@ -290,6 +292,7 @@ void ScrambleGame::playGame()
 
         level->loadLevel(window, viewPort, enemyVec);
 
+	//updates current player score and high score
         scoreStr = std::to_string(score);
         highSStr = std::to_string(highScore);
 
@@ -298,7 +301,8 @@ void ScrambleGame::playGame()
             highSTxt.setString(scoreStr);
         else
             highSTxt.setString(highSStr);
-
+	    
+	//prints the level counter information
         for (int i = 1; i <= 6; i++)
         {
             counterSprite[i - 1].setPosition(48 + ((i-1) * 96) + textMove, 48);
@@ -328,14 +332,18 @@ void ScrambleGame::playGame()
             window.draw(lifeSprite);
         }
 
+	//draws all the text at the top of the screen
         window.draw(upTxt);
         window.draw(highSTxt);
         window.draw(highScoreTxt);
         window.draw(scoreTxt);
+	
+	//updates player score
         score = player.getScore();
         window.display();
         textMove += 3;
-
+	
+	//keeps high score text in frame
         highSTxt.setPosition(400 + textMove, 22);
         scoreTxt.setPosition(100 + textMove, 22);
         upTxt.setPosition(100 + textMove, 0);

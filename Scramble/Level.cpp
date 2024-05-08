@@ -16,6 +16,7 @@
 Level::Level()
 {
 	levelOffset = 0;
+	//sets needed textures for terrain building
 	for (int i = 0; i < 34; i++)
 		for (int z = 0; z < 7; z++)
 		{
@@ -26,7 +27,7 @@ Level::Level()
 			levelTexture[i][z].loadFromFile
 			("./sprites/" + tempZ + "map/" + tempZ + "map" + tempI + ".png");
 		}
-
+	//sets needed sprites for terrain building
 	for (int i = 0; i < 34; i++)
 	{
 		levelSprite[i].setTexture(levelTexture[i][0]);
@@ -99,13 +100,14 @@ void Level::readFromFile(std::string fileName)
 	}
 }
 
+//erases the levels from the level array of vectors
 void Level::clearVec()
 {
 	levelArrVec->clear();
 	return;
 }
 
-
+//places enemies in their set location identified in the level txt file
 void Level::setEntities(std::vector<Enemy*>& enemyVec)
 {
 	int x, y;
@@ -153,7 +155,7 @@ void Level::setEntities(std::vector<Enemy*>& enemyVec)
 }
 
 
-//loads each level into sfml
+//loads each level into sfml and finds current level
 void Level::loadLevel(sf::RenderWindow& window, sf::View& viewPort, std::vector<Enemy*>& enemyVec)
 {
 	int offset;
@@ -183,6 +185,7 @@ void Level::loadLevel(sf::RenderWindow& window, sf::View& viewPort, std::vector<
 			}
 			else if (levelArrVec[j][i] > 32 && levelArrVec[j][i] < 39)
 				levelOn = levelArrVec[j][i] - 32;
+			//identifies current level by looking for select characters
 		}
 	}
 
@@ -190,7 +193,7 @@ void Level::loadLevel(sf::RenderWindow& window, sf::View& viewPort, std::vector<
 	window.setView(viewPort);
 }
 
-
+//changes color sets for the terrain on each level
 void Level::colorSwap(int palette)
 {
 	for (int i = 0; i < 34; i++)
@@ -200,13 +203,13 @@ void Level::colorSwap(int palette)
 	}
 }
 
-
+//returns level 1 sprite
 sf::Sprite Level::getSprite()
 {
 	return levelSprite[0];
 }
 
-
+//sets the array of vectors to make each level
 void Level::setLevelArrVec(std::vector<char> tempLevelArrVec[25])
 {
 	tempLevelArrVec->clear();
@@ -219,12 +222,13 @@ void Level::setLevelArrVec(std::vector<char> tempLevelArrVec[25])
 	}
 }
 
-//adjust these nums
+//returns the current level player is on
 int Level::currentLevel()
 {
 	return levelOn;
 }
 
+//resturns the level offset
 int Level::getOffset()
 {
 	return levelOffset;
