@@ -30,7 +30,7 @@ public:
 	void changeFuelSpeed();
 
 private:
-	bool usableMissiles[2] = { 1, 1 }, usableShots[4] = { 1, 1, 1, 1 };
+	bool usableMissiles[2] = { 1, 1 }, usableShots[4] = { 1, 1, 1, 1 }, extraLife = false;
 	int lives = 3, points = 0, fuelUseSpeed = 10, fuel = 128, yMove = 0, 
 		xMove = 1, sTimer = 0, mTimer = 0, mxMove[2] = {}, myMove[2] = {}, 
 		spriteNum = 0, boomNum = 0, tempPoints = 0;

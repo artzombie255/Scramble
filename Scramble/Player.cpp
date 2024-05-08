@@ -89,6 +89,12 @@ void Player::shootBlaster(sf::RectangleShape bullet[])
 void Player::addPoints(int tempPoints)
 {
 	points += tempPoints;
+	//gain an extra life when you reach 10000 points
+	if (points >= 10000 && extraLife == false)
+	{
+		lives++;
+		extraLife = true;
+	}
 	return;
 }
 
@@ -119,12 +125,14 @@ void Player::crash(std::vector<Enemy*> &enemyVec, int currentLevel,
 		//compares player and enemies
 		if (enemyBounds.intersects(nextPos))
 		{
+			//resets for next life
 			std::cout << "hit";
 			lives--;
 			fuel = 128;
 
 			textMove = 0;
 
+			//clears enemies
 			tempPoints = points;
 			for (int i = enemyVec.size() - 1; i >= 0; i--)
 			{
@@ -132,12 +140,15 @@ void Player::crash(std::vector<Enemy*> &enemyVec, int currentLevel,
 			}
 			points = tempPoints;
 
+			//resets enemies
 			level->setEntities(enemyVec);
 
 			for (int i = enemyVec.size() - 1; i > 0; i--)
 			{
 				enemyVec.at(i)->changeSprite(palette);
 			}
+
+			//set player and viewport
 			std::cout << currentLevel;
 			switch (currentLevel)
 			{
@@ -201,17 +212,14 @@ void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite,
 			//compares player and walls
 			if (wallBounds.intersects(nextPos))
 			{
+				//resets for next life
 				std::cout << "collide";
 				lives--;
 				fuel = 128;
 
 				textMove = 0;
-				//level[0].clearVec();
-				//level[1].clearVec();
-				//level[2].clearVec();
-				//level[3].clearVec();
-				//level[4].clearVec();
-				//level[5].clearVec();
+
+				//clears enemies
 				tempPoints = points;
 				for (int i = enemyVec.size() - 1; i >= 0; i--)
 				{
@@ -219,6 +227,7 @@ void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite,
 				}
 				points = tempPoints;
 
+				//resets enemies
 				level->setEntities(enemyVec);
 
 				for (int i = enemyVec.size() - 1; i > 0; i--)
@@ -226,7 +235,7 @@ void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite,
 					enemyVec.at(i)->changeSprite(palette);
 				}
 
-
+				//set player and viewport
 				std::cout << currentLevel;
 				switch (currentLevel)
 				{
@@ -472,16 +481,19 @@ void Player::fuelLoss(sf::Clock& clock,
 	fuelSprite.setTexture(fuelTexture);
 	fuelSprite.setScale(3, 3);
 
-	if (clock.getElapsedTime().asMilliseconds() >= 1000/(30/fuelUseSpeed))
+	//makes fuel go down
+	if (clock.getElapsedTime().asMilliseconds() >= 1000/(30/fuelUseSpeed)
+		&& lives > 0)
 	{
 		clock.restart();
 		fuel--;
 		std::cout << fuel << std::endl;
 	}
 
+	//prints fuel bar
 	for (int i = 0; i < fuel / 8; i++)
 	{
-		fuelSprite.setPosition(viewPort.getCenter().x - 136 + (i * 24), 768);
+		fuelSprite.setPosition(viewPort.getCenter().x - 136 + (i * 24), 700);
 		window.draw(fuelSprite);
 		fuelBar++;
 	}
@@ -516,7 +528,7 @@ void Player::fuelLoss(sf::Clock& clock,
 		}
 
 		fuelSprite.setTexture(fuelTexture);
-		fuelSprite.setPosition(viewPort.getCenter().x - 136 + (fuel / 8 * 24), 768);
+		fuelSprite.setPosition(viewPort.getCenter().x - 136 + (fuel / 8 * 24), 700);
 		window.draw(fuelSprite);
 		fuelBar++;
 	}
@@ -528,9 +540,9 @@ void Player::fuelLoss(sf::Clock& clock,
 		fuelSprite.setTexture(fuelTexture);
 		if (fuel > 0)
 			fuelSprite.setPosition
-			(viewPort.getCenter().x - 136 + (((fuel / 8) + i) * 24), 768);
+			(viewPort.getCenter().x - 136 + (((fuel / 8) + i) * 24), 700);
 		else 
-			fuelSprite.setPosition(viewPort.getCenter().x - 136 + ((i - 1) * 24), 768);
+			fuelSprite.setPosition(viewPort.getCenter().x - 136 + ((i - 1) * 24), 700);
 		window.draw(fuelSprite);
 	}
 
