@@ -41,7 +41,7 @@ void ScrambleGame::playGame()
     sf::Texture lifeTexture;
 
     sf::View viewPort;
-    //level 1: 361, level 2: 223, level 3: 227, level 4: 329, level 5: 225, level 6: 139 
+    //level 1: 361, level 2: 223, level 3: 227, level 4: 329, level 5: 228, level 6: 139 
     int currentLevel = 1, textMove = 0;
     /*
     Level* level = new Level[6]
@@ -114,11 +114,15 @@ void ScrambleGame::playGame()
     level[4].setEntities(enemyVec);
     */
 
-    //level->readFromFile("level1.txt");
+    level->readFromFile("level1.txt");
     level->readFromFile("level2.txt");
     level->readFromFile("level3.txt");
     level->readFromFile("level4.txt");
     level->readFromFile("level5.txt");
+    level->readFromFile("level6.txt");
+    level->readFromFile("level6.txt");
+    level->readFromFile("level6.txt");
+    level->readFromFile("level6.txt");
     level->readFromFile("level6.txt");
 
     level->setEntities(enemyVec);
@@ -230,9 +234,29 @@ void ScrambleGame::playGame()
 
 
         //process interactions
-        player.hit(enemyVec, bullet, missile);
-        player.crash(enemyVec, currentLevel, level, viewPort, palette, textMove);
-        player.crash(levelArrVec, level->getSprite(), currentLevel, level, viewPort, enemyVec, palette, textMove);
+        if (player.hit(enemyVec, bullet, missile) == 1)
+        {
+            int tempPoints;
+            player.addFuel(128);
+            textMove = 0;
+            tempPoints = player.getScore();
+            for (int i = enemyVec.size() - 1; i >= 0; i--)
+            {
+                enemyVec.at(i)->setPosition(-200, -200);
+            }
+            player.setPoints(tempPoints);
+
+            level->setEntities(enemyVec);
+
+            for (int i = enemyVec.size() - 1; i > 0; i--)
+            {
+                enemyVec.at(i)->changeSprite(palette);
+            }
+            viewPort.setCenter(336, 408);
+            player.setPosition(400, 200);
+        }
+        //player.crash(enemyVec, currentLevel, level, viewPort, palette, textMove);
+        //player.crash(levelArrVec, level->getSprite(), currentLevel, level, viewPort, enemyVec, palette, textMove);
 
         //set up player sprite to print
         playerSprite.setPosition(player.getPosition().x - 39, player.getPosition().y - 9);

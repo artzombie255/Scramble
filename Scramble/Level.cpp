@@ -141,6 +141,13 @@ void Level::setEntities(std::vector<Enemy*>& enemyVec)
 				y = 96 + (j * 24);
 				enemyVec.push_back(new Altar(x, y));
 			}
+			else if (levelArrVec[j][i] == 66)
+			{
+				std::cout << "Base:" << i << "\n" << j << "\n";
+				x = (i + levelOffset) * 24;
+				y = 96 + (j * 24);
+				enemyVec.push_back(new Base(x, y));
+			}
 		}
 	}
 }
@@ -179,7 +186,7 @@ void Level::loadLevel(sf::RenderWindow& window, sf::View& viewPort, std::vector<
 		}
 	}
 
-	viewPort.move(3, 0);
+	viewPort.move(15, 0);
 	window.setView(viewPort);
 }
 

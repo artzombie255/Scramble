@@ -13,6 +13,7 @@ public:
 	virtual int getFuel();
 	virtual void print(sf::RenderWindow&);
 	virtual void changeSprite(int);
+	virtual bool isBase();
 
 protected:
 	int points;

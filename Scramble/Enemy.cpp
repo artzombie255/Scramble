@@ -73,3 +73,8 @@ void Enemy::changeSprite(int palette)
 	sprite.setScale(3, 3);
 
 }
+
+bool Enemy::isBase()
+{
+	return false;
+}

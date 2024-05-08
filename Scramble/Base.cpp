@@ -95,3 +95,9 @@ int Base::getPoints()
 {
 	return 800;
 }
+
+
+int isBase()
+{
+	return true;
+}

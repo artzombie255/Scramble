@@ -93,6 +93,13 @@ void Player::addPoints(int tempPoints)
 }
 
 
+void Player::setPoints(int tempPoints)
+{
+	points = tempPoints;
+	return;
+}
+
+
 //detects when the player crashes and calls level to deal with it
 void Player::crash(std::vector<Enemy*> &enemyVec, int currentLevel,Level* level, sf::View &viewport, int palette, int &textMove)
 {
@@ -133,7 +140,7 @@ void Player::crash(std::vector<Enemy*> &enemyVec, int currentLevel,Level* level,
 				{
 					enemyVec.at(i)->changeSprite(palette);
 				}
-			std::cout << currentLevel;
+				std::cout << currentLevel;
 				switch (currentLevel)
 				{
 				case 1:
@@ -141,24 +148,24 @@ void Player::crash(std::vector<Enemy*> &enemyVec, int currentLevel,Level* level,
 					setPosition(400, 200);
 					break;
 				case 2:
-					viewport.setCenter(8536, 408);
-					setPosition(8600, 8000);
+					viewport.setCenter(8600, 408);
+					setPosition(8664, 200);
 					break;
 				case 3:
-					viewport.setCenter(336, 408);
-					setPosition(400, 200);
+					viewport.setCenter(14076, 408);
+					setPosition(14140, 200);
 					break;
 				case 4:
-					viewport.setCenter(336, 408);
-					setPosition(400, 200);
+					viewport.setCenter(19400, 408);
+					setPosition(19440, 150);
 					break;
 				case 5:
-					viewport.setCenter(336, 408);
-					setPosition(400, 200);
+					viewport.setCenter(27472, 408);
+					setPosition(27536, 225);
 					break;
 				case 6:
-					viewport.setCenter(336, 408);
-					setPosition(400, 200);
+					viewport.setCenter(32648, 408);
+					setPosition(32712, 175);
 				}
 			}
 			return;
@@ -239,23 +246,23 @@ void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite, int cur
 					case 1:
 						viewport.setCenter(336, 408);
 						setPosition(400, 200);
-						//break;
+						break;
 					case 2:
 						viewport.setCenter(8600, 408);
 						setPosition(8664, 200);
-						//break;
+						break;
 					case 3:
 						viewport.setCenter(14076, 408);
 						setPosition(14140, 200);
-						//break;
+						break;
 					case 4:
 						viewport.setCenter(19400, 408);
 						setPosition(19440, 150);
-						//break;
+						break;
 					case 5:
 						viewport.setCenter(27472, 408);
 						setPosition(27536, 225);
-						//break;
+						break;
 					case 6:
 						viewport.setCenter(32648, 408);
 						setPosition(32712, 175);
@@ -269,7 +276,7 @@ void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite, int cur
 
 
 //detects when an enemy is hit and manages it
-void Player::hit(std::vector<Enemy*> enemyVec, 
+int Player::hit(std::vector<Enemy*> enemyVec, 
 	sf::RectangleShape bullet[], sf::RectangleShape missile[])
 {
 	bool hit = false;
@@ -277,6 +284,7 @@ void Player::hit(std::vector<Enemy*> enemyVec,
 
 	for (int j = 0; j < enemyVec.size(); j++)
 	{
+		hit = false;
 		sf::FloatRect enemyBounds = enemyVec.at(j)->getGlobalBounds();
 		for (int i = 0; i < TOTAL_BULLETS; i++)
 		{
@@ -296,7 +304,6 @@ void Player::hit(std::vector<Enemy*> enemyVec,
 					//delete enemyVec.at(j);
 					//std::cout << points;
 				}
-				hit = false;
 			}
 		}
 		for (int i = 0; i < 2; i++)
@@ -319,62 +326,14 @@ void Player::hit(std::vector<Enemy*> enemyVec,
 					//delete enemyVec.at(j);
 					//std::cout << points;
 				}
-				hit = false;
 			}
+		}
+		if (enemyVec.at(j)->isBase() == true && hit == true)
+		{
+			return 1;
 		}
 	}
-
-
-
-
-	for (int j = 0; j < enemyVec.size(); j++)
-	{
-		sf::FloatRect enemyBounds = enemyVec.at(j)->getGlobalBounds();
-		for (int i = 0; i < TOTAL_BULLETS; i++)
-		{
-			sf::FloatRect bulletBounds = bullet[i].getGlobalBounds();
-			nextPos = bulletBounds;
-
-			if (enemyBounds.intersects(nextPos))
-			{
-				hit = true;
-				bullet[i].setPosition(-100, -100);
-				usableShots[i] = true;
-				if (hit == true)
-				{
-					addPoints(enemyVec.at(j)->getPoints());
-					addFuel(enemyVec.at(j)->getFuel());
-					enemyVec.at(j)->setPosition(-100, -100);
-					//delete enemyVec.at(j);
-					//std::cout << points;
-				}
-				hit = false;
-			}
-		}
-		for (int i = 0; i < 2; i++)
-		{
-			sf::FloatRect missileBounds = missile[i].getGlobalBounds();
-			nextPos = missileBounds;
-			nextPos.left += mxMove[i];
-			nextPos.top += myMove[i];
-
-			if (enemyBounds.intersects(nextPos))
-			{
-				hit = true;
-				missile[i].setPosition(-100, 900);
-				usableMissiles[i] = true;
-				if (hit == true)
-				{
-					addPoints(enemyVec.at(j)->getPoints());
-					addFuel(enemyVec.at(j)->getFuel());
-					enemyVec.at(j)->setPosition(-100, -100);
-					//delete enemyVec.at(j);
-					//std::cout << points;
-				}
-				hit = false;
-			}
-		}
-	}
+	return 0;
 }
 
 
