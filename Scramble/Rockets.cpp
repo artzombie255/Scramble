@@ -22,7 +22,7 @@ Rockets::~Rockets()
 
 }
 
-
+//sets rocket off from the ground
 void Rockets::move(sf::Clock &clock, sf::View viewport)
 {
 	//sf::RectangleShape::move(-1, 0);
@@ -47,7 +47,7 @@ void Rockets::takeoff()
 	return;
 }
 
-
+//returns points for rocket depending on if it is grounded or in the air
 int Rockets::getPoints()
 {
 	if (grounded == true)
@@ -56,7 +56,7 @@ int Rockets::getPoints()
 		return 80;
 }
 
-
+//pastes rocket
 void Rockets::print(sf::RenderWindow& window)
 {
 	sprite.setPosition(getPosition().x, getPosition().y);
@@ -64,7 +64,7 @@ void Rockets::print(sf::RenderWindow& window)
 	window.draw(sprite);
 }
 
-
+//color swaps for rokcets to new color palette
 void Rockets::changeSprite(int palette)
 {
 	std::string file, num, color = "0";

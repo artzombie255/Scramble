@@ -17,10 +17,10 @@ Meteors::~Meteors()
 
 void Meteors::move()
 {
-
+	//unfinished
 }
 
-
+//displays meteors
 void Meteors::print(sf::RenderWindow& window)
 {
 	sprite.setPosition(getPosition().x, getPosition().y);
@@ -28,7 +28,7 @@ void Meteors::print(sf::RenderWindow& window)
 	window.draw(sprite);
 }
 
-
+//useless
 void Meteors::changeSprite(int palette)
 {
 	Enemy::changeSprite(palette);

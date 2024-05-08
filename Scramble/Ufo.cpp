@@ -33,7 +33,7 @@ Ufo::~Ufo()
 
 }
 
-
+//moves ufo up and down
 void Ufo::move(sf::Clock &clock, sf::View viewport)
 {
 	//if (getPosition().x < 800)
@@ -45,18 +45,19 @@ void Ufo::move(sf::Clock &clock, sf::View viewport)
 		moveDir = 5;
 }
 
-
+//pastes ufo
 void Ufo::print(sf::RenderWindow& window)
 {
 	sprite.setPosition(getPosition().x, getPosition().y);
 	window.draw(sprite);
 }
 
-
+//useless
 void Ufo::changeSprite(int palette)
 {
 }
 
+//returms points given for destroying ufo
 int Ufo::getPoints()
 {
 	return 100;

@@ -40,6 +40,7 @@ void ScrambleGame::playGame()
     sf::Sprite playerSprite, rocketSprite, lifeSprite;
     sf::Texture lifeTexture;
 
+    //gameover sprites
     sf::Texture endText;
     sf::Sprite endSprite;
     endText.loadFromFile("./sprites/gameover.png");
@@ -68,6 +69,7 @@ void ScrambleGame::playGame()
         counterText[i].loadFromFile("./sprites/levelNum" + tempI + ".png");
     }
 
+    //sets sprites for counting the levels displayed
     for (int i = 0; i < 6; i++)
     {
         counterSprite[i].setTexture(counterText[i]);
@@ -84,7 +86,7 @@ void ScrambleGame::playGame()
 
     std::vector<char> levelArrVec[25];
     
-
+    //sprite for lives
     lifeTexture.loadFromFile("./sprites/lives.png");
     lifeSprite.setTexture(lifeTexture);
     lifeSprite.setScale(3, 3);
@@ -95,6 +97,7 @@ void ScrambleGame::playGame()
 
     srand(time(NULL));
 
+    //loads levels into array of vectors
     level->readFromFile("level1.txt");
     level->readFromFile("level2.txt");
     level->readFromFile("level3.txt");
@@ -106,8 +109,9 @@ void ScrambleGame::playGame()
     level->readFromFile("level6.txt");
     level->readFromFile("level6.txt");
 
+    //places enemies on level
     level->setEntities(enemyVec);
-
+    //player rocket animation
     player.changeSprite(playerSpriteClock, playerSprite);
  
 
@@ -121,7 +125,7 @@ void ScrambleGame::playGame()
         missile[i].setTexture(missileTxt);
         missile[i].setScale(3, 3);
     }
-
+    //sets array of vectors for levels
     level->setLevelArrVec(levelArrVec);
 
     window.setFramerateLimit(60);

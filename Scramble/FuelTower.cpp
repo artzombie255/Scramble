@@ -24,13 +24,13 @@ FuelTower::~FuelTower()
 
 }
 
-
+//returns added few for rocket after fuel tower is destrpyed
 int FuelTower::getFuel()
 {
 	return housedFuel;
 }
 
-
+//pastes few tower
 void FuelTower::print(sf::RenderWindow& window)
 {
 	sprite.setPosition(getPosition().x, getPosition().y);
@@ -38,13 +38,13 @@ void FuelTower::print(sf::RenderWindow& window)
 	window.draw(sprite);
 }
 
-
+//chnages color of fuel tower to fit new color palette
 void FuelTower::changeSprite(int palette)
 {
 	Enemy::changeSprite(palette);
 }
 
-
+//returns amount of point added from destroying fuel tower
 int FuelTower::getPoints()
 {
 	return 150;
