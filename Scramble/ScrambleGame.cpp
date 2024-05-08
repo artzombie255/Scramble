@@ -201,13 +201,14 @@ void ScrambleGame::playGame()
             palette++;
             if (palette == 7)
                 palette = 0;
-            for (int i = enemyVec.size() - 1; i > 0; i--)
-            {
-                enemyVec.at(i)->changeSprite(palette);
-            }
             for (int i = 0; i < 6; i++)
                 level->colorSwap(palette);
             paletteClock.restart();
+        }
+        for (int i = enemyVec.size() - 1; i >= 0; i--)
+        {
+            if (enemyVec.at(i)->getPosition().x > viewPort.getCenter().x - 400 && enemyVec.at(i)->getPosition().x < viewPort.getCenter().x + 400)
+                enemyVec.at(i)->changeSprite(palette);
         }
         player.changeSprite(playerSpriteClock, playerSprite);
 

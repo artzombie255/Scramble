@@ -112,13 +112,12 @@ void Rockets::changeSprite(int palette)
 	if (grounded == false && spriteClock.getElapsedTime().asMilliseconds() >= 250)
 	{
 		spriteClock.restart();
-		file = "./sprites/" + color + "rocket" + num + ".png";
 		spriteNum++;
 		if (spriteNum == 3)
 			spriteNum = 0;
 	}
 
-	file = "./sprites/" + color + "rocket" + "0" + ".png";
+	file = "./sprites/" + color + "rocket" + num + ".png";
 	image.loadFromFile(file);
 	sprite.setTexture(image);
 	sprite.setScale(3, 3);
