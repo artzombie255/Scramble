@@ -17,23 +17,24 @@ void Enemy::move(sf::Clock &clock, sf::View viewport)
 	return;
 }
 
+//returns point total for destroying enemy
 int Enemy::getPoints()
 {
 	return points;
 }
 
-
+//returns number of fuel added
 int Enemy::getFuel()
 {
 	return 0;
 }
 
-
+//pastes enemy
 void Enemy::print(sf::RenderWindow& window)
 {
 }
 
-
+//color swaps enemy to palette
 void Enemy::changeSprite(int palette)
 {
 	std::string file, color, t = "./sprites/";
@@ -74,6 +75,7 @@ void Enemy::changeSprite(int palette)
 
 }
 
+//returns if it is a base or not
 bool Enemy::isBase()
 {
 	return false;

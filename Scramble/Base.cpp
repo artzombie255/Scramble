@@ -25,7 +25,7 @@ Base::~Base()
 
 }
 
-
+//prints base
 void Base::print(sf::RenderWindow& window)
 {
 	sprite.setPosition(getPosition().x, getPosition().y);
@@ -33,7 +33,7 @@ void Base::print(sf::RenderWindow& window)
 	window.draw(sprite);
 }
 
-
+//color swaps base to new palette
 void Base::changeSprite(int palette)
 {
 	std::string file, num, color = "0";
@@ -91,12 +91,13 @@ void Base::changeSprite(int palette)
 	sprite.setScale(3, 3);
 }
 
+//returns point toital for destroying base
 int Base::getPoints()
 {
 	return 800;
 }
 
-
+//returns if it is a base or not
 bool Base::isBase()
 {
 	return true;

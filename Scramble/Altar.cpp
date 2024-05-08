@@ -24,7 +24,7 @@ Altar::~Altar()
 {
 }
 
-
+//pastes an alter
 void Altar::print(sf::RenderWindow& window)
 {
 	sprite.setPosition(getPosition().x, getPosition().y);
@@ -32,12 +32,13 @@ void Altar::print(sf::RenderWindow& window)
 	window.draw(sprite);
 }
 
-
+//changes the color palette of an alter
 void Altar::changeSprite(int palette)
 {
 	Enemy::changeSprite(palette);
 }
 
+//returns points for destroying an alter
 int Altar::getPoints()
 {
 	srand(time(NULL));
