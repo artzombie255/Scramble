@@ -80,7 +80,7 @@ Level::~Level()
 void Level::readFromFile(std::string fileName)
 {
 	std::fstream file;
-    file.open(fileName);
+	file.open(fileName);
 
 	if (file.is_open())
 	{
@@ -106,7 +106,7 @@ void Level::clearVec()
 }
 
 
-void Level::setEntities (std::vector<Enemy*>& enemyVec)
+void Level::setEntities(std::vector<Enemy*>& enemyVec)
 {
 	int x, y;
 	for (int j = 0; j < 25; j++)
@@ -141,20 +141,13 @@ void Level::setEntities (std::vector<Enemy*>& enemyVec)
 				y = 96 + (j * 24);
 				enemyVec.push_back(new Altar(x, y));
 			}
-			else if (levelArrVec[j][i] == 66)
-			{
-				std::cout << "Base:" << i << "\n" << j << "\n";
-				x = (i + levelOffset) * 24;
-				y = 96 + (j * 24);
-				enemyVec.push_back(new Base(x, y));
-			}
 		}
 	}
 }
 
 
 //loads each level into sfml
-void Level::loadLevel(sf::RenderWindow& window, sf::View& viewPort, std::vector<Enemy*> &enemyVec)
+void Level::loadLevel(sf::RenderWindow& window, sf::View& viewPort, std::vector<Enemy*>& enemyVec)
 {
 	int offset;
 
@@ -167,13 +160,13 @@ void Level::loadLevel(sf::RenderWindow& window, sf::View& viewPort, std::vector<
 			// 48-57 for 0-9 | 97-119 for a-w
 			//std::cout << ((viewPort.getCenter().x - 336) / 24) - (levelOffset) << std::endl;
 			//std::cout << (viewPort.getCenter().x - 336) / 24 - levelOffset + 30 << std::endl;
-			if ((levelArrVec[j][i] >= 48 && levelArrVec[j][i] <= 57) || 
+			if ((levelArrVec[j][i] >= 48 && levelArrVec[j][i] <= 57) ||
 				(levelArrVec[j][i] >= 97 && levelArrVec[j][i] <= 119)
 				|| levelArrVec[j][i] == 75)
 			{
 				if (levelArrVec[j][i] >= 48 && levelArrVec[j][i] <= 57)
 					offset = 48;
-				else if(levelArrVec[j][i] == 75)
+				else if (levelArrVec[j][i] == 75)
 					offset = 42;
 				else
 					offset = 87;
@@ -181,15 +174,11 @@ void Level::loadLevel(sf::RenderWindow& window, sf::View& viewPort, std::vector<
 				((i + levelOffset) * 24, 96 + (j * 24));
 				window.draw(levelSprite[levelArrVec[j][i] - offset]);
 			}
+			else if (levelArrVec[j][i] > 32 && levelArrVec[j][i] < 39)
+				levelOn = levelArrVec[j][i] - 32;
 		}
 	}
-	if (levelArrVec[0][(viewPort.getCenter().x - 336) / 24 - levelOffset] == 'y' && levelChangeCounter > 100)
-	{
-		levelOn++;
-		levelChangeCounter = 0;
-	}
-	levelChangeCounter++;
-	//std::cout << levelOn;
+
 	viewPort.move(3, 0);
 	window.setView(viewPort);
 }

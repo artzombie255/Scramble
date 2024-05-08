@@ -72,8 +72,8 @@ void ScrambleGame::playGame()
     }
     sf::Texture onLevelText, offLevelText;
     sf::Sprite onLevelSprite, offLevelSprite;
-    onLevelText.loadFromFile("levelCount1.png");
-    offLevelText.loadFromFile("levelCount0.png");
+    onLevelText.loadFromFile("./sprites/levelCount1.png");
+    offLevelText.loadFromFile("./sprites/levelCount0.png");
     onLevelSprite.setTexture(onLevelText);
     offLevelSprite.setTexture(offLevelText);
     onLevelSprite.setScale(3, 3);
@@ -274,6 +274,27 @@ void ScrambleGame::playGame()
             highSTxt.setString(scoreStr);
         else
             highSTxt.setString(highSStr);
+
+        for (int i = 1; i <= 6; i++)
+        {
+            counterSprite[i - 1].setPosition(48 + ((i-1) * 96) + textMove, 48);
+            window.draw(counterSprite[i - 1]);
+        }
+
+        for (int i = 1; i <= 6; i++)
+        {
+            if (i <= currentLevel)
+            {
+                onLevelSprite.setPosition(48 + ((i - 1) * 96) + textMove, 72);
+                window.draw(onLevelSprite);
+            }
+            else
+            {
+                offLevelSprite.setPosition(48 + ((i - 1) * 96) + textMove, 72);
+                window.draw(offLevelSprite);
+            }
+            
+        }
         
 
         // End the current frame and display its contents on screen
