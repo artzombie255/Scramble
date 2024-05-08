@@ -259,12 +259,12 @@ void ScrambleGame::playGame()
                 player.setPosition(400, 200);
                 player.changeFuelSpeed();
             }
-        player.crash(enemyVec, currentLevel, level, viewPort, palette, textMove);
-        player.crash(levelArrVec, level->getSprite(), currentLevel, 
-        level, viewPort, enemyVec, palette, textMove);
+            player.crash(enemyVec, currentLevel, level, viewPort, palette, textMove);
+            player.crash(levelArrVec, level->getSprite(), currentLevel, 
+            level, viewPort, enemyVec, palette, textMove);
 
-        //set up player sprite to print
-        playerSprite.setPosition(player.getPosition().x - 39,
+            //set up player sprite to print
+            playerSprite.setPosition(player.getPosition().x - 39,
             player.getPosition().y - 9);
             //set up player sprite to print
             playerSprite.setPosition(player.getPosition().x - 39, player.getPosition().y - 9);
