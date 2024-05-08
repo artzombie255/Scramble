@@ -101,7 +101,8 @@ void Player::setPoints(int tempPoints)
 
 
 //detects when the player crashes and calls level to deal with it
-void Player::crash(std::vector<Enemy*> &enemyVec, int currentLevel,Level* level, sf::View &viewport, int palette, int &textMove)
+void Player::crash(std::vector<Enemy*> &enemyVec, int currentLevel,
+	Level* level, sf::View &viewport, int palette, int &textMove)
 {
 	sf::FloatRect nextPos;
 	sf::FloatRect playerBounds = getGlobalBounds();
@@ -121,61 +122,60 @@ void Player::crash(std::vector<Enemy*> &enemyVec, int currentLevel,Level* level,
 			std::cout << "hit";
 			lives--;
 			fuel = 128;
-			//if (lives <= 0);
-			//play end animation
-			//else
+
+			textMove = 0;
+
+			tempPoints = points;
+			for (int i = enemyVec.size() - 1; i >= 0; i--)
 			{
-				textMove = 0;
-			
-				tempPoints = points;
-				for (int i = enemyVec.size() - 1; i >= 0; i--)
-				{
-					enemyVec.at(i)->setPosition(-200, -200);
-				}
-				points = tempPoints;
+				enemyVec.at(i)->setPosition(-200, -200);
+			}
+			points = tempPoints;
 
-				level->setEntities(enemyVec);
+			level->setEntities(enemyVec);
 
-				for (int i = enemyVec.size() - 1; i > 0; i--)
-				{
-					enemyVec.at(i)->changeSprite(palette);
-				}
-				std::cout << currentLevel;
-				switch (currentLevel)
-				{
-				case 1:
-					viewport.setCenter(336, 408);
-					setPosition(400, 200);
-					break;
-				case 2:
-					viewport.setCenter(8600, 408);
-					setPosition(8664, 200);
-					break;
-				case 3:
-					viewport.setCenter(14076, 408);
-					setPosition(14140, 200);
-					break;
-				case 4:
-					viewport.setCenter(19400, 408);
-					setPosition(19440, 150);
-					break;
-				case 5:
-					viewport.setCenter(27472, 408);
-					setPosition(27536, 225);
-					break;
-				case 6:
-					viewport.setCenter(32648, 408);
-					setPosition(32712, 175);
-				}
+			for (int i = enemyVec.size() - 1; i > 0; i--)
+			{
+				enemyVec.at(i)->changeSprite(palette);
+			}
+			std::cout << currentLevel;
+			switch (currentLevel)
+			{
+			case 1:
+				viewport.setCenter(336, 408);
+				setPosition(400, 200);
+				break;
+			case 2:
+				viewport.setCenter(8600, 408);
+				setPosition(8664, 200);
+				break;
+			case 3:
+				viewport.setCenter(14076, 408);
+				setPosition(14140, 200);
+				break;
+			case 4:
+				viewport.setCenter(19400, 408);
+				setPosition(19440, 150);
+				break;
+			case 5:
+				viewport.setCenter(27472, 408);
+				setPosition(27536, 225);
+				break;
+			case 6:
+				viewport.setCenter(32648, 408);
+				setPosition(32712, 175);
 			}
 			return;
 			//respawn
 		}
+		
 	}
 }
 
 
-void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite, int currentLevel, Level* level, sf::View &viewport, std::vector<Enemy*> &enemyVec, int palette, int &textMove)
+void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite, 
+	int currentLevel, Level* level, sf::View &viewport, std::vector<Enemy*> 
+	&enemyVec, int palette, int &textMove)
 {
 	sf::FloatRect nextPos;
 	sf::FloatRect playerBounds = getGlobalBounds();
@@ -204,70 +204,57 @@ void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite, int cur
 				std::cout << "collide";
 				lives--;
 				fuel = 128;
-				//if (lives <= 0);
-				//play end animation
-				//else;
+
+				textMove = 0;
+				//level[0].clearVec();
+				//level[1].clearVec();
+				//level[2].clearVec();
+				//level[3].clearVec();
+				//level[4].clearVec();
+				//level[5].clearVec();
+				tempPoints = points;
+				for (int i = enemyVec.size() - 1; i >= 0; i--)
 				{
-					textMove = 0;
-					//level[0].clearVec();
-					//level[1].clearVec();
-					//level[2].clearVec();
-					//level[3].clearVec();
-					//level[4].clearVec();
-					//level[5].clearVec();
-					tempPoints = points;
-					for (int i = enemyVec.size() - 1; i >= 0; i--)
-					{
-						enemyVec.at(i)->setPosition(-200,-200);
-					}
-					points = tempPoints;
-
-					level->setEntities(enemyVec);
-
-					for (int i = enemyVec.size() - 1; i > 0; i--)
-					{
-						enemyVec.at(i)->changeSprite(palette);
-					}
-					
-				/*case 6:
-					levelOffset += 224;
-				case 5:
-					levelOffset += 328;
-				case 4:
-					levelOffset += 226;
-				case 3:
-					levelOffset += 224;
-				case 2:
-					levelOffset += 360;*/
-
-					std::cout << currentLevel;
-					switch (currentLevel)
-					{
-					case 1:
-						viewport.setCenter(336, 408);
-						setPosition(400, 200);
-						break;
-					case 2:
-						viewport.setCenter(8600, 408);
-						setPosition(8664, 200);
-						break;
-					case 3:
-						viewport.setCenter(14076, 408);
-						setPosition(14140, 200);
-						break;
-					case 4:
-						viewport.setCenter(19400, 408);
-						setPosition(19440, 150);
-						break;
-					case 5:
-						viewport.setCenter(27472, 408);
-						setPosition(27536, 225);
-						break;
-					case 6:
-						viewport.setCenter(32648, 408);
-						setPosition(32712, 175);
-					}
+					enemyVec.at(i)->setPosition(-200,-200);
 				}
+				points = tempPoints;
+
+				level->setEntities(enemyVec);
+
+				for (int i = enemyVec.size() - 1; i > 0; i--)
+				{
+					enemyVec.at(i)->changeSprite(palette);
+				}
+
+
+				std::cout << currentLevel;
+				switch (currentLevel)
+				{
+				case 1:
+					viewport.setCenter(336, 408);
+					setPosition(400, 200);
+					break;
+				case 2:
+					viewport.setCenter(8600, 408);
+					setPosition(8664, 200);
+					break;
+				case 3:
+					viewport.setCenter(14076, 408);
+					setPosition(14140, 200);
+					break;	
+				case 4:
+					viewport.setCenter(19400, 408);
+					setPosition(19440, 150);
+					break;
+				case 5:
+					viewport.setCenter(27472, 408);
+					setPosition(27536, 225);
+					break;
+				case 6:
+					viewport.setCenter(32648, 408);
+					setPosition(32712, 175);
+				}
+				
 				return;
 			}
 		}
@@ -485,7 +472,7 @@ void Player::fuelLoss(sf::Clock& clock,
 	fuelSprite.setTexture(fuelTexture);
 	fuelSprite.setScale(3, 3);
 
-	if (clock.getElapsedTime().asMilliseconds() >= 1000/(60/fuelUseSpeed))
+	if (clock.getElapsedTime().asMilliseconds() >= 1000/(30/fuelUseSpeed))
 	{
 		clock.restart();
 		fuel--;
@@ -568,4 +555,12 @@ int Player::getScore()
 int Player::getLives()
 {
 	return lives;
+}
+
+
+void Player::changeFuelSpeed()
+{
+	fuelUseSpeed -= 2;
+	if (fuelUseSpeed <= 5)
+		fuelUseSpeed = 6;
 }
