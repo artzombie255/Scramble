@@ -133,7 +133,7 @@ void Player::crash(std::vector<Enemy*> &enemyVec, int currentLevel,Level* level,
 				{
 					enemyVec.at(i)->changeSprite(palette);
 				}
-			//std::cout << "THIS COULD BE DEAD";
+			std::cout << currentLevel;
 				switch (currentLevel)
 				{
 				case 1:
@@ -141,8 +141,8 @@ void Player::crash(std::vector<Enemy*> &enemyVec, int currentLevel,Level* level,
 					setPosition(400, 200);
 					break;
 				case 2:
-					viewport.setCenter(336, 408);
-					setPosition(400, 200);
+					viewport.setCenter(8536, 408);
+					setPosition(8600, 8000);
 					break;
 				case 3:
 					viewport.setCenter(336, 408);
@@ -222,32 +222,43 @@ void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite, int cur
 						enemyVec.at(i)->changeSprite(palette);
 					}
 					
-					//std::cout << "THIS COULD BE DEAD";
+				/*case 6:
+					levelOffset += 224;
+				case 5:
+					levelOffset += 328;
+				case 4:
+					levelOffset += 226;
+				case 3:
+					levelOffset += 224;
+				case 2:
+					levelOffset += 360;*/
+
+					std::cout << currentLevel;
 					switch (currentLevel)
 					{
 					case 1:
 						viewport.setCenter(336, 408);
 						setPosition(400, 200);
-						break;
+						//break;
 					case 2:
-						viewport.setCenter(336, 408);
-						setPosition(400, 200);
-						break;
+						viewport.setCenter(8600, 408);
+						setPosition(8664, 200);
+						//break;
 					case 3:
-						viewport.setCenter(336, 408);
-						setPosition(400, 200);
-						break;
+						viewport.setCenter(14076, 408);
+						setPosition(14140, 200);
+						//break;
 					case 4:
-						viewport.setCenter(336, 408);
-						setPosition(400, 200);
-						break;
+						viewport.setCenter(19400, 408);
+						setPosition(19440, 150);
+						//break;
 					case 5:
-						viewport.setCenter(336, 408);
-						setPosition(400, 200);
-						break;
+						viewport.setCenter(27472, 408);
+						setPosition(27536, 225);
+						//break;
 					case 6:
-						viewport.setCenter(336, 408);
-						setPosition(400, 200);
+						viewport.setCenter(32648, 408);
+						setPosition(32712, 175);
 					}
 				}
 				return;

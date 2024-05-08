@@ -114,7 +114,7 @@ void ScrambleGame::playGame()
     level[4].setEntities(enemyVec);
     */
 
-    level->readFromFile("level1.txt");
+    //level->readFromFile("level1.txt");
     level->readFromFile("level2.txt");
     level->readFromFile("level3.txt");
     level->readFromFile("level4.txt");
@@ -223,7 +223,7 @@ void ScrambleGame::playGame()
 
         if (currentLevel != level->currentLevel())
         {
-            std::cout << "change level" << currentLevel + 1;
+            //std::cout << "change level" << currentLevel + 1;
             currentLevel = level->currentLevel();
             //level.setLevelArrVec(levelArrVec);
         }
