@@ -79,6 +79,12 @@ void Rockets::changeSprite(int palette)
 		break;
 	case 2:
 		num = "2";
+		break;
+	case 3:
+		num = "3";
+		break;
+	case 4:
+		num = "4";
 	}
 
 	
@@ -110,12 +116,12 @@ void Rockets::changeSprite(int palette)
 		break;
 	}
 
-	if (grounded == false && spriteClock.getElapsedTime().asMilliseconds() >= 250)
+	if (grounded == false && spriteClock.getElapsedTime().asMilliseconds() >= 150)
 	{
 		spriteClock.restart();
 		spriteNum++;
-		if (spriteNum == 3)
-			spriteNum = 0;
+		if (spriteNum == 4)
+			spriteNum = 1;
 	}
 
 	file = "./sprites/" + color + "rocket" + num + ".png";

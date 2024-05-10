@@ -103,7 +103,8 @@ void Level::readFromFile(std::string fileName)
 //erases the levels from the level array of vectors
 void Level::clearVec()
 {
-	levelArrVec->clear();
+	for (int i = 0; i < 25; i++)
+		levelArrVec[i].clear();
 	return;
 }
 

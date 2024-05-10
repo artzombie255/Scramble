@@ -93,6 +93,7 @@ void ScrambleGame::playGame()
     srand(time(NULL));
 
     //loads levels into array of vectors
+    level->readFromFile("levelIntro.txt");
     level->readFromFile("level1.txt");
     level->readFromFile("level2.txt");
     level->readFromFile("level3.txt");
@@ -261,7 +262,7 @@ void ScrambleGame::playGame()
                 player.setPosition(400, 200);
                 player.changeFuelSpeed();
             }
-            player.crash(enemyVec, currentLevel, level, viewPort, palette, textMove);
+            player.crash(enemyVec, currentLevel, level, viewPort, palette, textMove, levelArrVec);
             player.crash(levelArrVec, level->getSprite(), currentLevel, 
             level, viewPort, enemyVec, palette, textMove);
 

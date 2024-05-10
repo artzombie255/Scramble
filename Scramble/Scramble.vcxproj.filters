@@ -92,10 +92,15 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt" />
-    <Text Include="level1.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
     <Text Include="level2.txt" />
+    <Text Include="level3.txt" />
+    <Text Include="level4.txt" />
+    <Text Include="level5.txt" />
+    <Text Include="level6.txt" />
+    <Text Include="level1.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="levelIntro.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader_colour_swap.frag">
@@ -146,6 +151,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="sprites\fuel8.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="sprites\gameover.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
