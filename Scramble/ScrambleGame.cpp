@@ -11,6 +11,7 @@
 #include "Ufo.h"
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <windows.h>
 
 
 ScrambleGame::ScrambleGame()
@@ -43,7 +44,7 @@ void ScrambleGame::playGame()
     flagText.loadFromFile("./sprites/flag.png");
     flagSprite.setTexture(flagText);
     flagSprite.setScale(3, 3);
-    flagSprite.setPosition(654, 792);
+    flagSprite.setPosition(654, 720);
 
     //gameover sprites
     sf::Texture endText;
@@ -176,6 +177,46 @@ void ScrambleGame::playGame()
     fuelTxt.setPosition(100, 700);
     fuelTxt.setCharacterSize(fuelTxt.getCharacterSize() * 3 / 4);
     fuelTxt.setFillColor(sf::Color::Yellow);
+
+
+
+    if (window.isOpen())
+    {
+        sf::Texture screen1Txt, screen2Txt, screen3Txt, screen4Txt;
+        screen1Txt.loadFromFile("./sprites/screen1.png");
+        screen2Txt.loadFromFile("./sprites/screen2.png");
+        //screen3Txt.loadFromFile("./sprites/screen3.png");
+        screen4Txt.loadFromFile("./sprites/screen4.png");
+        sf::Sprite screen1, screen2, screen3, screen4;
+        screen1.setTexture(screen1Txt);
+        screen2.setTexture(screen2Txt);
+        //screen3.setTexture(screen3Txt);
+        screen4.setTexture(screen4Txt);
+
+        window.draw(screen1);
+        window.display();
+        Sleep(2000);
+        window.clear();
+
+        window.draw(screen2);
+        window.draw(upTxt);
+        window.draw(highSTxt);
+        window.draw(highScoreTxt);
+        window.draw(scoreTxt);
+        window.display();
+        Sleep(4000);
+        window.clear();
+
+        window.draw(screen4);
+        window.draw(upTxt);
+        window.draw(highSTxt);
+        window.draw(highScoreTxt);
+        window.draw(scoreTxt);
+        window.display();
+        Sleep(10000);
+        window.clear();
+
+    }
   
     //window
     while (window.isOpen())
@@ -221,7 +262,7 @@ void ScrambleGame::playGame()
             highSTxt.setString(highSStr);
 
 
-
+        
         if (player.getLives() > 0)
         {
             //change sprites for palette change and animations
