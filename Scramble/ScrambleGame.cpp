@@ -29,8 +29,8 @@ void ScrambleGame::playGame()
 {
     //header = 32
     //bottom = 16
-    //play area = 224
-    sf::RenderWindow window(sf::VideoMode(672, 816), "Scramble");
+    //play area = 200
+    sf::RenderWindow window(sf::VideoMode(672, 744), "Scramble");
 	Player player;
     sf::RectangleShape bullet[4], missile[2];
     //can hold any enemy, deletes them when they are killed
@@ -86,8 +86,8 @@ void ScrambleGame::playGame()
     lifeSprite.setTexture(lifeTexture);
     lifeSprite.setScale(3, 3);
 
-    viewPort.setCenter(336, 408);
-    viewPort.setSize(672, 816);
+    viewPort.setCenter(336, 372);
+    viewPort.setSize(672, 744);
 
 
     srand(time(NULL));
@@ -258,7 +258,7 @@ void ScrambleGame::playGame()
                 {
                     enemyVec.at(i)->changeSprite(palette);
                 }
-                viewPort.setCenter(336, 408);
+                viewPort.setCenter(336, 372);
                 player.setPosition(400, 200);
                 player.changeFuelSpeed();
             }
@@ -327,7 +327,7 @@ void ScrambleGame::playGame()
             // End the current frame and display its contents on screen
             for (int i = 0; i < player.getLives(); i++)
             {
-                lifeSprite.setPosition(viewPort.getCenter().x - (viewPort.getSize().x / 2) + (50 * i), 764);
+                lifeSprite.setPosition(viewPort.getCenter().x - (viewPort.getSize().x / 2) + (50 * i), 719);
                 window.draw(lifeSprite);
             }
 

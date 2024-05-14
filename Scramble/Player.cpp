@@ -341,7 +341,7 @@ void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite,
 					level->readFromFile("level6.txt");
 				}
 
-				viewport.setCenter(336, 408);
+				viewport.setCenter(336, 372);
 				setPosition(400, 200);
 				
 				level->setLevelArrVec(levelArrVec);
@@ -582,7 +582,7 @@ void Player::fuelLoss(sf::Clock& clock,
 	//prints fuel bar
 	for (int i = 0; i < fuel / 8; i++)
 	{
-		fuelSprite.setPosition(viewPort.getCenter().x - 136 + (i * 24), 700);
+		fuelSprite.setPosition(viewPort.getCenter().x - 136 + (i * 24), 696);
 		window.draw(fuelSprite);
 		fuelBar++;
 	}
@@ -617,7 +617,7 @@ void Player::fuelLoss(sf::Clock& clock,
 		}
 
 		fuelSprite.setTexture(fuelTexture);
-		fuelSprite.setPosition(viewPort.getCenter().x - 136 + (fuel / 8 * 24), 700);
+		fuelSprite.setPosition(viewPort.getCenter().x - 136 + (fuel / 8 * 24), 696);
 		window.draw(fuelSprite);
 		fuelBar++;
 	}
@@ -629,9 +629,9 @@ void Player::fuelLoss(sf::Clock& clock,
 		fuelSprite.setTexture(fuelTexture);
 		if (fuel > 0)
 			fuelSprite.setPosition
-			(viewPort.getCenter().x - 136 + (((fuel / 8) + i) * 24), 700);
+			(viewPort.getCenter().x - 136 + (((fuel / 8) + i) * 24), 696);
 		else 
-			fuelSprite.setPosition(viewPort.getCenter().x - 136 + ((i - 1) * 24), 700);
+			fuelSprite.setPosition(viewPort.getCenter().x - 136 + ((i - 1) * 24), 696);
 		window.draw(fuelSprite);
 	}
 
