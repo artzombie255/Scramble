@@ -37,8 +37,13 @@ void ScrambleGame::playGame()
     std::vector<Enemy*> enemyVec;
     //animations and palette swaps
     sf::Clock clock, playerSpriteClock, fuelClock, paletteClock, levelClock;
-    sf::Sprite playerSprite, rocketSprite, lifeSprite;
-    sf::Texture lifeTexture;
+    sf::Sprite playerSprite, rocketSprite, lifeSprite, flagSprite;
+    sf::Texture lifeTexture, flagText;
+
+    flagText.loadFromFile("./sprites/flag.png");
+    flagSprite.setTexture(flagText);
+    flagSprite.setScale(3, 3);
+    flagSprite.setPosition(654, 792);
 
     //gameover sprites
     sf::Texture endText;
@@ -147,11 +152,13 @@ void ScrambleGame::playGame()
     highSTxt.setFont(font);
     highSTxt.setPosition(400, 22);
     highSTxt.setCharacterSize(highSTxt.getCharacterSize() * 3 / 4);
+    highSTxt.setFillColor(sf::Color::Yellow);
     sf::Text scoreTxt;
     scoreTxt.setString(scoreStr);
     scoreTxt.setFont(font);
     scoreTxt.setPosition(100, 22);
     scoreTxt.setCharacterSize(scoreTxt.getCharacterSize() * 3 / 4);
+    scoreTxt.setFillColor(sf::Color::Yellow);
     sf::Text upTxt;
     upTxt.setString("1UP");
     upTxt.setFont(font);
@@ -162,6 +169,13 @@ void ScrambleGame::playGame()
     highScoreTxt.setFont(font);
     highScoreTxt.setPosition(400, 0);
     highScoreTxt.setCharacterSize(highScoreTxt.getCharacterSize() * 3 / 4);
+
+    sf::Text fuelTxt;
+    fuelTxt.setString("FUEL");
+    fuelTxt.setFont(font);
+    fuelTxt.setPosition(100, 700);
+    fuelTxt.setCharacterSize(fuelTxt.getCharacterSize() * 3 / 4);
+    fuelTxt.setFillColor(sf::Color::Yellow);
   
     //window
     while (window.isOpen())
@@ -338,6 +352,8 @@ void ScrambleGame::playGame()
             window.draw(highSTxt);
             window.draw(highScoreTxt);
             window.draw(scoreTxt);
+            window.draw(flagSprite);
+            window.draw(fuelTxt);
 
             //updates player score
             score = player.getScore();
@@ -349,6 +365,8 @@ void ScrambleGame::playGame()
             scoreTxt.setPosition(100 + textMove, 22);
             upTxt.setPosition(100 + textMove, 0);
             highScoreTxt.setPosition(400 + textMove, 0);
+            flagSprite.setPosition(654 + textMove, 792);
+            fuelTxt.setPosition(100 + textMove, 700);
             //std::cout << viewPort.getCenter().x << std::endl;
         }
         else
@@ -361,6 +379,7 @@ void ScrambleGame::playGame()
             window.draw(scoreTxt);
             player.fuelLoss(fuelClock, window, viewPort);
             window.draw(endSprite);
+            window.draw(fuelTxt);
             window.display();
         }
     }
