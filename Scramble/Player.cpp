@@ -211,7 +211,7 @@ void Player::crash(std::vector<Enemy*> &enemyVec, int currentLevel,
 				level->readFromFile("level6.txt");
 			}
 
-			viewport.setCenter(336, 408);
+			viewport.setCenter(336, 372);
 			setPosition(400, 200);
 
 			level->setLevelArrVec(levelArrVec);
