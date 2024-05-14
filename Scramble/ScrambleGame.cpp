@@ -44,7 +44,7 @@ void ScrambleGame::playGame()
     flagText.loadFromFile("./sprites/flag.png");
     flagSprite.setTexture(flagText);
     flagSprite.setScale(3, 3);
-    flagSprite.setPosition(654, 792);
+    flagSprite.setPosition(654, 720);
 
     //gameover sprites
     sf::Texture endText;
@@ -406,7 +406,7 @@ void ScrambleGame::playGame()
             scoreTxt.setPosition(100 + textMove, 22);
             upTxt.setPosition(100 + textMove, 0);
             highScoreTxt.setPosition(400 + textMove, 0);
-            flagSprite.setPosition(654 + textMove, 792);
+            flagSprite.setPosition(654 + textMove, 720);
             fuelTxt.setPosition(100 + textMove, 700);
             //std::cout << viewPort.getCenter().x << std::endl;
         }
