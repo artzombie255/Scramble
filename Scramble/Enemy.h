@@ -11,6 +11,7 @@ public:
 	virtual void move(sf::Clock&, sf::View);
 	virtual int getPoints();
 	virtual int getFuel();
+	virtual bool getDestroyable();
 	virtual void print(sf::RenderWindow&);
 	virtual void changeSprite(int);
 	virtual bool isBase();

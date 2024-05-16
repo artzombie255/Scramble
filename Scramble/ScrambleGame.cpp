@@ -294,7 +294,7 @@ void ScrambleGame::playGame()
             if (currentLevel != level->currentLevel())
                 currentLevel = level->currentLevel();
 
-            if (currentLevel == 3 && meteorClock.getElapsedTime().asMilliseconds() > 250)
+            if (currentLevel == 3 && meteorClock.getElapsedTime().asMilliseconds() > 500)
             {
                 meteorClock.restart();
                 enemyVec.push_back(new Meteors(viewPort));

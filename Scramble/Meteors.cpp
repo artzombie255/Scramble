@@ -13,6 +13,7 @@ Meteors::Meteors(sf::View viewport)
 	setOrigin(0, 0);
 	setPosition(viewport.getCenter().x + 400, (rand() % 408 + 100));
 	name = "meteor.png";
+	destroyable = false;
 }
 
 Meteors::~Meteors()
@@ -20,9 +21,9 @@ Meteors::~Meteors()
 }
 
 
-void Meteors::move()
+void Meteors::move(sf::Clock& clock, sf::View viewport)
 {
-	//unfinished
+	sf::RectangleShape::move(-5, 0);
 }
 
 //displays meteors
@@ -36,7 +37,7 @@ void Meteors::print(sf::RenderWindow& window)
 //useless
 void Meteors::changeSprite(int palette)
 {
-	/*std::string file, num, color = "0";
+	std::string file, num;
 
 	switch (spriteNum)
 	{
@@ -52,20 +53,18 @@ void Meteors::changeSprite(int palette)
 	case 3:
 		num = "3";
 		break;
-	case 4:
-		num = "4";
 	}
 
-	if (grounded == false && spriteClock.getElapsedTime().asMilliseconds() >= 150)
+	if (spriteClock.getElapsedTime().asMilliseconds() >= 150)
 	{
 		spriteClock.restart();
 		spriteNum++;
-		if (spriteNum == 4)
-			spriteNum = 1;
+		if (spriteNum == 3)
+			spriteNum = 0;
 	}
 
-	file = "./sprites/" + color + "rocket" + num + ".png";
+	file = "./sprites/meteor" + num + ".png";
 	image.loadFromFile(file);
 	sprite.setTexture(image);
-	sprite.setScale(3, 3);*/
+	sprite.setScale(3, 3);
 }
