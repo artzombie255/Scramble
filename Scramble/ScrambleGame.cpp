@@ -37,7 +37,7 @@ void ScrambleGame::playGame()
     //can hold any enemy, deletes them when they are killed
     std::vector<Enemy*> enemyVec;
     //animations and palette swaps
-    sf::Clock clock, playerSpriteClock, fuelClock, paletteClock, levelClock, meteorClock;
+    sf::Clock clock, playerSpriteClock, fuelClock, paletteClock, levelClock, meteorClock, pointClock;
     sf::Sprite playerSprite, rocketSprite, lifeSprite, flagSprite;
     sf::Texture lifeTexture, flagText;
 
@@ -235,6 +235,13 @@ void ScrambleGame::playGame()
             player.shootMissiles(missile);
         }
 
+
+        if (pointClock.getElapsedTime().asMilliseconds() > 1000)
+        {
+            player.addPoints(10);
+            pointClock.restart();
+        }
+
         //change sprites for palette change and animations
         if (paletteClock.getElapsedTime().asMilliseconds() > 10000)
         {
@@ -324,15 +331,14 @@ void ScrambleGame::playGame()
                 player.setPosition(400, 200);
                 player.changeFuelSpeed();
             }
-            player.crash(enemyVec, currentLevel, level, viewPort, palette, textMove, levelArrVec);
+            player.crash(enemyVec, currentLevel, level, viewPort,
+            palette, textMove, levelArrVec, window, playerSprite);
             player.crash(levelArrVec, level->getSprite(), currentLevel, 
-            level, viewPort, enemyVec, palette, textMove);
+            level, viewPort, enemyVec, palette, textMove, window, playerSprite);
 
             //set up player sprite to print
             playerSprite.setPosition(player.getPosition().x - 39,
             player.getPosition().y - 9);
-            //set up player sprite to print
-            playerSprite.setPosition(player.getPosition().x - 39, player.getPosition().y - 9);
 
             // Clear the whole window before rendering a new frame
             window.clear();
