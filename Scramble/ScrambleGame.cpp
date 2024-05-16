@@ -37,7 +37,7 @@ void ScrambleGame::playGame()
     //can hold any enemy, deletes them when they are killed
     std::vector<Enemy*> enemyVec;
     //animations and palette swaps
-    sf::Clock clock, playerSpriteClock, fuelClock, paletteClock, levelClock;
+    sf::Clock clock, playerSpriteClock, fuelClock, paletteClock, levelClock, meteorClock;
     sf::Sprite playerSprite, rocketSprite, lifeSprite, flagSprite;
     sf::Texture lifeTexture, flagText;
 
@@ -294,6 +294,13 @@ void ScrambleGame::playGame()
             if (currentLevel != level->currentLevel())
                 currentLevel = level->currentLevel();
 
+            if (currentLevel == 3 && meteorClock.getElapsedTime().asMilliseconds() > 500)
+            {
+                meteorClock.restart();
+                enemyVec.push_back(new Meteors(viewPort));
+            }
+
+
 
             if (player.hit(enemyVec, bullet, missile) == 1)
             {
@@ -406,8 +413,8 @@ void ScrambleGame::playGame()
             scoreTxt.setPosition(100 + textMove, 22);
             upTxt.setPosition(100 + textMove, 0);
             highScoreTxt.setPosition(400 + textMove, 0);
-            flagSprite.setPosition(654 + textMove, 720);
-            fuelTxt.setPosition(100 + textMove, 700);
+            flagSprite.setPosition(654 + textMove, 719);
+            fuelTxt.setPosition(100 + textMove, 696);
             //std::cout << viewPort.getCenter().x << std::endl;
         }
         else

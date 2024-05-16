@@ -173,7 +173,7 @@ void Player::crash(std::vector<Enemy*> &enemyVec, int currentLevel,
 				level->readFromFile("level6.txt");
 				break;
 			case 3:
-				level->readFromFile("levelIntro.txt");
+				level->readFromFile("levelIntro2.txt");
 				level->readFromFile("level3.txt");
 				level->readFromFile("level4.txt");
 				level->readFromFile("level5.txt");
@@ -184,7 +184,7 @@ void Player::crash(std::vector<Enemy*> &enemyVec, int currentLevel,
 				level->readFromFile("level6.txt");
 				break;
 			case 4:
-				level->readFromFile("levelIntro.txt");
+				level->readFromFile("levelIntro2.txt");
 				level->readFromFile("level4.txt");
 				level->readFromFile("level5.txt");
 				level->readFromFile("level6.txt");
@@ -194,7 +194,7 @@ void Player::crash(std::vector<Enemy*> &enemyVec, int currentLevel,
 				level->readFromFile("level6.txt");
 				break;
 			case 5:
-				level->readFromFile("levelIntro.txt");
+				level->readFromFile("levelIntro2.txt");
 				level->readFromFile("level5.txt");
 				level->readFromFile("level6.txt");
 				level->readFromFile("level6.txt");
@@ -203,7 +203,7 @@ void Player::crash(std::vector<Enemy*> &enemyVec, int currentLevel,
 				level->readFromFile("level6.txt");
 				break;
 			case 6:
-				level->readFromFile("levelIntro.txt");
+				level->readFromFile("levelIntro2.txt");
 				level->readFromFile("level6.txt");
 				level->readFromFile("level6.txt");
 				level->readFromFile("level6.txt");
@@ -211,7 +211,7 @@ void Player::crash(std::vector<Enemy*> &enemyVec, int currentLevel,
 				level->readFromFile("level6.txt");
 			}
 
-			viewport.setCenter(336, 408);
+			viewport.setCenter(336, 372);
 			setPosition(400, 200);
 
 			level->setLevelArrVec(levelArrVec);
@@ -303,7 +303,7 @@ void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite,
 					level->readFromFile("level6.txt");
 					break;
 				case 3:
-					level->readFromFile("levelIntro.txt");
+					level->readFromFile("levelIntro2.txt");
 					level->readFromFile("level3.txt");
 					level->readFromFile("level4.txt");
 					level->readFromFile("level5.txt");
@@ -376,7 +376,7 @@ int Player::hit(std::vector<Enemy*> enemyVec,
 			sf::FloatRect bulletBounds = bullet[i].getGlobalBounds();
 			nextPos = bulletBounds;
 
-			if (enemyBounds.intersects(nextPos))
+			if (enemyBounds.intersects(nextPos) && enemyVec.at(j)->getDestroyable())
 			{
 				hit = true;
 				bullet[i].setPosition(-100, -100);
@@ -398,7 +398,7 @@ int Player::hit(std::vector<Enemy*> enemyVec,
 			nextPos.left += mxMove[i];
 			nextPos.top += myMove[i];
 
-			if (enemyBounds.intersects(nextPos))
+			if (enemyBounds.intersects(nextPos) && enemyVec.at(j)->getDestroyable())
 			{
 				hit = true;
 				missile[i].setPosition(-100, 900);

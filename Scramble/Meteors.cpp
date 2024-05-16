@@ -3,21 +3,27 @@
 
 Meteors::Meteors()
 {
-	setSize(sf::Vector2f(48, 48));
-	setOrigin(0, 0);
-	setPosition((rand() % 2000 + 300), 500);
-	name = "meteor.png";
+
 }
 
+
+Meteors::Meteors(sf::View viewport)
+{
+	setSize(sf::Vector2f(48, 48));
+	setOrigin(0, 0);
+	setPosition(viewport.getCenter().x + 400, (rand() % 408 + 100));
+	name = "meteor.png";
+	destroyable = false;
+}
 
 Meteors::~Meteors()
 {
 }
 
 
-void Meteors::move()
+void Meteors::move(sf::Clock& clock, sf::View viewport)
 {
-	//unfinished
+	sf::RectangleShape::move(-5, 0);
 }
 
 //displays meteors
@@ -31,5 +37,34 @@ void Meteors::print(sf::RenderWindow& window)
 //useless
 void Meteors::changeSprite(int palette)
 {
-	Enemy::changeSprite(palette);
+	std::string file, num;
+
+	switch (spriteNum)
+	{
+	case 0:
+		num = "0";
+		break;
+	case 1:
+		num = "1";
+		break;
+	case 2:
+		num = "2";
+		break;
+	case 3:
+		num = "3";
+		break;
+	}
+
+	if (spriteClock.getElapsedTime().asMilliseconds() >= 150)
+	{
+		spriteClock.restart();
+		spriteNum++;
+		if (spriteNum == 3)
+			spriteNum = 0;
+	}
+
+	file = "./sprites/meteor" + num + ".png";
+	image.loadFromFile(file);
+	sprite.setTexture(image);
+	sprite.setScale(3, 3);
 }
