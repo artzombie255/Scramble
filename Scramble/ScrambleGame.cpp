@@ -185,12 +185,12 @@ void ScrambleGame::playGame()
         sf::Texture screen1Txt, screen2Txt, screen3Txt, screen4Txt;
         screen1Txt.loadFromFile("./sprites/screen1.png");
         screen2Txt.loadFromFile("./sprites/screen2.png");
-        //screen3Txt.loadFromFile("./sprites/screen3.png");
+        screen3Txt.loadFromFile("./sprites/screen3.png");
         screen4Txt.loadFromFile("./sprites/screen4.png");
         sf::Sprite screen1, screen2, screen3, screen4;
         screen1.setTexture(screen1Txt);
         screen2.setTexture(screen2Txt);
-        //screen3.setTexture(screen3Txt);
+        screen3.setTexture(screen3Txt);
         screen4.setTexture(screen4Txt);
 
         window.draw(screen1);
@@ -199,6 +199,15 @@ void ScrambleGame::playGame()
         window.clear();
 
         window.draw(screen2);
+        window.draw(upTxt);
+        window.draw(highSTxt);
+        window.draw(highScoreTxt);
+        window.draw(scoreTxt);
+        window.display();
+        Sleep(4000);
+        window.clear();
+
+        window.draw(screen3);
         window.draw(upTxt);
         window.draw(highSTxt);
         window.draw(highScoreTxt);
