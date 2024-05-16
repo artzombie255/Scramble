@@ -313,6 +313,20 @@ void ScrambleGame::playGame()
 
             if (player.hit(enemyVec, bullet, missile) == 1)
             {
+                sf::Texture repeatTxt;
+                repeatTxt.loadFromFile("./sprites/repeat.png");
+ 
+                sf::Sprite repeat;
+                repeat.setTexture(repeatTxt);
+                window.draw(repeat);
+                window.draw(upTxt);
+                window.draw(highSTxt);
+                window.draw(highScoreTxt);
+                window.draw(scoreTxt);
+                window.display();
+                Sleep(4000);
+                window.clear();
+
                 int tempPoints;
                 player.addFuel(128);
                 textMove = 0;
@@ -332,6 +346,7 @@ void ScrambleGame::playGame()
                 viewPort.setCenter(336, 372);
                 player.setPosition(400, 200);
                 player.changeFuelSpeed();
+
             }
             player.crash(enemyVec, currentLevel, level, viewPort, palette, textMove, levelArrVec);
             player.crash(levelArrVec, level->getSprite(), currentLevel, 
