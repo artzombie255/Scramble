@@ -3,11 +3,12 @@
 #include "Enemy.h"
 #include "Level.h"
 #include <vector>
+#include <windows.h>
 
 
 Player::Player()
 {
-	setSize(sf::Vector2f(57, 33));
+	setSize(sf::Vector2f(40, 33));
 	setOrigin(0, 0);
 	setPosition(400, 200);
 }
@@ -109,7 +110,7 @@ void Player::setPoints(int tempPoints)
 //detects when the player crashes and calls level to deal with it
 void Player::crash(std::vector<Enemy*> &enemyVec, int currentLevel,
 	Level* &level, sf::View &viewport, int palette, int &textMove, 
-	std::vector<char> levelArrVec[25])
+	std::vector<char> levelArrVec[25], sf::RenderWindow& window, sf::Sprite& playerSprite)
 {
 	sf::FloatRect nextPos;
 	sf::FloatRect playerBounds = getGlobalBounds();
@@ -130,6 +131,23 @@ void Player::crash(std::vector<Enemy*> &enemyVec, int currentLevel,
 			std::cout << "hit";
 			lives--;
 			fuel = 128;
+
+			for (int i = 0; i < 28; i++)
+			{
+				std::string file;
+				int temp = i / 7;
+				level->colorSwap(i % 7);
+				viewport.move(-3, 0);
+				level->loadLevel(window, viewport, enemyVec);
+				file = "./sprites/playerBoom" + std::to_string(temp) + ".png";
+				image.loadFromFile(file);
+				playerSprite.setTexture(image);
+				playerSprite.setScale(3, 3);
+				playerSprite.setPosition(getPosition().x - 39,
+					getPosition().y - 9);
+				window.display();
+				Sleep(50);
+			}
 
 			textMove = 0;
 
@@ -230,7 +248,7 @@ void Player::crash(std::vector<Enemy*> &enemyVec, int currentLevel,
 
 void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite, 
 	int currentLevel, Level* &level, sf::View &viewport, std::vector<Enemy*> 
-	&enemyVec, int palette, int &textMove)
+	&enemyVec, int palette, int &textMove, sf::RenderWindow& window, sf::Sprite& playerSprite)
 {
 	sf::FloatRect nextPos;
 	sf::FloatRect playerBounds = getGlobalBounds();
@@ -260,6 +278,23 @@ void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite,
 				std::cout << "collide";
 				lives--;
 				fuel = 128;
+
+				for (int i = 0; i < 28; i++)
+				{
+					std::string file;
+					int temp = i / 7;
+					level->colorSwap(i % 7);
+					viewport.move(-3, 0);
+					level->loadLevel(window, viewport, enemyVec);
+					file = "./sprites/playerBoom" + std::to_string(temp) + ".png";
+					image.loadFromFile(file);
+					playerSprite.setTexture(image);
+					playerSprite.setScale(3, 3);
+					playerSprite.setPosition(getPosition().x - 39,
+						getPosition().y - 9);
+					window.display();
+					Sleep(50);
+				}
 
 				textMove = 0;
 
