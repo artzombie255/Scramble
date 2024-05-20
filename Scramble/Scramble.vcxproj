@@ -181,6 +181,7 @@
     <Text Include="level4.txt" />
     <Text Include="level5.txt" />
     <Text Include="level6.txt" />
+    <Text Include="levelIntro.txt" />
     <Text Include="README.txt" />
   </ItemGroup>
   <ItemGroup>

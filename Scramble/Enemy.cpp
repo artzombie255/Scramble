@@ -34,6 +34,11 @@ int Enemy::getFuel()
 	return 0;
 }
 
+bool Enemy::getDestroyable()
+{
+	return destroyable;
+}
+
 
 //pastes enemy
 void Enemy::print(sf::RenderWindow& window)

@@ -103,7 +103,8 @@ void Level::readFromFile(std::string fileName)
 //erases the levels from the level array of vectors
 void Level::clearVec()
 {
-	levelArrVec->clear();
+	for (int i = 0; i < 25; i++)
+		levelArrVec[i].clear();
 	return;
 }
 
@@ -212,7 +213,8 @@ sf::Sprite Level::getSprite()
 //sets the array of vectors to make each level
 void Level::setLevelArrVec(std::vector<char> tempLevelArrVec[25])
 {
-	tempLevelArrVec->clear();
+	for (int i = 0; i < 25; i++)
+		tempLevelArrVec[i].clear();
 	for (int j = 0; j < 25; j++)
 	{
 		for (int i = 0; i < levelArrVec[0].size(); i++)
@@ -220,6 +222,7 @@ void Level::setLevelArrVec(std::vector<char> tempLevelArrVec[25])
 			tempLevelArrVec[j].push_back(levelArrVec[j][i]);
 		}
 	}
+	return;
 }
 
 //returns the current level player is on

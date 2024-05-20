@@ -3,11 +3,12 @@
 #include "Enemy.h"
 #include "Level.h"
 #include <vector>
+#include <windows.h>
 
 
 Player::Player()
 {
-	setSize(sf::Vector2f(57, 33));
+	setSize(sf::Vector2f(40, 33));
 	setOrigin(0, 0);
 	setPosition(400, 200);
 }
@@ -108,7 +109,8 @@ void Player::setPoints(int tempPoints)
 
 //detects when the player crashes and calls level to deal with it
 void Player::crash(std::vector<Enemy*> &enemyVec, int currentLevel,
-	Level* level, sf::View &viewport, int palette, int &textMove)
+	Level* &level, sf::View &viewport, int palette, int &textMove, 
+	std::vector<char> levelArrVec[25], sf::RenderWindow& window, sf::Sprite& playerSprite)
 {
 	sf::FloatRect nextPos;
 	sf::FloatRect playerBounds = getGlobalBounds();
@@ -130,6 +132,23 @@ void Player::crash(std::vector<Enemy*> &enemyVec, int currentLevel,
 			lives--;
 			fuel = 128;
 
+			for (int i = 0; i < 28; i++)
+			{
+				std::string file;
+				int temp = i / 7;
+				level->colorSwap(i % 7);
+				viewport.move(-3, 0);
+				level->loadLevel(window, viewport, enemyVec);
+				file = "./sprites/playerBoom" + std::to_string(temp) + ".png";
+				image.loadFromFile(file);
+				playerSprite.setTexture(image);
+				playerSprite.setScale(3, 3);
+				playerSprite.setPosition(getPosition().x - 39,
+					getPosition().y - 9);
+				window.display();
+				Sleep(50);
+			}
+
 			textMove = 0;
 
 			//clears enemies
@@ -140,6 +159,80 @@ void Player::crash(std::vector<Enemy*> &enemyVec, int currentLevel,
 			}
 			points = tempPoints;
 
+			level->clearVec();
+
+			//set player and viewport
+			std::cout << currentLevel;
+			switch (currentLevel)
+			{
+			case 1:
+				level->readFromFile("levelIntro.txt");
+				level->readFromFile("level1.txt");
+				level->readFromFile("level2.txt");
+				level->readFromFile("level3.txt");
+				level->readFromFile("level4.txt");
+				level->readFromFile("level5.txt");
+				level->readFromFile("level6.txt");
+				level->readFromFile("level6.txt");
+				level->readFromFile("level6.txt");
+				level->readFromFile("level6.txt");
+				level->readFromFile("level6.txt");
+				break;
+			case 2:
+				level->readFromFile("levelIntro.txt");
+				level->readFromFile("level2.txt");
+				level->readFromFile("level3.txt");
+				level->readFromFile("level4.txt");
+				level->readFromFile("level5.txt");
+				level->readFromFile("level6.txt");
+				level->readFromFile("level6.txt");
+				level->readFromFile("level6.txt");
+				level->readFromFile("level6.txt");
+				level->readFromFile("level6.txt");
+				break;
+			case 3:
+				level->readFromFile("levelIntro2.txt");
+				level->readFromFile("level3.txt");
+				level->readFromFile("level4.txt");
+				level->readFromFile("level5.txt");
+				level->readFromFile("level6.txt");
+				level->readFromFile("level6.txt");
+				level->readFromFile("level6.txt");
+				level->readFromFile("level6.txt");
+				level->readFromFile("level6.txt");
+				break;
+			case 4:
+				level->readFromFile("levelIntro2.txt");
+				level->readFromFile("level4.txt");
+				level->readFromFile("level5.txt");
+				level->readFromFile("level6.txt");
+				level->readFromFile("level6.txt");
+				level->readFromFile("level6.txt");
+				level->readFromFile("level6.txt");
+				level->readFromFile("level6.txt");
+				break;
+			case 5:
+				level->readFromFile("levelIntro2.txt");
+				level->readFromFile("level5.txt");
+				level->readFromFile("level6.txt");
+				level->readFromFile("level6.txt");
+				level->readFromFile("level6.txt");
+				level->readFromFile("level6.txt");
+				level->readFromFile("level6.txt");
+				break;
+			case 6:
+				level->readFromFile("levelIntro2.txt");
+				level->readFromFile("level6.txt");
+				level->readFromFile("level6.txt");
+				level->readFromFile("level6.txt");
+				level->readFromFile("level6.txt");
+				level->readFromFile("level6.txt");
+			}
+
+			viewport.setCenter(336, 372);
+			setPosition(400, 200);
+
+			level->setLevelArrVec(levelArrVec);
 			//resets enemies
 			level->setEntities(enemyVec);
 
@@ -147,37 +240,6 @@ void Player::crash(std::vector<Enemy*> &enemyVec, int currentLevel,
 			{
 				enemyVec.at(i)->changeSprite(palette);
 			}
-
-			//set player and viewport
-			std::cout << currentLevel;
-			switch (currentLevel)
-			{
-			case 1:
-				viewport.setCenter(336, 408);
-				setPosition(400, 200);
-				break;
-			case 2:
-				viewport.setCenter(8600, 408);
-				setPosition(8664, 200);
-				break;
-			case 3:
-				viewport.setCenter(14076, 408);
-				setPosition(14140, 200);
-				break;
-			case 4:
-				viewport.setCenter(19400, 408);
-				setPosition(19440, 150);
-				break;
-			case 5:
-				viewport.setCenter(27472, 408);
-				setPosition(27536, 225);
-				break;
-			case 6:
-				viewport.setCenter(32648, 408);
-				setPosition(32712, 175);
-			}
-			return;
-			//respawn
 		}
 		
 	}
@@ -185,8 +247,8 @@ void Player::crash(std::vector<Enemy*> &enemyVec, int currentLevel,
 
 
 void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite, 
-	int currentLevel, Level* level, sf::View &viewport, std::vector<Enemy*> 
-	&enemyVec, int palette, int &textMove)
+	int currentLevel, Level* &level, sf::View &viewport, std::vector<Enemy*> 
+	&enemyVec, int palette, int &textMove, sf::RenderWindow& window, sf::Sprite& playerSprite)
 {
 	sf::FloatRect nextPos;
 	sf::FloatRect playerBounds = getGlobalBounds();
@@ -217,6 +279,23 @@ void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite,
 				lives--;
 				fuel = 128;
 
+				for (int i = 0; i < 28; i++)
+				{
+					std::string file;
+					int temp = i / 7;
+					level->colorSwap(i % 7);
+					viewport.move(-3, 0);
+					level->loadLevel(window, viewport, enemyVec);
+					file = "./sprites/playerBoom" + std::to_string(temp) + ".png";
+					image.loadFromFile(file);
+					playerSprite.setTexture(image);
+					playerSprite.setScale(3, 3);
+					playerSprite.setPosition(getPosition().x - 39,
+						getPosition().y - 9);
+					window.display();
+					Sleep(50);
+				}
+
 				textMove = 0;
 
 				//clears enemies
@@ -227,6 +306,80 @@ void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite,
 				}
 				points = tempPoints;
 
+				level->clearVec();
+
+				//set player and viewport
+				std::cout << currentLevel;
+				switch (currentLevel)
+				{
+				case 1:
+					level->readFromFile("levelIntro.txt");
+					level->readFromFile("level1.txt");
+					level->readFromFile("level2.txt");
+					level->readFromFile("level3.txt");
+					level->readFromFile("level4.txt");
+					level->readFromFile("level5.txt");
+					level->readFromFile("level6.txt");
+					level->readFromFile("level6.txt");
+					level->readFromFile("level6.txt");
+					level->readFromFile("level6.txt");
+					level->readFromFile("level6.txt");
+					break;
+				case 2:
+					level->readFromFile("levelIntro.txt");
+					level->readFromFile("level2.txt");
+					level->readFromFile("level3.txt");
+					level->readFromFile("level4.txt");
+					level->readFromFile("level5.txt");
+					level->readFromFile("level6.txt");
+					level->readFromFile("level6.txt");
+					level->readFromFile("level6.txt");
+					level->readFromFile("level6.txt");
+					level->readFromFile("level6.txt");
+					break;
+				case 3:
+					level->readFromFile("levelIntro2.txt");
+					level->readFromFile("level3.txt");
+					level->readFromFile("level4.txt");
+					level->readFromFile("level5.txt");
+					level->readFromFile("level6.txt");
+					level->readFromFile("level6.txt");
+					level->readFromFile("level6.txt");
+					level->readFromFile("level6.txt");
+					level->readFromFile("level6.txt");
+					break;
+				case 4:
+					level->readFromFile("levelIntro.txt");
+					level->readFromFile("level4.txt");
+					level->readFromFile("level5.txt");
+					level->readFromFile("level6.txt");
+					level->readFromFile("level6.txt");
+					level->readFromFile("level6.txt");
+					level->readFromFile("level6.txt");
+					level->readFromFile("level6.txt");
+					break;
+				case 5:
+					level->readFromFile("levelIntro.txt");
+					level->readFromFile("level5.txt");
+					level->readFromFile("level6.txt");
+					level->readFromFile("level6.txt");
+					level->readFromFile("level6.txt");
+					level->readFromFile("level6.txt");
+					level->readFromFile("level6.txt");
+					break;
+				case 6:
+					level->readFromFile("levelIntro.txt");
+					level->readFromFile("level6.txt");
+					level->readFromFile("level6.txt");
+					level->readFromFile("level6.txt");
+					level->readFromFile("level6.txt");
+					level->readFromFile("level6.txt");
+				}
+
+				viewport.setCenter(336, 372);
+				setPosition(400, 200);
+				
+				level->setLevelArrVec(levelArrVec);
 				//resets enemies
 				level->setEntities(enemyVec);
 
@@ -235,35 +388,6 @@ void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite,
 					enemyVec.at(i)->changeSprite(palette);
 				}
 
-				//set player and viewport
-				std::cout << currentLevel;
-				switch (currentLevel)
-				{
-				case 1:
-					viewport.setCenter(336, 408);
-					setPosition(400, 200);
-					break;
-				case 2:
-					viewport.setCenter(8600, 408);
-					setPosition(8664, 200);
-					break;
-				case 3:
-					viewport.setCenter(14076, 408);
-					setPosition(14140, 200);
-					break;	
-				case 4:
-					viewport.setCenter(19400, 408);
-					setPosition(19440, 150);
-					break;
-				case 5:
-					viewport.setCenter(27472, 408);
-					setPosition(27536, 225);
-					break;
-				case 6:
-					viewport.setCenter(32648, 408);
-					setPosition(32712, 175);
-				}
-				
 				return;
 			}
 		}
@@ -287,7 +411,7 @@ int Player::hit(std::vector<Enemy*> enemyVec,
 			sf::FloatRect bulletBounds = bullet[i].getGlobalBounds();
 			nextPos = bulletBounds;
 
-			if (enemyBounds.intersects(nextPos))
+			if (enemyBounds.intersects(nextPos) && enemyVec.at(j)->getDestroyable())
 			{
 				hit = true;
 				bullet[i].setPosition(-100, -100);
@@ -309,7 +433,7 @@ int Player::hit(std::vector<Enemy*> enemyVec,
 			nextPos.left += mxMove[i];
 			nextPos.top += myMove[i];
 
-			if (enemyBounds.intersects(nextPos))
+			if (enemyBounds.intersects(nextPos) && enemyVec.at(j)->getDestroyable())
 			{
 				hit = true;
 				missile[i].setPosition(-100, 900);
@@ -493,7 +617,7 @@ void Player::fuelLoss(sf::Clock& clock,
 	//prints fuel bar
 	for (int i = 0; i < fuel / 8; i++)
 	{
-		fuelSprite.setPosition(viewPort.getCenter().x - 136 + (i * 24), 700);
+		fuelSprite.setPosition(viewPort.getCenter().x - 136 + (i * 24), 696);
 		window.draw(fuelSprite);
 		fuelBar++;
 	}
@@ -528,7 +652,7 @@ void Player::fuelLoss(sf::Clock& clock,
 		}
 
 		fuelSprite.setTexture(fuelTexture);
-		fuelSprite.setPosition(viewPort.getCenter().x - 136 + (fuel / 8 * 24), 700);
+		fuelSprite.setPosition(viewPort.getCenter().x - 136 + (fuel / 8 * 24), 696);
 		window.draw(fuelSprite);
 		fuelBar++;
 	}
@@ -540,9 +664,9 @@ void Player::fuelLoss(sf::Clock& clock,
 		fuelSprite.setTexture(fuelTexture);
 		if (fuel > 0)
 			fuelSprite.setPosition
-			(viewPort.getCenter().x - 136 + (((fuel / 8) + i) * 24), 700);
+			(viewPort.getCenter().x - 136 + (((fuel / 8) + i) * 24), 696);
 		else 
-			fuelSprite.setPosition(viewPort.getCenter().x - 136 + ((i - 1) * 24), 700);
+			fuelSprite.setPosition(viewPort.getCenter().x - 136 + ((i - 1) * 24), 696);
 		window.draw(fuelSprite);
 	}
 

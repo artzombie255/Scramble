@@ -11,6 +11,7 @@
 #include "Ufo.h"
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <windows.h>
 
 
 ScrambleGame::ScrambleGame()
@@ -29,16 +30,21 @@ void ScrambleGame::playGame()
 {
     //header = 32
     //bottom = 16
-    //play area = 224
-    sf::RenderWindow window(sf::VideoMode(672, 816), "Scramble");
+    //play area = 200
+    sf::RenderWindow window(sf::VideoMode(672, 744), "Scramble");
 	Player player;
     sf::RectangleShape bullet[4], missile[2];
     //can hold any enemy, deletes them when they are killed
     std::vector<Enemy*> enemyVec;
     //animations and palette swaps
-    sf::Clock clock, playerSpriteClock, fuelClock, paletteClock, levelClock;
-    sf::Sprite playerSprite, rocketSprite, lifeSprite;
-    sf::Texture lifeTexture;
+    sf::Clock clock, playerSpriteClock, fuelClock, paletteClock, levelClock, meteorClock, pointClock;
+    sf::Sprite playerSprite, rocketSprite, lifeSprite, flagSprite;
+    sf::Texture lifeTexture, flagText;
+
+    flagText.loadFromFile("./sprites/flag.png");
+    flagSprite.setTexture(flagText);
+    flagSprite.setScale(3, 3);
+    flagSprite.setPosition(654, 720);
 
     //gameover sprites
     sf::Texture endText;
@@ -86,13 +92,14 @@ void ScrambleGame::playGame()
     lifeSprite.setTexture(lifeTexture);
     lifeSprite.setScale(3, 3);
 
-    viewPort.setCenter(336, 408);
-    viewPort.setSize(672, 816);
+    viewPort.setCenter(336, 372);
+    viewPort.setSize(672, 744);
 
 
     srand(time(NULL));
 
     //loads levels into array of vectors
+    level->readFromFile("levelIntro.txt");
     level->readFromFile("level1.txt");
     level->readFromFile("level2.txt");
     level->readFromFile("level3.txt");
@@ -146,11 +153,13 @@ void ScrambleGame::playGame()
     highSTxt.setFont(font);
     highSTxt.setPosition(400, 22);
     highSTxt.setCharacterSize(highSTxt.getCharacterSize() * 3 / 4);
+    highSTxt.setFillColor(sf::Color::Yellow);
     sf::Text scoreTxt;
     scoreTxt.setString(scoreStr);
     scoreTxt.setFont(font);
     scoreTxt.setPosition(100, 22);
     scoreTxt.setCharacterSize(scoreTxt.getCharacterSize() * 3 / 4);
+    scoreTxt.setFillColor(sf::Color::Yellow);
     sf::Text upTxt;
     upTxt.setString("1UP");
     upTxt.setFont(font);
@@ -161,6 +170,62 @@ void ScrambleGame::playGame()
     highScoreTxt.setFont(font);
     highScoreTxt.setPosition(400, 0);
     highScoreTxt.setCharacterSize(highScoreTxt.getCharacterSize() * 3 / 4);
+
+    sf::Text fuelTxt;
+    fuelTxt.setString("FUEL");
+    fuelTxt.setFont(font);
+    fuelTxt.setPosition(100, 700);
+    fuelTxt.setCharacterSize(fuelTxt.getCharacterSize() * 3 / 4);
+    fuelTxt.setFillColor(sf::Color::Yellow);
+
+
+
+    if (window.isOpen())
+    {
+        sf::Texture screen1Txt, screen2Txt, screen3Txt, screen4Txt;
+        screen1Txt.loadFromFile("./sprites/screen1.png");
+        screen2Txt.loadFromFile("./sprites/screen2.png");
+        screen3Txt.loadFromFile("./sprites/screen3.png");
+        screen4Txt.loadFromFile("./sprites/screen4.png");
+        sf::Sprite screen1, screen2, screen3, screen4;
+        screen1.setTexture(screen1Txt);
+        screen2.setTexture(screen2Txt);
+        screen3.setTexture(screen3Txt);
+        screen4.setTexture(screen4Txt);
+
+        window.draw(screen1);
+        window.display();
+        Sleep(2000);
+        window.clear();
+
+        window.draw(screen2);
+        window.draw(upTxt);
+        window.draw(highSTxt);
+        window.draw(highScoreTxt);
+        window.draw(scoreTxt);
+        window.display();
+        Sleep(4000);
+        window.clear();
+
+        window.draw(screen3);
+        window.draw(upTxt);
+        window.draw(highSTxt);
+        window.draw(highScoreTxt);
+        window.draw(scoreTxt);
+        window.display();
+        Sleep(4000);
+        window.clear();
+
+        window.draw(screen4);
+        window.draw(upTxt);
+        window.draw(highSTxt);
+        window.draw(highScoreTxt);
+        window.draw(scoreTxt);
+        window.display();
+        Sleep(10000);
+        window.clear();
+
+    }
   
     //window
     while (window.isOpen())
@@ -177,6 +242,13 @@ void ScrambleGame::playGame()
             player.moveCheck();
             player.shootBlaster(bullet);
             player.shootMissiles(missile);
+        }
+
+
+        if (pointClock.getElapsedTime().asMilliseconds() > 1000)
+        {
+            player.addPoints(10);
+            pointClock.restart();
         }
 
         //change sprites for palette change and animations
@@ -206,7 +278,7 @@ void ScrambleGame::playGame()
             highSTxt.setString(highSStr);
 
 
-
+        
         if (player.getLives() > 0)
         {
             //change sprites for palette change and animations
@@ -238,9 +310,30 @@ void ScrambleGame::playGame()
             if (currentLevel != level->currentLevel())
                 currentLevel = level->currentLevel();
 
+            if (currentLevel == 3 && meteorClock.getElapsedTime().asMilliseconds() > 500)
+            {
+                meteorClock.restart();
+                enemyVec.push_back(new Meteors(viewPort));
+            }
+
+
 
             if (player.hit(enemyVec, bullet, missile) == 1)
             {
+                sf::Texture repeatTxt;
+                repeatTxt.loadFromFile("./sprites/repeat.png");
+ 
+                sf::Sprite repeat;
+                repeat.setTexture(repeatTxt);
+                window.draw(repeat);
+                window.draw(upTxt);
+                window.draw(highSTxt);
+                window.draw(highScoreTxt);
+                window.draw(scoreTxt);
+                window.display();
+                Sleep(4000);
+                window.clear();
+
                 int tempPoints;
                 player.addFuel(128);
                 textMove = 0;
@@ -257,19 +350,19 @@ void ScrambleGame::playGame()
                 {
                     enemyVec.at(i)->changeSprite(palette);
                 }
-                viewPort.setCenter(336, 408);
+                viewPort.setCenter(336, 372);
                 player.setPosition(400, 200);
                 player.changeFuelSpeed();
+
             }
-            player.crash(enemyVec, currentLevel, level, viewPort, palette, textMove);
+            player.crash(enemyVec, currentLevel, level, viewPort,
+            palette, textMove, levelArrVec, window, playerSprite);
             player.crash(levelArrVec, level->getSprite(), currentLevel, 
-            level, viewPort, enemyVec, palette, textMove);
+            level, viewPort, enemyVec, palette, textMove, window, playerSprite);
 
             //set up player sprite to print
             playerSprite.setPosition(player.getPosition().x - 39,
             player.getPosition().y - 9);
-            //set up player sprite to print
-            playerSprite.setPosition(player.getPosition().x - 39, player.getPosition().y - 9);
 
             // Clear the whole window before rendering a new frame
             window.clear();
@@ -326,7 +419,7 @@ void ScrambleGame::playGame()
             // End the current frame and display its contents on screen
             for (int i = 0; i < player.getLives(); i++)
             {
-                lifeSprite.setPosition(viewPort.getCenter().x - (viewPort.getSize().x / 2) + (50 * i), 764);
+                lifeSprite.setPosition(viewPort.getCenter().x - (viewPort.getSize().x / 2) + (50 * i), 719);
                 window.draw(lifeSprite);
             }
 
@@ -337,6 +430,8 @@ void ScrambleGame::playGame()
             window.draw(highSTxt);
             window.draw(highScoreTxt);
             window.draw(scoreTxt);
+            window.draw(flagSprite);
+            window.draw(fuelTxt);
 
             //updates player score
             score = player.getScore();
@@ -348,6 +443,8 @@ void ScrambleGame::playGame()
             scoreTxt.setPosition(100 + textMove, 22);
             upTxt.setPosition(100 + textMove, 0);
             highScoreTxt.setPosition(400 + textMove, 0);
+            flagSprite.setPosition(654 + textMove, 719);
+            fuelTxt.setPosition(100 + textMove, 696);
             //std::cout << viewPort.getCenter().x << std::endl;
         }
         else
@@ -360,6 +457,7 @@ void ScrambleGame::playGame()
             window.draw(scoreTxt);
             player.fuelLoss(fuelClock, window, viewPort);
             window.draw(endSprite);
+            window.draw(fuelTxt);
             window.display();
         }
     }
