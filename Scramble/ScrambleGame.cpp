@@ -310,14 +310,17 @@ void ScrambleGame::playGame()
             //move entities
             player.move(bullet, missile, viewPort);
 
+            //moves enemies
             for (int i = 0; i < enemyVec.size(); i++)
             {
                 enemyVec.at(i)->move(clock, viewPort);
             }
 
+            //changes the level
             if (currentLevel != level->currentLevel())
                 currentLevel = level->currentLevel();
 
+            //adds meteors
             if (currentLevel == 3 && meteorClock.getElapsedTime().asMilliseconds() > 500)
             {
                 meteorClock.restart();
