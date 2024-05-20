@@ -125,6 +125,22 @@ void Rockets::changeSprite(int palette)
 	}
 
 	file = "./sprites/" + color + "rocket" + num + ".png";
+
+	if (destroyed == true)
+	{
+		file = "./sprites/" + color + "enemyBoom" + std::to_string(boomNum) + ".png";
+		if (boomClock.getElapsedTime().asMilliseconds() >= 250)
+		{
+			boomClock.restart();
+			boomNum++;
+			if (boomNum == 4)
+			{
+				setPosition(-200, -200);
+				destroyed = false;
+			}
+		}
+	}
+
 	image.loadFromFile(file);
 	sprite.setTexture(image);
 	sprite.setScale(3, 3);

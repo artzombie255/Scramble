@@ -55,6 +55,25 @@ void Ufo::print(sf::RenderWindow& window)
 //useless
 void Ufo::changeSprite(int palette)
 {
+	std::string file;
+
+	if (destroyed == true)
+	{
+		file = "./sprites/UfoBoom" + std::to_string(boomNum) + ".png";
+		if (boomClock.getElapsedTime().asMilliseconds() >= 250)
+		{
+			boomClock.restart();
+			boomNum++;
+			if (boomNum == 4)
+			{
+				setPosition(-200, -200);
+				destroyed = false;
+			}
+		}
+	}
+	image.loadFromFile(file);
+	sprite.setTexture(image);
+	sprite.setScale(3, 3);
 }
 
 //returms points given for destroying ufo

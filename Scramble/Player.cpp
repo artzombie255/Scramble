@@ -292,6 +292,7 @@ void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite,
 					playerSprite.setScale(3, 3);
 					playerSprite.setPosition(getPosition().x - 39,
 						getPosition().y - 9);
+					window.draw(playerSprite);
 					window.display();
 					Sleep(50);
 				}
@@ -420,7 +421,7 @@ int Player::hit(std::vector<Enemy*> enemyVec,
 				{
 					addPoints(enemyVec.at(j)->getPoints());
 					addFuel(enemyVec.at(j)->getFuel());
-					enemyVec.at(j)->setPosition(-200, -200);
+					enemyVec.at(j)->setDestroyed(true);
 					//delete enemyVec.at(j);
 					//std::cout << points;
 				}
@@ -442,7 +443,7 @@ int Player::hit(std::vector<Enemy*> enemyVec,
 				{
 					addPoints(enemyVec.at(j)->getPoints());
 					addFuel(enemyVec.at(j)->getFuel());
-					enemyVec.at(j)->setPosition(-200, -200);
+					enemyVec.at(j)->setDestroyed(true);
 					//delete enemyVec.at(j);
 					//std::cout << points;
 				}
