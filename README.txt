@@ -44,5 +44,13 @@ The game terrain is contained in LevelArrVec, this is an array of vectors.
 When levels are loaded the levels get added on the back of the array of vectors.
 When the player dies, the levels are reloaded with the pre-level at the beginning. 
 
+Enemies Characters
+Rocket = R
+Ufo = U
+Altar = A
+Fuel Tower = F
+Base = B
+
+
 
 
