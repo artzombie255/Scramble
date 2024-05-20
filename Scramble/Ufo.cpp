@@ -36,7 +36,7 @@ Ufo::~Ufo()
 //moves ufo up and down
 void Ufo::move(sf::Clock &clock, sf::View viewport)
 {
-	//if (getPosition().x < 800)
+	if (destroyed == false)
 		sf::RectangleShape::move(0, moveDir);
 
 	if (getPosition().y >= start)

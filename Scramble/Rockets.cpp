@@ -26,7 +26,7 @@ Rockets::~Rockets()
 void Rockets::move(sf::Clock &clock, sf::View viewport)
 {
 	//sf::RectangleShape::move(-1, 0);
-	if (grounded == false)
+	if (grounded == false && destroyed == false)
 		sf::RectangleShape::move(0, -2);
 	if (clock.getElapsedTime().asSeconds() >= 1 
 		&& getPosition().x < viewport.getCenter().x

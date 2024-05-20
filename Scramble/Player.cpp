@@ -125,7 +125,7 @@ void Player::crash(std::vector<Enemy*> &enemyVec, int currentLevel,
 		sf::FloatRect enemyBounds = enemyVec.at(i)->getGlobalBounds();
 
 		//compares player and enemies
-		if (enemyBounds.intersects(nextPos))
+		if (enemyBounds.intersects(nextPos) && enemyVec.at(i)->getDestroyed() == false)
 		{
 			//resets for next life
 			std::cout << "hit";
@@ -145,6 +145,7 @@ void Player::crash(std::vector<Enemy*> &enemyVec, int currentLevel,
 				playerSprite.setScale(3, 3);
 				playerSprite.setPosition(getPosition().x - 39,
 					getPosition().y - 9);
+				window.draw(playerSprite);
 				window.display();
 				Sleep(50);
 			}
@@ -272,7 +273,7 @@ void Player::crash(std::vector<char> levelArrVec[25], sf::Sprite sprite,
 			sf::FloatRect wallBounds = sprite.getGlobalBounds();
 
 			//compares player and walls
-			if (wallBounds.intersects(nextPos))
+			if (wallBounds.intersects(nextPos) && enemyVec.at(i)->getDestroyed() == false)
 			{
 				//resets for next life
 				std::cout << "collide";
@@ -412,7 +413,8 @@ int Player::hit(std::vector<Enemy*> enemyVec,
 			sf::FloatRect bulletBounds = bullet[i].getGlobalBounds();
 			nextPos = bulletBounds;
 
-			if (enemyBounds.intersects(nextPos) && enemyVec.at(j)->getDestroyable())
+			if (enemyBounds.intersects(nextPos) && enemyVec.at(j)->getDestroyable() == true
+				&& enemyVec.at(i)->getDestroyed() == false)
 			{
 				hit = true;
 				bullet[i].setPosition(-100, -100);
@@ -434,7 +436,8 @@ int Player::hit(std::vector<Enemy*> enemyVec,
 			nextPos.left += mxMove[i];
 			nextPos.top += myMove[i];
 
-			if (enemyBounds.intersects(nextPos) && enemyVec.at(j)->getDestroyable())
+			if (enemyBounds.intersects(nextPos) && enemyVec.at(j)->getDestroyable() == true
+				&& enemyVec.at(i)->getDestroyed() == false)
 			{
 				hit = true;
 				missile[i].setPosition(-100, 900);
