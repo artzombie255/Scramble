@@ -36,7 +36,7 @@ Ufo::~Ufo()
 //moves ufo up and down
 void Ufo::move(sf::Clock &clock, sf::View viewport)
 {
-	//if (getPosition().x < 800)
+	if (destroyed == false)
 		sf::RectangleShape::move(0, moveDir);
 
 	if (getPosition().y >= start)
@@ -55,6 +55,25 @@ void Ufo::print(sf::RenderWindow& window)
 //useless
 void Ufo::changeSprite(int palette)
 {
+	std::string file;
+
+	if (destroyed == true)
+	{
+		file = "./sprites/UfoBoom" + std::to_string(boomNum) + ".png";
+		if (boomClock.getElapsedTime().asMilliseconds() >= 250)
+		{
+			boomClock.restart();
+			boomNum++;
+			if (boomNum == 4)
+			{
+				setPosition(-200, -200);
+				destroyed = false;
+			}
+		}
+	}
+	image.loadFromFile(file);
+	sprite.setTexture(image);
+	sprite.setScale(3, 3);
 }
 
 //returms points given for destroying ufo

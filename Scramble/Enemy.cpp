@@ -79,8 +79,24 @@ void Enemy::changeSprite(int palette)
 		break;
 	}
 
-	//spriteClock.restart();
 	file = t + color + name;
+
+	if (destroyed == true)
+	{
+		file = t + color + "enemyBoom" + std::to_string(boomNum) + ".png";
+		if (boomClock.getElapsedTime().asMilliseconds() >= 250)
+		{
+			boomClock.restart();
+			boomNum++;
+			if (boomNum == 4)
+			{
+				setPosition(-200, -200);
+				destroyed = false;
+			}
+		}
+	}
+
+	//spriteClock.restart();
 	image.loadFromFile(file);
 	sprite.setTexture(image);
 	sprite.setScale(3, 3);
@@ -92,4 +108,16 @@ void Enemy::changeSprite(int palette)
 bool Enemy::isBase()
 {
 	return false;
+}
+
+
+void Enemy::setDestroyed(bool temp)
+{
+	destroyed = temp;
+}
+
+
+bool Enemy::getDestroyed()
+{
+	return destroyed;
 }

@@ -1,3 +1,11 @@
+/*
+5/20/2024
+Phoenix Ribiat, Ray Ward
+
+Scramble arcade game emulator
+*/
+
+
 #include "ScrambleGame.h"
 #include "Altar.h"
 #include "Base.h"

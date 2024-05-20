@@ -15,13 +15,15 @@ public:
 	virtual void print(sf::RenderWindow&);
 	virtual void changeSprite(int);
 	virtual bool isBase();
+	void setDestroyed(bool);
+	bool getDestroyed();
 
 protected:
-	int points;
-	bool destroyable = true;
+	int points, boomNum = -1;
+	bool destroyable = true, destroyed = false;
 	sf::Sprite sprite;
 	sf::Texture image;
-	sf::Clock spriteClock;
+	sf::Clock spriteClock, boomClock;
 	std::string name;
 };
 

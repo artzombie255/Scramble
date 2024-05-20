@@ -26,7 +26,7 @@ Rockets::~Rockets()
 void Rockets::move(sf::Clock &clock, sf::View viewport)
 {
 	//sf::RectangleShape::move(-1, 0);
-	if (grounded == false)
+	if (grounded == false && destroyed == false)
 		sf::RectangleShape::move(0, -2);
 	if (clock.getElapsedTime().asSeconds() >= 1 
 		&& getPosition().x < viewport.getCenter().x
@@ -125,6 +125,22 @@ void Rockets::changeSprite(int palette)
 	}
 
 	file = "./sprites/" + color + "rocket" + num + ".png";
+
+	if (destroyed == true)
+	{
+		file = "./sprites/" + color + "enemyBoom" + std::to_string(boomNum) + ".png";
+		if (boomClock.getElapsedTime().asMilliseconds() >= 250)
+		{
+			boomClock.restart();
+			boomNum++;
+			if (boomNum == 4)
+			{
+				setPosition(-200, -200);
+				destroyed = false;
+			}
+		}
+	}
+
 	image.loadFromFile(file);
 	sprite.setTexture(image);
 	sprite.setScale(3, 3);
